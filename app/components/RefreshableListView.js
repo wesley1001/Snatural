@@ -1,5 +1,5 @@
 /**
- * @fileOverview Loading
+ * @fileOverview 下拉刷新列表 RefreshableListView
  */
 
 'use strict';

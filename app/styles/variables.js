@@ -1,3 +1,13 @@
+let React = require('react-native');
+
+let {
+	width: screenWidth,
+	height: screenHeight
+} = React.Dimensions.get('window');
+
+exports.SCREEN_WIDTH = screenWidth;
+exports.SCREEN_HEIGHT = screenHeight;
+
 exports.COLOR_PRICE = '#fd8e56';
 exports.COLOR_BORDER = '#e8e8e8';
 exports.COLOR_BACKGROUND = '#f1f1f1';

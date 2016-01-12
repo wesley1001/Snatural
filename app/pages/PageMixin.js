@@ -1,4 +1,5 @@
 module.exports = {
+	
 	goto(pageKey, params = {}){
 		let {navigator, routes} = this.props;
 		let nextRoute = Object.assign(

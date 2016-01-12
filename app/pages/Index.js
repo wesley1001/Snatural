@@ -1,5 +1,5 @@
 /**
- * @fileOverview 底部Tab
+ * @fileOverview 入口页
  */
 
 'use strict';

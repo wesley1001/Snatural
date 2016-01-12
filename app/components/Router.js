@@ -1,5 +1,5 @@
 /**
- * @fileOverview 路由Router
+ * @fileOverview 路由 Router
  */
 
 'use strict';
@@ -30,9 +30,13 @@ const renderIOSRouter = (store) => {
 };
 
 const renderAndroidRouter = (store) => {
+	let route = Object.assign(
+		{passProps: { routes: store }},
+		store[store.start]
+	);
 	return (
 		<Navigator
-	    initialRoute={store[store.start]}
+	    initialRoute={route}
 	    renderScene={(route, navigator) => {
 	    	let {routes, params} = route.passProps;
 	      return React.createElement(route.component, {
