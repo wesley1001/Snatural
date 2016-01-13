@@ -5,6 +5,7 @@ let React = require('react-native');
 const {
 	COLOR_MAIN,
 	COLOR_BORDER,
+	PADDING_S_SIZE,
 	PADDING_M_SIZE,
 	PADDING_L_SIZE,
 	FONT_M_SIZE,
@@ -31,12 +32,6 @@ module.exports = React.StyleSheet.create({
 		backgroundColor: 'white',
 		padding: PADDING_M_SIZE
 	},
-	avatar: {
-		width: 64,
-		height: 64,
-		borderRadius: 32,
-		backgroundColor: 'white'
-	},
 	login: {
 		fontSize: FONT_M_SIZE,
 		paddingTop: PADDING_M_SIZE,
@@ -59,7 +54,7 @@ module.exports = React.StyleSheet.create({
 		fontSize: FONT_M_SIZE,
 		alignSelf: 'center',
 		flex: 1,
-		paddingLeft: PADDING_M_SIZE
+		paddingLeft: PADDING_S_SIZE
 	},
 	barArrow: {
 		fontSize: FONT_ICON,
