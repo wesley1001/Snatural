@@ -14,6 +14,7 @@ exports.COLOR_BACKGROUND = '#f1f1f1';
 exports.COLOR_DARK = '#76b68c';
 exports.COLOR_MAIN = '#98d1ad';
 
+exports.FONT_ICON = 26;
 exports.FONT_X_SIZE = 22;
 exports.FONT_L_SIZE = 18;
 exports.FONT_M_SIZE = 16;

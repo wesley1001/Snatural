@@ -12,6 +12,8 @@ let {
   TouchableWithoutFeedback
 } = React;
 
+const Icon = require('react-native-vector-icons/FontAwesome')
+
 const styles = require('../styles/indexPage');
 
 const Home = require('./Home');
@@ -40,6 +42,7 @@ const Index = React.createClass({
             key="tab:home" 
             onPress={() => this.setState({homeDisplayed: true})}>
             <View style={[styles.tab, homeDisplayed ? styles.activeTab : null]}>
+              <Icon name="home" color="white" style={styles.tabIcon} />
               <Text style={styles.tabText}>首页</Text>
             </View>
           </TouchableWithoutFeedback>
@@ -47,6 +50,7 @@ const Index = React.createClass({
             key="tab:me" 
             onPress={() => this.setState({homeDisplayed: false})}>
             <View style={[styles.tab, !homeDisplayed ? styles.activeTab : null]}>
+              <Icon name="user" size={20} color="white" style={styles.tabIcon} />
               <Text style={styles.tabText}>我的</Text>
             </View>
           </TouchableWithoutFeedback>

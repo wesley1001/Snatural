@@ -11,6 +11,8 @@ let {
 	TextInput
 } = React;
 
+const Icon = require('react-native-vector-icons/FontAwesome');
+
 const styles = require('../styles/searchBox');
 
 const SearchBox = React.createClass({
@@ -26,9 +28,11 @@ const SearchBox = React.createClass({
 				<TextInput
 					style={styles.textInput}
 					autoCorrect={false}
+					placeholder="请输入商品名称"
 					onChangeText={this._onChangeText}
 					onSubmitEditing={this._onSubmitEditing}
 				/>
+				<Icon name="search" style={styles.icon}/>
 			</View>
 		);
 	},

@@ -5,7 +5,10 @@ let React = require('react-native');
 
 const {
 	COLOR_DARK,
-	COLOR_MAIN
+	COLOR_MAIN,
+	FONT_ICON,
+	FONT_S_SIZE,
+	PADDING_S_SIZE
 } = require('./variables');
 
 module.exports = React.StyleSheet.create({
@@ -21,13 +24,17 @@ module.exports = React.StyleSheet.create({
 	tab: {
 		flex: 1,
 		height: 48,
-		backgroundColor: COLOR_MAIN
+		backgroundColor: COLOR_MAIN,
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	tabIcon: {
+		fontSize: FONT_ICON
 	},
 	tabText: {
-		flex: 1,
 		color: 'white',
 		textAlign: 'center',
-		marginTop: 22
+		fontSize: FONT_S_SIZE
 	},
 	activeTab: {
 		backgroundColor: COLOR_DARK

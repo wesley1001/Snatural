@@ -47,10 +47,10 @@ module.exports = React.StyleSheet.create({
 		flexDirection: 'row'
 	},
 	stock: {
-		width: 100
+		flex: 1
 	},
 	fav: {
-		flex: 1
+		width: 50
 	},
 	favCount: {
 		flex: 1

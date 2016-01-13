@@ -8,7 +8,7 @@ const {
 	PADDING_M_SIZE,
 	PADDING_L_SIZE,
 	FONT_M_SIZE,
-	FONT_S_SIZE
+	FONT_ICON
 } = require('./variables');
 
 
@@ -47,9 +47,24 @@ module.exports = React.StyleSheet.create({
 		borderBottomColor: COLOR_BORDER,
 		paddingTop: PADDING_M_SIZE,
 		paddingBottom: PADDING_M_SIZE,
-		flexDirection: 'row'
+		flexDirection: 'row',
+		justifyContent: 'center'
+	},
+	barIcon: {
+		fontSize: FONT_ICON,
+		width: FONT_ICON,
+		textAlign: 'center'
 	},
 	barText: {
-		fontSize: FONT_M_SIZE
+		fontSize: FONT_M_SIZE,
+		alignSelf: 'center',
+		flex: 1,
+		paddingLeft: PADDING_M_SIZE
+	},
+	barArrow: {
+		fontSize: FONT_ICON,
+		width: FONT_ICON,
+		textAlign: 'right',
+		color: '#c1c1c1'
 	}
 });
