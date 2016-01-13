@@ -7,8 +7,7 @@ const {
 	COLOR_DARK,
 	COLOR_MAIN,
 	FONT_ICON,
-	FONT_S_SIZE,
-	PADDING_S_SIZE
+	FONT_S_SIZE
 } = require('./variables');
 
 module.exports = React.StyleSheet.create({

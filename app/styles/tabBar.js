@@ -1,38 +1,29 @@
 'use strict';
 
 let React = require('react-native');
-let { StyleSheet, Dimensions } = React;
-const WINDOW_WIDTH = Dimensions.get('window').width;
 
-let styles = StyleSheet.create({
+const { SCREEN_WIDTH } = require('./variables');
+
+module.exports = React.StyleSheet.create({
   container: {
     flex: 1
   },
-  tabbarView: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  tabView: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  contentView: {
+  viewContainer: {
     flex: 1
   },
-  // Move the view outside of the current viewport.
-  contentViewDisplay: {
+  view: {
     flex: 1
-    // position: 'absolute',
-    // left: 0,
-    // top: 0
   },
-  contentViewHidden: {
+  inActiveView: {
     position: 'absolute',
-    left: WINDOW_WIDTH,
-    top: 0
+    top: 0,
+    left: SCREEN_WIDTH
+  },
+  tabContainer: {
+    height: 48,
+    flexDirection: 'row'
+  },
+  tab: {
+    flex: 1
   }
 });
-
-module.exports = styles;

@@ -4,80 +4,93 @@ const React = require('react-native');
 const styles = require('../styles/tabBar');
 
 const {
-  Component,
   View,
-  Text,
   TouchableWithoutFeedback
 } = React;
 
-class Tabbar extends Component {
-  render() {
-    const contents = this._generateContents();
+let Tabbar = React.createClass({
+  propTypes: {
+    activeTabStyle: React.PropTypes.number, // style number
+    active: React.PropTypes.string
+  },
+
+  getInitialState() {
+    return {
+      active: this.props.active
+    };
+  },
+
+  render(){
+    let contents = this._createContents(this.props)
     return (
       <View style={styles.container}>
-        <View style={styles.contentView}>
+        <View style={styles.viewContainer}>
           {contents.views}
         </View>
-        <View style={[styles.tabbarView, this.props.style]}>
-          { contents.tabs }
+        <View style={styles.tabContainer}>
+          {contents.tabs}
         </View>
       </View>
     );
+  },
+
+  _createContents(props){
+    let contents = {views:[], tabs:[]};
+    React.Children.forEach(props.children, (child) => {
+      if(child.type.displayName === 'Tabbar.View'){
+        contents.views.push(this._createView(child.props.name, child))
+      }else{
+        contents.tabs.push(this._createTab(child.props.name, child))
+      }
+    });
+    return contents;
+  },
+  _createView(name, element){
+    let isActive = name === this.state.active;
+    return React.cloneElement(element, {
+      key: `view:${name}`,
+      isActive
+    });
+  },
+  _createTab(name, element){
+    let isActive = name === this.state.active;
+    return React.cloneElement(element, {
+      key: `tab:${name}`,
+      isActive,
+      activeStyle: this.props.activeTabStyle,
+      onPress: () => {
+        this.setState({active: name})
+      }
+    });
   }
+});
 
-  _generateContents() {
-    const {
-      children,
-      onTabItemPress,
-      renderTabComponent,
-      selected,
-      tabHeight
-    } = this.props;
+Tabbar.View = React.createClass({
+  displayName: 'Tabbar.View',
 
-    return children.reduce((accum, originalChild) => {
-      const { children: originChildChildren, name } = originalChild.props;
-      const isActive = name === selected;
-      const tabView = renderTabComponent(name, isActive);
+  render(){
+    let {children, isActive} = this.props;
+    return (
+      <View style={isActive ? styles.activeView : styles.inActiveView}>
+        {React.Children.map(children, child => child )}
+      </View>
+    );
+  }
+});
 
-      console.log(isActive);
+Tabbar.Tab = React.createClass({
+  displayName: 'Tabbar.Tab',
 
-      accum.views.push(
-        <View 
-          key={`view:${name}`}
-          style={isActive ? styles.contentViewDisplay : styles.contentViewHidden}>
-          {React.cloneElement(originChildChildren)}
+  render(){
+    let {children, style, isActive, activeStyle, onPress} = this.props;
+    return (
+      <TouchableWithoutFeedback onPress={onPress}>
+        <View style={[ styles.tab, style, isActive ? activeStyle : null ]}>
+          {React.Children.map(children, child => child )}
         </View>
-      );
-
-      accum.tabs.push(
-        <TouchableWithoutFeedback key={`tab:${name}`} onPress={() => onTabItemPress(name)}>
-          {
-            React.cloneElement(tabView, {
-              style: [styles.tabView, tabView.props.style],
-              height: tabHeight
-            })
-          }
-        </TouchableWithoutFeedback>
-      );
-
-      return accum;
-    }, { views: [], tabs: [] });
+      </TouchableWithoutFeedback>
+    );
   }
-}
-
-Tabbar.propTypes = {
-  selected: React.PropTypes.string.isRequired,
-  onTabItemPress: React.PropTypes.func.isRequired,
-  tabHeight: React.PropTypes.number,
-  renderTabComponent: React.PropTypes.func
-};
-
-Tabbar.defaultProps = {
-  selected: '',
-  tabHeight: 50,
-  renderTabComponent: (label, isActive) => <View style={styles.tabView}><Text>{ label }</Text></View>
-};
-
-Tabbar.Item = View;
+});
 
 module.exports = Tabbar;
