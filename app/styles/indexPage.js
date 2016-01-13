@@ -14,15 +14,8 @@ module.exports = React.StyleSheet.create({
 	container: {
 		flex: 1
 	},
-	tabView: {
-		flex: 1	
-	},
-	tabs: {
-		flexDirection: 'row'
-	},
 	tab: {
 		flex: 1,
-		height: 48,
 		backgroundColor: COLOR_MAIN,
 		alignItems: 'center',
 		justifyContent: 'center'
