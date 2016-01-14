@@ -21,7 +21,8 @@ module.exports = React.StyleSheet.create({
 		justifyContent: 'center'
 	},
 	tabIcon: {
-		fontSize: FONT_ICON
+		fontSize: FONT_ICON,
+		color: 'white'
 	},
 	tabText: {
 		color: 'white',

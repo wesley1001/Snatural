@@ -20,20 +20,24 @@ const {
 let Tabbar = React.createClass({
   propTypes: {
     activeTabStyle: React.PropTypes.number, // style number
-    active: React.PropTypes.string
+    initalActive: React.PropTypes.string, 
+    tabPosition: React.PropTypes.oneOf(['top', 'bottom'])
   },
 
   getInitialState() {
     return {
-      active: this.props.active
+      active: this.props.initalActive
     };
   },
 
   render(){
     let contents = this._createContents(this.props);
+    let { topTabs, bottomTabs } = 
+      this._renderTabs(this.props.tabPosition, contents.tabs);
     if(Platform.OS === 'ios'){
       return (
         <View style={styles.container}>
+          {topTabs}
           <ScrollView
             horizontal
             pagingEnabled
@@ -46,14 +50,13 @@ let Tabbar = React.createClass({
             ref={viewPager => { this.viewPager = viewPager; }}>
             {contents.views}
           </ScrollView>
-          <View style={styles.tabContainer}>
-            {contents.tabs}
-          </View>
+          {bottomTabs}
         </View>
       );
     }else{
       return (
         <View style={styles.container}>
+          {topTabs}
           <ViewPagerAndroid
             style={styles.viewContainer}
             initialPage={0}
@@ -61,12 +64,21 @@ let Tabbar = React.createClass({
             ref={viewPager => { this.viewPager = viewPager; }}>
             {contents.views}
           </ViewPagerAndroid>
-          <View style={styles.tabContainer}>
-            {contents.tabs}
-          </View>
+          {bottomTabs}
         </View>
       );
     }
+  },
+
+  _renderTabs(tabPosition, tabs){
+    let tabContainer = (
+      <View style={styles.tabContainer}>
+        {tabs}
+      </View> 
+    );
+    return tabPosition === 'top' ?
+      { topTabs: tabContainer}:
+      { bottomTabs: tabContainer};
   },
 
   _onMomentumScrollEnd(e) {
@@ -80,42 +92,43 @@ let Tabbar = React.createClass({
 
   _createContents(props){
     let contents = {views:[], tabs:[]};
-    // build the mapping between active page index and active tab name
+    // build the mapping between active page index and active tab key
     this.activeMapping = [];
     let activeIndex = 0;
 
     React.Children.forEach(props.children, (child) => {
       if(!child) return;
       if(child.type.displayName === 'Tabbar.View'){
-        this.activeMapping[activeIndex++] = child.props.name;
-        contents.views.push(this._createView(child.props.name, child))
+        this.activeMapping[activeIndex++] = child.key;
+        contents.views.push(this._createView(child.key, child))
       }else{
-        contents.tabs.push(this._createTab(child.props.name, child))
+        contents.tabs.push(this._createTab(child.key, child))
       }
     });
     return contents;
   },
-  _createView(name, element){
+  _createView(key, element){
     return (
-      <View key={`view:${name}`} style={styles.view}>
+      <View key={`view:${key}`} style={styles.view}>
         {element}
       </View>
     );
   },
-  _createTab(name, element){
-    let isActive = name === this.state.active;
+  _createTab(key, element){
     return React.cloneElement(element, {
-      key: `tab:${name}`,
-      isActive,
-      activeStyle: this.props.activeTabStyle,
-      onPress: () => this._switchTo(name)
+      key: `tab:${key}`,
+      activeStyle: key === this.state.active ? this.props.activeTabStyle : null,
+      onPress: () => {
+        this._switchTo(key);
+        element.props.onPress && element.props.onPress(key);
+      }
     });
   },
 
-  _switchTo(name){
+  _switchTo(key){
     let page = 0;
     for(let index in this.activeMapping){
-      if(name === this.activeMapping[index]){
+      if(key === this.activeMapping[index]){
         page = index;
         break;
       }
@@ -125,7 +138,7 @@ let Tabbar = React.createClass({
     }else{
       this.viewPager.setPage(page);
     }
-    this.setState({active: name});
+    this.setState({active: key});
   }
 });
 
@@ -139,10 +152,10 @@ Tabbar.View = React.createClass({
 Tabbar.Tab = React.createClass({
   displayName: 'Tabbar.Tab',
   render(){
-    let {children, style, isActive, activeStyle, onPress} = this.props;
+    let {onPress, activeStyle, children, style} = this.props;
     return (
       <TouchableWithoutFeedback onPress={onPress}>
-        <View style={[ styles.tab, style, isActive ? activeStyle : null ]}>
+        <View style={[ styles.tab, style, activeStyle ]}>
           {React.Children.map(children, child => child )}
         </View>
       </TouchableWithoutFeedback>
