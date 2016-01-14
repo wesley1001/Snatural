@@ -4,7 +4,8 @@ let React = require('react-native');
 
 let {
 	View,
-	Text
+	Text,
+	TouchableHighlight
 } = React;
 
 const Icon = require('react-native-vector-icons/Ionicons');
@@ -12,19 +13,24 @@ const Icon = require('react-native-vector-icons/Ionicons');
 let styles = require('../styles/mePage');
 
 const Avatar = require('../components/Avatar');
+const PageMixin = require('./PageMixin');
 
 const Bar = (props) => {
-	let {icon, title, color} = props;
+	let {icon, title, color, onPress} = props;
 	return (
-		<View style={styles.bar}>
-			<Icon name={icon} color={color} style={styles.barIcon}/>
-			<Text style={styles.barText}>{title}</Text>
-			<Icon name="ios-arrow-forward" style={styles.barArrow}/>
-		</View>
+		<TouchableHighlight onPress={onPress}>
+			<View style={styles.bar}>
+				<Icon name={icon} color={color} style={styles.barIcon}/>
+				<Text style={styles.barText}>{title}</Text>
+				<Icon name="ios-arrow-forward" style={styles.barArrow}/>
+			</View>
+		</TouchableHighlight>
 	)
 };
 
 const Me = React.createClass({
+
+	mixins: [PageMixin],
 
 	getInitialState() {
 		return {
@@ -34,10 +40,10 @@ const Me = React.createClass({
 
 	render(){
 		let data = [
-			{ title: "全部订单", color: '#fd9055', icon: 'android-list'},
-			{ title: "地址管理", color: '#349cf2', icon: 'android-pin'},
-			{ title: "我的喜欢", color: '#fc6875', icon: 'heart'},
-			{ title: "意见反馈", color: '#99d0ac', icon: 'chatbubble-working'}
+			{ title: "全部订单", color: '#fd9055', target: 'OrderList', icon: 'android-list'},
+			{ title: "地址管理", color: '#349cf2', target: 'OrderList', icon: 'android-pin'},
+			{ title: "我的喜欢", color: '#fc6875', target: 'OrderList', icon: 'heart'},
+			{ title: "意见反馈", color: '#99d0ac', target: 'OrderList', icon: 'chatbubble-working'}
 		];
 		return (
 			<View style={styles.container}>
@@ -48,12 +54,13 @@ const Me = React.createClass({
 				<View style={styles.tabs}></View>
 				<View style={styles.bars}>
 					{data.map((item, i) => {
-						return <Bar key={i} {...data[i]}/>
+						return <Bar key={i} {...item} onPress={()=>this.goto(item.target)}/>
 					})}
 				</View>
 			</View>
 		)
 	}
+
 })
 
 module.exports = Me;

@@ -85,6 +85,7 @@ let Tabbar = React.createClass({
     let activeIndex = 0;
 
     React.Children.forEach(props.children, (child) => {
+      if(!child) return;
       if(child.type.displayName === 'Tabbar.View'){
         this.activeMapping[activeIndex++] = child.props.name;
         contents.views.push(this._createView(child.props.name, child))
