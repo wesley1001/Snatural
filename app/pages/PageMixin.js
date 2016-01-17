@@ -1,3 +1,7 @@
+let React = require('react-native');
+
+const NavigatorBar = require('../components/NavigatorBar');
+
 module.exports = {
 	
 	goto(pageKey, params = {}){
@@ -12,5 +16,11 @@ module.exports = {
 	goBack(){
 		let {navigator} = this.props;
 		navigator.pop();
+	},
+
+	_renderNavigatorBar(){
+		return (
+			<NavigatorBar onBack={() => this.goBack()}/>
+		);
 	}
 }

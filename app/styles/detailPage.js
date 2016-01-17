@@ -73,16 +73,5 @@ module.exports = React.StyleSheet.create({
 
 	detail: {
 		flex: 1
-	},
-
-	back: {
-		height: 48,
-		backgroundColor: COLOR_MAIN,
-		justifyContent: 'center'
-	},
-	backText: {
-		fontSize: FONT_X_SIZE,
-		color: 'white',
-		paddingLeft: PADDING_L_SIZE
 	}
 });

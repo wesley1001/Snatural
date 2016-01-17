@@ -58,17 +58,15 @@ const Detail = React.createClass({
 
 	render(){
 		let {params} = this.props;
-		console.log(params);
+		
+		let actionBar = this._renderNavigatorBar();
+
 		return (
 			<View style={styles.container}>
 				<Product {...data}/>
 				<Brand {...data.brand}/>
 				<View style={styles.detail}></View>
-				<TouchableWithoutFeedback onPress={()=>this.goBack()}>
-					<View style={styles.back}>
-						<Text style={styles.backText}>返回</Text>
-					</View>
-				</TouchableWithoutFeedback>
+				{actionBar}
 			</View>
 		)
 	}

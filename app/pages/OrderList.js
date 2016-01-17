@@ -14,8 +14,11 @@ let {
 const styles = require('../styles/orderListPage');
 
 const TabBar = require('../components/TabBar');
+const PageMixin = require('./PageMixin');
 
 const OrderList = React.createClass({
+  mixins: [PageMixin],
+
   getInitialState(){
     return {
       activeTab: 'all'
@@ -56,6 +59,7 @@ const OrderList = React.createClass({
     				);
     			})}
     		</TabBar>
+        {this._renderNavigatorBar()}
     	</View>
     );
   }
