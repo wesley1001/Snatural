@@ -8,28 +8,34 @@ let React = require('react-native');
 
 let {
 	View,
-	Text
+	Platform,
+	ActivityIndicatorIOS,
+	ProgressBarAndroid
 } = React;
 
 const styles = require('../styles/loading');
 
 const Loading = (props) => {
-	let androidIndicator = (
-		<Text style={styles.text}>Loading...</Text>
-	);
-	// let iosIndicator = (
-	// 	<ActivityIndicatorIOS
-	//     animating={true}
-	//     style={styles.spinner}
-	//     size="large"
-	// 	 />
-	// );
-
-	return (
-		<View style={styles.container}>
-			{androidIndicator}
-		</View>
-	);
+	if(Platform.OS === 'ios'){
+		return (
+			<View style={styles.container}>
+				<ActivityIndicatorIOS
+			    animating={true}
+			    style={styles.spinner}
+			    size="large"
+				 />
+			</View>
+		);
+	}else{
+		return (
+			<View style={styles.container}>
+				<ProgressBarAndroid
+			    styleAttr="Inverse"
+			    style={styles.spinner}
+				 />
+			</View>
+		);
+	}
 };
 
 module.exports = Loading;

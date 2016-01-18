@@ -11,10 +11,7 @@ const {SCREEN_WIDTH} = require('../styles/variables');
 
 const {
   View,
-  ScrollView,
-  ViewPagerAndroid,
-  TouchableWithoutFeedback,
-  Platform
+  TouchableWithoutFeedback
 } = React;
 
 let Tabbar = React.createClass({
@@ -34,40 +31,13 @@ let Tabbar = React.createClass({
     let contents = this._createContents(this.props);
     let { topTabs, bottomTabs } = 
       this._renderTabs(this.props.tabPosition, contents.tabs);
-    if(Platform.OS === 'ios'){
-      return (
-        <View style={styles.container}>
-          {topTabs}
-          <ScrollView
-            horizontal
-            pagingEnabled
-            directionalLockEnabled
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            bounces={false}
-            style={styles.viewContainer}
-            onMomentumScrollEnd={this._onMomentumScrollEnd}
-            ref={viewPager => { this.viewPager = viewPager; }}>
-            {contents.views}
-          </ScrollView>
-          {bottomTabs}
-        </View>
-      );
-    }else{
-      return (
-        <View style={styles.container}>
-          {topTabs}
-          <ViewPagerAndroid
-            style={styles.viewContainer}
-            initialPage={0}
-            onPageSelected={this._onPageSelected}
-            ref={viewPager => { this.viewPager = viewPager; }}>
-            {contents.views}
-          </ViewPagerAndroid>
-          {bottomTabs}
-        </View>
-      );
-    }
+    return (
+      <View style={styles.container}>
+        {topTabs}
+        {contents.activeView}
+        {bottomTabs}
+      </View>
+    );
   },
 
   _renderTabs(tabPosition, tabs){
@@ -81,35 +51,23 @@ let Tabbar = React.createClass({
       { bottomTabs: tabContainer};
   },
 
-  _onMomentumScrollEnd(e) {
-    let activeIndex = e.nativeEvent.contentOffset.x / SCREEN_WIDTH;
-    this.setState({active: this.activeMapping[activeIndex]});
-  },
-
-  _onPageSelected(e){
-    this.setState({active: this.activeMapping[e.nativeEvent.position]});
-  },
-
   _createContents(props){
-    let contents = {views:[], tabs:[]};
-    // build the mapping between active page index and active tab key
-    this.activeMapping = [];
-    let activeIndex = 0;
-
+    let contents = {activeView: null, tabs:[]};
+    let active = this.state.active;
     React.Children.forEach(props.children, (child) => {
       if(!child) return;
       if(child.type.displayName === 'Tabbar.View'){
-        this.activeMapping[activeIndex++] = child.key;
-        contents.views.push(this._createView(child.key, child))
+        if(child.key === active)
+          contents.activeView = this._createView(child.key, child);
       }else{
-        contents.tabs.push(this._createTab(child.key, child))
+        contents.tabs.push(this._createTab(child.key, child));
       }
     });
     return contents;
   },
   _createView(key, element){
     return (
-      <View key={`view:${key}`} style={styles.view}>
+      <View style={styles.viewContainer}>
         {element}
       </View>
     );
@@ -126,18 +84,6 @@ let Tabbar = React.createClass({
   },
 
   _switchTo(key){
-    let page = 0;
-    for(let index in this.activeMapping){
-      if(key === this.activeMapping[index]){
-        page = index;
-        break;
-      }
-    }
-    if(Platform.OS === 'ios'){
-      this.viewPager.scrollTo(0, page * SCREEN_WIDTH);
-    }else{
-      this.viewPager.setPage(page);
-    }
     this.setState({active: key});
   }
 });

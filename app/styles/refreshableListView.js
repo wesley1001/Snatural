@@ -2,17 +2,16 @@
 
 let React = require('react-native');
 
-const { 
-	FONT_X_SIZE
+const {
+	PADDING_S_SIZE
 } = require('./variables');
 
 module.exports = React.StyleSheet.create({
 	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
+		flex: 1
 	},
-	spinner: {
 
+	list: {
+		flex: 1
 	}
 });

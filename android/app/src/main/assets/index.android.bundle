@@ -57028,7 +57028,11 @@ title:'首页'},
 
 Detail:{
 component:require('Snatural/app/pages/Detail.js'),
-title:'产品详情'}};
+title:'产品详情'},
+
+OrderList:{
+component:require('Snatural/app/pages/OrderList.js'),
+title:'订单列表'}};
 });
 __d('Snatural/app/pages/Index.js',function(global, require, module, exports) {  'use strict';
 
@@ -57041,54 +57045,2576 @@ var React=require('react-native/Libraries/react-native/react-native.js');var
 
 View=
 
+React.View;var Text=React.Text;
 
-React.View;var Text=React.Text;var TouchableWithoutFeedback=React.TouchableWithoutFeedback;
+var Icon=require('FontAwesome');
 
 var styles=require('Snatural/app/styles/indexPage.js');
 
+var TabBar=require('Snatural/app/components/TabBar.js');
 var Home=require('Snatural/app/pages/Home.js');
 var Me=require('Snatural/app/pages/Me.js');
 
-var Index=React.createClass({displayName:'Index',
-getInitialState:function(){
-return {
-homeDisplayed:true};},
-
-
-
-render:function(){var _this=this;var 
-homeDisplayed=this.state.homeDisplayed;
-var page=homeDisplayed?
-React.createElement(Home,{navigator:this.props.navigator,routes:this.props.routes}):
-React.createElement(Me,{navigator:this.props.navigator,routes:this.props.routes});
-
+var Index=function(props){var 
+navigator=props.navigator;var routes=props.routes;
 return (
-React.createElement(View,{style:styles.container},
-React.createElement(View,{style:styles.tabView},
-page),
+React.createElement(TabBar,{initalActive:'home',activeTabStyle:styles.activeTab},
+React.createElement(TabBar.View,{key:'home'},
+React.createElement(Home,{navigator:navigator,routes:routes})),
 
-React.createElement(View,{style:styles.tabs},
-React.createElement(TouchableWithoutFeedback,{
-key:'tab:home',
-onPress:function(){return _this.setState({homeDisplayed:true});}},
-React.createElement(View,{style:[styles.tab,homeDisplayed?styles.activeTab:null]},
-React.createElement(Text,{style:styles.tabText},'首页'))),
+React.createElement(TabBar.View,{key:'me'},
+React.createElement(Me,{navigator:navigator,routes:routes})),
 
+React.createElement(TabBar.Tab,{key:'home',style:styles.tab},
+React.createElement(Icon,{name:'home',style:styles.tabIcon}),
+React.createElement(Text,{style:styles.tabText},'首页')),
 
-React.createElement(TouchableWithoutFeedback,{
-key:'tab:me',
-onPress:function(){return _this.setState({homeDisplayed:false});}},
-React.createElement(View,{style:[styles.tab,!homeDisplayed?styles.activeTab:null]},
-React.createElement(Text,{style:styles.tabText},'我的'))))));}});
-
-
-
+React.createElement(TabBar.Tab,{key:'me',style:styles.tab},
+React.createElement(Icon,{name:'user',style:styles.tabIcon}),
+React.createElement(Text,{style:styles.tabText},'我的'))));};
 
 
 
 
 
 module.exports=Index;
+});
+__d('FontAwesome',function(global, require, module, exports) {  'use strict';
+
+
+
+
+
+
+
+var createIconSet=require('createIconSet');
+var glyphMap={
+"glass":61440,
+"music":61441,
+"search":61442,
+"envelope-o":61443,
+"heart":61444,
+"star":61445,
+"star-o":61446,
+"user":61447,
+"film":61448,
+"th-large":61449,
+"th":61450,
+"th-list":61451,
+"check":61452,
+"remove":61453,
+"close":61453,
+"times":61453,
+"search-plus":61454,
+"search-minus":61456,
+"power-off":61457,
+"signal":61458,
+"gear":61459,
+"cog":61459,
+"trash-o":61460,
+"home":61461,
+"file-o":61462,
+"clock-o":61463,
+"road":61464,
+"download":61465,
+"arrow-circle-o-down":61466,
+"arrow-circle-o-up":61467,
+"inbox":61468,
+"play-circle-o":61469,
+"rotate-right":61470,
+"repeat":61470,
+"refresh":61473,
+"list-alt":61474,
+"lock":61475,
+"flag":61476,
+"headphones":61477,
+"volume-off":61478,
+"volume-down":61479,
+"volume-up":61480,
+"qrcode":61481,
+"barcode":61482,
+"tag":61483,
+"tags":61484,
+"book":61485,
+"bookmark":61486,
+"print":61487,
+"camera":61488,
+"font":61489,
+"bold":61490,
+"italic":61491,
+"text-height":61492,
+"text-width":61493,
+"align-left":61494,
+"align-center":61495,
+"align-right":61496,
+"align-justify":61497,
+"list":61498,
+"dedent":61499,
+"outdent":61499,
+"indent":61500,
+"video-camera":61501,
+"photo":61502,
+"image":61502,
+"picture-o":61502,
+"pencil":61504,
+"map-marker":61505,
+"adjust":61506,
+"tint":61507,
+"edit":61508,
+"pencil-square-o":61508,
+"share-square-o":61509,
+"check-square-o":61510,
+"arrows":61511,
+"step-backward":61512,
+"fast-backward":61513,
+"backward":61514,
+"play":61515,
+"pause":61516,
+"stop":61517,
+"forward":61518,
+"fast-forward":61520,
+"step-forward":61521,
+"eject":61522,
+"chevron-left":61523,
+"chevron-right":61524,
+"plus-circle":61525,
+"minus-circle":61526,
+"times-circle":61527,
+"check-circle":61528,
+"question-circle":61529,
+"info-circle":61530,
+"crosshairs":61531,
+"times-circle-o":61532,
+"check-circle-o":61533,
+"ban":61534,
+"arrow-left":61536,
+"arrow-right":61537,
+"arrow-up":61538,
+"arrow-down":61539,
+"mail-forward":61540,
+"share":61540,
+"expand":61541,
+"compress":61542,
+"plus":61543,
+"minus":61544,
+"asterisk":61545,
+"exclamation-circle":61546,
+"gift":61547,
+"leaf":61548,
+"fire":61549,
+"eye":61550,
+"eye-slash":61552,
+"warning":61553,
+"exclamation-triangle":61553,
+"plane":61554,
+"calendar":61555,
+"random":61556,
+"comment":61557,
+"magnet":61558,
+"chevron-up":61559,
+"chevron-down":61560,
+"retweet":61561,
+"shopping-cart":61562,
+"folder":61563,
+"folder-open":61564,
+"arrows-v":61565,
+"arrows-h":61566,
+"bar-chart-o":61568,
+"bar-chart":61568,
+"twitter-square":61569,
+"facebook-square":61570,
+"camera-retro":61571,
+"key":61572,
+"gears":61573,
+"cogs":61573,
+"comments":61574,
+"thumbs-o-up":61575,
+"thumbs-o-down":61576,
+"star-half":61577,
+"heart-o":61578,
+"sign-out":61579,
+"linkedin-square":61580,
+"thumb-tack":61581,
+"external-link":61582,
+"sign-in":61584,
+"trophy":61585,
+"github-square":61586,
+"upload":61587,
+"lemon-o":61588,
+"phone":61589,
+"square-o":61590,
+"bookmark-o":61591,
+"phone-square":61592,
+"twitter":61593,
+"facebook-f":61594,
+"facebook":61594,
+"github":61595,
+"unlock":61596,
+"credit-card":61597,
+"feed":61598,
+"rss":61598,
+"hdd-o":61600,
+"bullhorn":61601,
+"bell":61683,
+"certificate":61603,
+"hand-o-right":61604,
+"hand-o-left":61605,
+"hand-o-up":61606,
+"hand-o-down":61607,
+"arrow-circle-left":61608,
+"arrow-circle-right":61609,
+"arrow-circle-up":61610,
+"arrow-circle-down":61611,
+"globe":61612,
+"wrench":61613,
+"tasks":61614,
+"filter":61616,
+"briefcase":61617,
+"arrows-alt":61618,
+"group":61632,
+"users":61632,
+"chain":61633,
+"link":61633,
+"cloud":61634,
+"flask":61635,
+"cut":61636,
+"scissors":61636,
+"copy":61637,
+"files-o":61637,
+"paperclip":61638,
+"save":61639,
+"floppy-o":61639,
+"square":61640,
+"navicon":61641,
+"reorder":61641,
+"bars":61641,
+"list-ul":61642,
+"list-ol":61643,
+"strikethrough":61644,
+"underline":61645,
+"table":61646,
+"magic":61648,
+"truck":61649,
+"pinterest":61650,
+"pinterest-square":61651,
+"google-plus-square":61652,
+"google-plus":61653,
+"money":61654,
+"caret-down":61655,
+"caret-up":61656,
+"caret-left":61657,
+"caret-right":61658,
+"columns":61659,
+"unsorted":61660,
+"sort":61660,
+"sort-down":61661,
+"sort-desc":61661,
+"sort-up":61662,
+"sort-asc":61662,
+"envelope":61664,
+"linkedin":61665,
+"rotate-left":61666,
+"undo":61666,
+"legal":61667,
+"gavel":61667,
+"dashboard":61668,
+"tachometer":61668,
+"comment-o":61669,
+"comments-o":61670,
+"flash":61671,
+"bolt":61671,
+"sitemap":61672,
+"umbrella":61673,
+"paste":61674,
+"clipboard":61674,
+"lightbulb-o":61675,
+"exchange":61676,
+"cloud-download":61677,
+"cloud-upload":61678,
+"user-md":61680,
+"stethoscope":61681,
+"suitcase":61682,
+"bell-o":61602,
+"coffee":61684,
+"cutlery":61685,
+"file-text-o":61686,
+"building-o":61687,
+"hospital-o":61688,
+"ambulance":61689,
+"medkit":61690,
+"fighter-jet":61691,
+"beer":61692,
+"h-square":61693,
+"plus-square":61694,
+"angle-double-left":61696,
+"angle-double-right":61697,
+"angle-double-up":61698,
+"angle-double-down":61699,
+"angle-left":61700,
+"angle-right":61701,
+"angle-up":61702,
+"angle-down":61703,
+"desktop":61704,
+"laptop":61705,
+"tablet":61706,
+"mobile-phone":61707,
+"mobile":61707,
+"circle-o":61708,
+"quote-left":61709,
+"quote-right":61710,
+"spinner":61712,
+"circle":61713,
+"mail-reply":61714,
+"reply":61714,
+"github-alt":61715,
+"folder-o":61716,
+"folder-open-o":61717,
+"smile-o":61720,
+"frown-o":61721,
+"meh-o":61722,
+"gamepad":61723,
+"keyboard-o":61724,
+"flag-o":61725,
+"flag-checkered":61726,
+"terminal":61728,
+"code":61729,
+"mail-reply-all":61730,
+"reply-all":61730,
+"star-half-empty":61731,
+"star-half-full":61731,
+"star-half-o":61731,
+"location-arrow":61732,
+"crop":61733,
+"code-fork":61734,
+"unlink":61735,
+"chain-broken":61735,
+"question":61736,
+"info":61737,
+"exclamation":61738,
+"superscript":61739,
+"subscript":61740,
+"eraser":61741,
+"puzzle-piece":61742,
+"microphone":61744,
+"microphone-slash":61745,
+"shield":61746,
+"calendar-o":61747,
+"fire-extinguisher":61748,
+"rocket":61749,
+"maxcdn":61750,
+"chevron-circle-left":61751,
+"chevron-circle-right":61752,
+"chevron-circle-up":61753,
+"chevron-circle-down":61754,
+"html5":61755,
+"css3":61756,
+"anchor":61757,
+"unlock-alt":61758,
+"bullseye":61760,
+"ellipsis-h":61761,
+"ellipsis-v":61762,
+"rss-square":61763,
+"play-circle":61764,
+"ticket":61765,
+"minus-square":61766,
+"minus-square-o":61767,
+"level-up":61768,
+"level-down":61769,
+"check-square":61770,
+"pencil-square":61771,
+"external-link-square":61772,
+"share-square":61773,
+"compass":61774,
+"toggle-down":61776,
+"caret-square-o-down":61776,
+"toggle-up":61777,
+"caret-square-o-up":61777,
+"toggle-right":61778,
+"caret-square-o-right":61778,
+"euro":61779,
+"eur":61779,
+"gbp":61780,
+"dollar":61781,
+"usd":61781,
+"rupee":61782,
+"inr":61782,
+"cny":61783,
+"rmb":61783,
+"yen":61783,
+"jpy":61783,
+"ruble":61784,
+"rouble":61784,
+"rub":61784,
+"won":61785,
+"krw":61785,
+"bitcoin":61786,
+"btc":61786,
+"file":61787,
+"file-text":61788,
+"sort-alpha-asc":61789,
+"sort-alpha-desc":61790,
+"sort-amount-asc":61792,
+"sort-amount-desc":61793,
+"sort-numeric-asc":61794,
+"sort-numeric-desc":61795,
+"thumbs-up":61796,
+"thumbs-down":61797,
+"youtube-square":61798,
+"youtube":61799,
+"xing":61800,
+"xing-square":61801,
+"youtube-play":61802,
+"dropbox":61803,
+"stack-overflow":61804,
+"instagram":61805,
+"flickr":61806,
+"adn":61808,
+"bitbucket":61809,
+"bitbucket-square":61810,
+"tumblr":61811,
+"tumblr-square":61812,
+"long-arrow-down":61813,
+"long-arrow-up":61814,
+"long-arrow-left":61815,
+"long-arrow-right":61816,
+"apple":61817,
+"windows":61818,
+"android":61819,
+"linux":61820,
+"dribbble":61821,
+"skype":61822,
+"foursquare":61824,
+"trello":61825,
+"female":61826,
+"male":61827,
+"gittip":61828,
+"gratipay":61828,
+"sun-o":61829,
+"moon-o":61830,
+"archive":61831,
+"bug":61832,
+"vk":61833,
+"weibo":61834,
+"renren":61835,
+"pagelines":61836,
+"stack-exchange":61837,
+"arrow-circle-o-right":61838,
+"arrow-circle-o-left":61840,
+"toggle-left":61841,
+"caret-square-o-left":61841,
+"dot-circle-o":61842,
+"wheelchair":61843,
+"vimeo-square":61844,
+"turkish-lira":61845,
+"try":61845,
+"plus-square-o":61846,
+"space-shuttle":61847,
+"slack":61848,
+"envelope-square":61849,
+"wordpress":61850,
+"openid":61851,
+"institution":61852,
+"bank":61852,
+"university":61852,
+"mortar-board":61853,
+"graduation-cap":61853,
+"yahoo":61854,
+"google":61856,
+"reddit":61857,
+"reddit-square":61858,
+"stumbleupon-circle":61859,
+"stumbleupon":61860,
+"delicious":61861,
+"digg":61862,
+"pied-piper":61863,
+"pied-piper-alt":61864,
+"drupal":61865,
+"joomla":61866,
+"language":61867,
+"fax":61868,
+"building":61869,
+"child":61870,
+"paw":61872,
+"spoon":61873,
+"cube":61874,
+"cubes":61875,
+"behance":61876,
+"behance-square":61877,
+"steam":61878,
+"steam-square":61879,
+"recycle":61880,
+"automobile":61881,
+"car":61881,
+"cab":61882,
+"taxi":61882,
+"tree":61883,
+"spotify":61884,
+"deviantart":61885,
+"soundcloud":61886,
+"database":61888,
+"file-pdf-o":61889,
+"file-word-o":61890,
+"file-excel-o":61891,
+"file-powerpoint-o":61892,
+"file-photo-o":61893,
+"file-picture-o":61893,
+"file-image-o":61893,
+"file-zip-o":61894,
+"file-archive-o":61894,
+"file-sound-o":61895,
+"file-audio-o":61895,
+"file-movie-o":61896,
+"file-video-o":61896,
+"file-code-o":61897,
+"vine":61898,
+"codepen":61899,
+"jsfiddle":61900,
+"life-bouy":61901,
+"life-buoy":61901,
+"life-saver":61901,
+"support":61901,
+"life-ring":61901,
+"circle-o-notch":61902,
+"ra":61904,
+"rebel":61904,
+"ge":61905,
+"empire":61905,
+"git-square":61906,
+"git":61907,
+"y-combinator-square":61908,
+"yc-square":61908,
+"hacker-news":61908,
+"tencent-weibo":61909,
+"qq":61910,
+"wechat":61911,
+"weixin":61911,
+"send":61912,
+"paper-plane":61912,
+"send-o":61913,
+"paper-plane-o":61913,
+"history":61914,
+"circle-thin":61915,
+"header":61916,
+"paragraph":61917,
+"sliders":61918,
+"share-alt":61920,
+"share-alt-square":61921,
+"bomb":61922,
+"soccer-ball-o":61923,
+"futbol-o":61923,
+"tty":61924,
+"binoculars":61925,
+"plug":61926,
+"slideshare":61927,
+"twitch":61928,
+"yelp":61929,
+"newspaper-o":61930,
+"wifi":61931,
+"calculator":61932,
+"paypal":61933,
+"google-wallet":61934,
+"cc-visa":61936,
+"cc-mastercard":61937,
+"cc-discover":61938,
+"cc-amex":61939,
+"cc-paypal":61940,
+"cc-stripe":61941,
+"bell-slash":61942,
+"bell-slash-o":61943,
+"trash":61944,
+"copyright":61945,
+"at":61946,
+"eyedropper":61947,
+"paint-brush":61948,
+"birthday-cake":61949,
+"area-chart":61950,
+"pie-chart":61952,
+"line-chart":61953,
+"lastfm":61954,
+"lastfm-square":61955,
+"toggle-off":61956,
+"toggle-on":61957,
+"bicycle":61958,
+"bus":61959,
+"ioxhost":61960,
+"angellist":61961,
+"cc":61962,
+"shekel":61963,
+"sheqel":61963,
+"ils":61963,
+"meanpath":61964,
+"buysellads":61965,
+"connectdevelop":61966,
+"dashcube":61968,
+"forumbee":61969,
+"leanpub":61970,
+"sellsy":61971,
+"shirtsinbulk":61972,
+"simplybuilt":61973,
+"skyatlas":61974,
+"cart-plus":61975,
+"cart-arrow-down":61976,
+"diamond":61977,
+"ship":61978,
+"user-secret":61979,
+"motorcycle":61980,
+"street-view":61981,
+"heartbeat":61982,
+"venus":61985,
+"mars":61986,
+"mercury":61987,
+"intersex":61988,
+"transgender":61988,
+"transgender-alt":61989,
+"venus-double":61990,
+"mars-double":61991,
+"venus-mars":61992,
+"mars-stroke":61993,
+"mars-stroke-v":61994,
+"mars-stroke-h":61995,
+"neuter":61996,
+"genderless":61997,
+"facebook-official":62000,
+"pinterest-p":62001,
+"whatsapp":62002,
+"server":62003,
+"user-plus":62004,
+"user-times":62005,
+"hotel":62006,
+"bed":62006,
+"viacoin":62007,
+"train":62008,
+"subway":62009,
+"medium":62010,
+"yc":62011,
+"y-combinator":62011,
+"optin-monster":62012,
+"opencart":62013,
+"expeditedssl":62014,
+"battery-4":62016,
+"battery-full":62016,
+"battery-3":62017,
+"battery-three-quarters":62017,
+"battery-2":62018,
+"battery-half":62018,
+"battery-1":62019,
+"battery-quarter":62019,
+"battery-0":62020,
+"battery-empty":62020,
+"mouse-pointer":62021,
+"i-cursor":62022,
+"object-group":62023,
+"object-ungroup":62024,
+"sticky-note":62025,
+"sticky-note-o":62026,
+"cc-jcb":62027,
+"cc-diners-club":62028,
+"clone":62029,
+"balance-scale":62030,
+"hourglass-o":62032,
+"hourglass-1":62033,
+"hourglass-start":62033,
+"hourglass-2":62034,
+"hourglass-half":62034,
+"hourglass-3":62035,
+"hourglass-end":62035,
+"hourglass":62036,
+"hand-grab-o":62037,
+"hand-rock-o":62037,
+"hand-stop-o":62038,
+"hand-paper-o":62038,
+"hand-scissors-o":62039,
+"hand-lizard-o":62040,
+"hand-spock-o":62041,
+"hand-pointer-o":62042,
+"hand-peace-o":62043,
+"trademark":62044,
+"registered":62045,
+"creative-commons":62046,
+"gg":62048,
+"gg-circle":62049,
+"tripadvisor":62050,
+"odnoklassniki":62051,
+"odnoklassniki-square":62052,
+"get-pocket":62053,
+"wikipedia-w":62054,
+"safari":62055,
+"chrome":62056,
+"firefox":62057,
+"opera":62058,
+"internet-explorer":62059,
+"tv":62060,
+"television":62060,
+"contao":62061,
+"500px":62062,
+"amazon":62064,
+"calendar-plus-o":62065,
+"calendar-minus-o":62066,
+"calendar-times-o":62067,
+"calendar-check-o":62068,
+"industry":62069,
+"map-pin":62070,
+"map-signs":62071,
+"map-o":62072,
+"map":62073,
+"commenting":62074,
+"commenting-o":62075,
+"houzz":62076,
+"vimeo":62077,
+"black-tie":62078,
+"fonticons":62080,
+"reddit-alien":62081,
+"edge":62082,
+"credit-card-alt":62083,
+"codiepie":62084,
+"modx":62085,
+"fort-awesome":62086,
+"usb":62087,
+"product-hunt":62088,
+"mixcloud":62089,
+"scribd":62090,
+"pause-circle":62091,
+"pause-circle-o":62092,
+"stop-circle":62093,
+"stop-circle-o":62094,
+"shopping-bag":62096,
+"shopping-basket":62097,
+"hashtag":62098,
+"bluetooth":62099,
+"bluetooth-b":62100,
+"percent":62101};
+
+
+var FontAwesome=createIconSet(glyphMap,'FontAwesome','FontAwesome.ttf');
+
+module.exports=FontAwesome;
+module.exports.glyphMap=glyphMap;
+});
+__d('createIconSet',function(global, require, module, exports) {  'use strict';
+
+
+
+
+
+var pick=require('lodash/object/pick.js');
+var omit=require('lodash/object/omit.js');
+var isString=require('lodash/lang/isString.js');
+var isEqual=require('lodash/lang/isEqual.js');
+
+var React=require('react-native/Libraries/react-native/react-native.js');var 
+
+View=
+
+
+
+
+
+
+
+
+
+React.View;var Text=React.Text;var StyleSheet=React.StyleSheet;var TouchableHighlight=React.TouchableHighlight;var TabBarIOS=React.TabBarIOS;var requireNativeComponent=React.requireNativeComponent;var NativeModules=React.NativeModules;var Platform=React.Platform;var PixelRatio=React.PixelRatio;var processColor=React.processColor;
+
+var NativeIconAPI=NativeModules.RNVectorIconsManager||NativeModules.RNVectorIconsModule;
+
+var DEFAULT_ICON_SIZE=12;
+var TAB_BAR_ICON_SIZE=30;
+var DEFAULT_ICON_COLOR='black';
+var IOS7_BLUE='#007AFF';
+var DEFAULT_BUTTON_ICON_SIZE=20;
+var DEFAULT_BUTTON_ICON_COLOR='white';
+var DEFAULT_BUTTON_RADIUS=5;
+var DEFAULT_BUTTON_BACKGROUND=IOS7_BLUE;
+
+function createIconSet(glyphMap,fontFamily,fontFile){
+var fontReference=fontFamily;
+
+if(Platform.OS==='android'&&fontFile){
+fontReference=fontFile.replace(/\.(otf|ttf)$/,'');}
+
+
+var Icon=React.createClass({displayName:'Icon',
+propTypes:{
+name:React.PropTypes.oneOf(Object.keys(glyphMap)).isRequired,
+size:React.PropTypes.number,
+color:React.PropTypes.string},
+
+_root:null,
+
+setNativeProps:function(nativeProps){
+if(this._root==null){
+throw new Error("Ref must have been set before calling setNativeProps");}
+
+this._root.setNativeProps(nativeProps);},
+
+
+render:function(){var _this=this;var _props=
+this.props;var name=_props.name;var size=_props.size;var color=_props.color;var style=_props.style;var props=babelHelpers.objectWithoutProperties(_props,['name','size','color','style']);
+
+var glyph=glyphMap[name]||'?';
+if(typeof glyph==='number'){
+glyph=String.fromCharCode(glyph);}
+
+
+size=size||DEFAULT_ICON_SIZE;
+
+var styleDefaults={
+fontSize:size,
+color:color};
+
+
+props.style=[styleDefaults,style];
+props.ref=function(component){return _this._root=component;};
+
+styleDefaults.fontFamily=fontReference;
+
+return React.createElement(Text,props,glyph,this.props.children);}});
+
+
+
+var styles=StyleSheet.create({
+container:{
+flexDirection:'row',
+justifyContent:'flex-start',
+alignItems:'center',
+padding:8},
+
+touchable:{
+overflow:'hidden'},
+
+icon:{
+marginRight:10},
+
+text:{
+fontWeight:'600',
+backgroundColor:'transparent'}});
+
+
+
+var IconButton=React.createClass({displayName:'IconButton',
+getDefaultProps:function(){
+return {
+size:DEFAULT_BUTTON_ICON_SIZE,
+color:DEFAULT_BUTTON_ICON_COLOR,
+backgroundColor:DEFAULT_BUTTON_BACKGROUND,
+borderRadius:DEFAULT_BUTTON_RADIUS};},
+
+
+
+render:function(){var _props2=
+
+
+
+
+
+this.props;var style=_props2.style;var iconStyle=_props2.iconStyle;var children=_props2.children;var props=babelHelpers.objectWithoutProperties(_props2,['style','iconStyle','children']);
+
+var iconProps=pick(props,Object.keys(Text.propTypes),'style','name','size','color');
+var touchableProps=pick(props,Object.keys(TouchableHighlight.propTypes));
+props=omit(
+props,
+Object.keys(iconProps),
+Object.keys(touchableProps),
+'iconStyle',
+'borderRadius',
+'backgroundColor');
+
+iconProps.style=this.props.iconStyle?[styles.icon,this.props.iconStyle]:styles.icon;
+
+var colorStyle=pick(this.props,'color');
+var blockStyle=pick(this.props,'backgroundColor','borderRadius');
+
+if(isString(children)){
+children=React.createElement(Text,{style:[styles.text,colorStyle]},children);}
+
+
+return (
+React.createElement(TouchableHighlight,babelHelpers.extends({style:[styles.touchable,blockStyle]},touchableProps),
+React.createElement(View,babelHelpers.extends({
+style:[styles.container,blockStyle,style]},
+props),
+
+React.createElement(Icon,iconProps),
+children)));}});
+
+
+
+
+
+
+var imageSourceCache={};
+
+var getImageSource=function(name,size,color){
+if(!NativeIconAPI){
+if(Platform.OS==='android'){
+throw new Error('RNVectorIconsModule not available, did you properly integrate the module?');}
+
+throw new Error('RNVectorIconsManager not available, did you add the library to your project and link with libRNVectorIcons.a?');}
+
+
+var glyph=glyphMap[name]||'?';
+if(typeof glyph==='number'){
+glyph=String.fromCharCode(glyph);}
+
+size=size||DEFAULT_ICON_SIZE;
+color=color||DEFAULT_ICON_COLOR;
+
+if(processColor){
+color=processColor(color);}
+
+
+var cacheKey=glyph+':'+size+':'+color;
+var scale=PixelRatio.get();
+
+return new Promise(function(resolve,reject){
+var cached=imageSourceCache[cacheKey];
+if(typeof cached!=='undefined'){
+if(!cached||cached instanceof Error){reject(cached);}
+return resolve({uri:cached,scale:scale});}
+
+NativeIconAPI.getImageForFont(fontReference,glyph,size,color,function(err,image){
+if(typeof err==='string'){
+err=new Error(err);}
+
+imageSourceCache[cacheKey]=image||err||false;
+if(!err&&image){
+return resolve({uri:image,scale:scale});}
+
+reject(err);});});};
+
+
+
+
+
+var TabBarItem=React.createClass({displayName:'TabBarItem',
+propTypes:{
+iconName:React.PropTypes.oneOf(Object.keys(glyphMap)).isRequired,
+selectedIconName:React.PropTypes.oneOf(Object.keys(glyphMap)),
+iconSize:React.PropTypes.number},
+
+
+updateIconSources:function(){var _this2=this;
+var size=this.props.iconSize||TAB_BAR_ICON_SIZE;
+if(this.props.iconName){
+getImageSource(this.props.iconName,size).then(function(icon){return _this2.setState({icon:icon});});}
+
+if(this.props.selectedIconName){
+getImageSource(this.props.selectedIconName,size).then(function(selectedIcon){return _this2.setState({selectedIcon:selectedIcon});});}},
+
+
+
+componentWillMount:function(){
+this.updateIconSources();},
+
+
+componentWillReceiveProps:function(nextProps){
+var keys=Object.keys(TabBarItem.propTypes);
+if(!isEqual(pick(nextProps,keys),pick(this.props,keys))){
+this.updateIconSources();}},
+
+
+
+render:function(){
+return React.createElement(TabBarIOS.Item,babelHelpers.extends({},this.props,this.state));}});
+
+
+
+Icon.Button=IconButton;
+Icon.TabBarItem=TabBarItem;
+Icon.getImageSource=getImageSource;
+
+return Icon;}
+;
+
+module.exports=createIconSet;
+});
+__d('lodash/object/pick.js',function(global, require, module, exports) {  var baseFlatten=require('lodash/internal/baseFlatten.js'),
+bindCallback=require('lodash/internal/bindCallback.js'),
+pickByArray=require('lodash/internal/pickByArray.js'),
+pickByCallback=require('lodash/internal/pickByCallback.js'),
+restParam=require('lodash/function/restParam.js');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var pick=restParam(function(object,props){
+if(object==null){
+return {};}
+
+return typeof props[0]=='function'?
+pickByCallback(object,bindCallback(props[0],props[1],3)):
+pickByArray(object,baseFlatten(props));});
+
+
+module.exports=pick;
+});
+__d('lodash/internal/baseFlatten.js',function(global, require, module, exports) {  var arrayPush=require('lodash/internal/arrayPush.js'),
+isArguments=require('lodash/lang/isArguments.js'),
+isArray=require('lodash/lang/isArray.js'),
+isArrayLike=require('lodash/internal/isArrayLike.js'),
+isObjectLike=require('lodash/internal/isObjectLike.js');
+
+
+
+
+
+
+
+
+
+
+
+
+function baseFlatten(array,isDeep,isStrict,result){
+result||(result=[]);
+
+var index=-1,
+length=array.length;
+
+while(++index<length){
+var value=array[index];
+if(isObjectLike(value)&&isArrayLike(value)&&(
+isStrict||isArray(value)||isArguments(value))){
+if(isDeep){
+
+baseFlatten(value,isDeep,isStrict,result);}else 
+{
+arrayPush(result,value);}}else 
+
+if(!isStrict){
+result[result.length]=value;}}
+
+
+return result;}
+
+
+module.exports=baseFlatten;
+});
+__d('lodash/internal/arrayPush.js',function(global, require, module, exports) {  function 
+
+
+
+
+
+
+
+arrayPush(array,values){
+var index=-1,
+length=values.length,
+offset=array.length;
+
+while(++index<length){
+array[offset+index]=values[index];}
+
+return array;}
+
+
+module.exports=arrayPush;
+});
+__d('lodash/lang/isArguments.js',function(global, require, module, exports) {  var isArrayLike=require('lodash/internal/isArrayLike.js'),
+isObjectLike=require('lodash/internal/isObjectLike.js');
+
+
+var objectProto=Object.prototype;
+
+
+var hasOwnProperty=objectProto.hasOwnProperty;
+
+
+var propertyIsEnumerable=objectProto.propertyIsEnumerable;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function isArguments(value){
+return isObjectLike(value)&&isArrayLike(value)&&
+hasOwnProperty.call(value,'callee')&&!propertyIsEnumerable.call(value,'callee');}
+
+
+module.exports=isArguments;
+});
+__d('lodash/internal/isArrayLike.js',function(global, require, module, exports) {  var getLength=require('lodash/internal/getLength.js'),
+isLength=require('lodash/internal/isLength.js');
+
+
+
+
+
+
+
+
+function isArrayLike(value){
+return value!=null&&isLength(getLength(value));}
+
+
+module.exports=isArrayLike;
+});
+__d('lodash/internal/getLength.js',function(global, require, module, exports) {  var baseProperty=require('lodash/internal/baseProperty.js');
+
+
+
+
+
+
+
+
+
+
+
+var getLength=baseProperty('length');
+
+module.exports=getLength;
+});
+__d('lodash/internal/baseProperty.js',function(global, require, module, exports) {  function 
+
+
+
+
+
+
+baseProperty(key){
+return function(object){
+return object==null?undefined:object[key];};}
+
+
+
+module.exports=baseProperty;
+});
+__d('lodash/internal/isLength.js',function(global, require, module, exports) {  var 
+
+
+
+MAX_SAFE_INTEGER=9007199254740991;
+
+
+
+
+
+
+
+
+
+
+function isLength(value){
+return typeof value=='number'&&value>-1&&value%1==0&&value<=MAX_SAFE_INTEGER;}
+
+
+module.exports=isLength;
+});
+__d('lodash/internal/isObjectLike.js',function(global, require, module, exports) {  function 
+
+
+
+
+
+
+isObjectLike(value){
+return !!value&&typeof value=='object';}
+
+
+module.exports=isObjectLike;
+});
+__d('lodash/lang/isArray.js',function(global, require, module, exports) {  var getNative=require('lodash/internal/getNative.js'),
+isLength=require('lodash/internal/isLength.js'),
+isObjectLike=require('lodash/internal/isObjectLike.js');
+
+
+var arrayTag='[object Array]';
+
+
+var objectProto=Object.prototype;
+
+
+
+
+
+var objToString=objectProto.toString;
+
+
+var nativeIsArray=getNative(Array,'isArray');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var isArray=nativeIsArray||function(value){
+return isObjectLike(value)&&isLength(value.length)&&objToString.call(value)==arrayTag;};
+
+
+module.exports=isArray;
+});
+__d('lodash/internal/getNative.js',function(global, require, module, exports) {  var isNative=require('lodash/lang/isNative.js');
+
+
+
+
+
+
+
+
+
+function getNative(object,key){
+var value=object==null?undefined:object[key];
+return isNative(value)?value:undefined;}
+
+
+module.exports=getNative;
+});
+__d('lodash/lang/isNative.js',function(global, require, module, exports) {  var isFunction=require('lodash/lang/isFunction.js'),
+isObjectLike=require('lodash/internal/isObjectLike.js');
+
+
+var reIsHostCtor=/^\[object .+?Constructor\]$/;
+
+
+var objectProto=Object.prototype;
+
+
+var fnToString=Function.prototype.toString;
+
+
+var hasOwnProperty=objectProto.hasOwnProperty;
+
+
+var reIsNative=RegExp('^'+
+fnToString.call(hasOwnProperty).replace(/[\\^$.*+?()[\]{}|]/g,'\\$&').
+replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,'$1.*?')+'$');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function isNative(value){
+if(value==null){
+return false;}
+
+if(isFunction(value)){
+return reIsNative.test(fnToString.call(value));}
+
+return isObjectLike(value)&&reIsHostCtor.test(value);}
+
+
+module.exports=isNative;
+});
+__d('lodash/lang/isFunction.js',function(global, require, module, exports) {  var isObject=require('lodash/lang/isObject.js');
+
+
+var funcTag='[object Function]';
+
+
+var objectProto=Object.prototype;
+
+
+
+
+
+var objToString=objectProto.toString;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function isFunction(value){
+
+
+
+return isObject(value)&&objToString.call(value)==funcTag;}
+
+
+module.exports=isFunction;
+});
+__d('lodash/lang/isObject.js',function(global, require, module, exports) {  function 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+isObject(value){
+
+
+var type=typeof value;
+return !!value&&(type=='object'||type=='function');}
+
+
+module.exports=isObject;
+});
+__d('lodash/internal/bindCallback.js',function(global, require, module, exports) {  var identity=require('lodash/utility/identity.js');
+
+
+
+
+
+
+
+
+
+
+
+function bindCallback(func,thisArg,argCount){
+if(typeof func!='function'){
+return identity;}
+
+if(thisArg===undefined){
+return func;}
+
+switch(argCount){
+case 1:return function(value){
+return func.call(thisArg,value);};
+
+case 3:return function(value,index,collection){
+return func.call(thisArg,value,index,collection);};
+
+case 4:return function(accumulator,value,index,collection){
+return func.call(thisArg,accumulator,value,index,collection);};
+
+case 5:return function(value,other,key,object,source){
+return func.call(thisArg,value,other,key,object,source);};}
+
+
+return function(){
+return func.apply(thisArg,arguments);};}
+
+
+
+module.exports=bindCallback;
+});
+__d('lodash/utility/identity.js',function(global, require, module, exports) {  function 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+identity(value){
+return value;}
+
+
+module.exports=identity;
+});
+__d('lodash/internal/pickByArray.js',function(global, require, module, exports) {  var toObject=require('lodash/internal/toObject.js');
+
+
+
+
+
+
+
+
+
+
+function pickByArray(object,props){
+object=toObject(object);
+
+var index=-1,
+length=props.length,
+result={};
+
+while(++index<length){
+var key=props[index];
+if(key in object){
+result[key]=object[key];}}
+
+
+return result;}
+
+
+module.exports=pickByArray;
+});
+__d('lodash/internal/toObject.js',function(global, require, module, exports) {  var isObject=require('lodash/lang/isObject.js');
+
+
+
+
+
+
+
+
+function toObject(value){
+return isObject(value)?value:Object(value);}
+
+
+module.exports=toObject;
+});
+__d('lodash/internal/pickByCallback.js',function(global, require, module, exports) {  var baseForIn=require('lodash/internal/baseForIn.js');
+
+
+
+
+
+
+
+
+
+
+function pickByCallback(object,predicate){
+var result={};
+baseForIn(object,function(value,key,object){
+if(predicate(value,key,object)){
+result[key]=value;}});
+
+
+return result;}
+
+
+module.exports=pickByCallback;
+});
+__d('lodash/internal/baseForIn.js',function(global, require, module, exports) {  var baseFor=require('lodash/internal/baseFor.js'),
+keysIn=require('lodash/object/keysIn.js');
+
+
+
+
+
+
+
+
+
+
+function baseForIn(object,iteratee){
+return baseFor(object,iteratee,keysIn);}
+
+
+module.exports=baseForIn;
+});
+__d('lodash/internal/baseFor.js',function(global, require, module, exports) {  var createBaseFor=require('lodash/internal/createBaseFor.js');
+
+
+
+
+
+
+
+
+
+
+
+
+
+var baseFor=createBaseFor();
+
+module.exports=baseFor;
+});
+__d('lodash/internal/createBaseFor.js',function(global, require, module, exports) {  var toObject=require('lodash/internal/toObject.js');
+
+
+
+
+
+
+
+
+function createBaseFor(fromRight){
+return function(object,iteratee,keysFunc){
+var iterable=toObject(object),
+props=keysFunc(object),
+length=props.length,
+index=fromRight?length:-1;
+
+while(fromRight?index--:++index<length){
+var key=props[index];
+if(iteratee(iterable[key],key,iterable)===false){
+break;}}
+
+
+return object;};}
+
+
+
+module.exports=createBaseFor;
+});
+__d('lodash/object/keysIn.js',function(global, require, module, exports) {  var isArguments=require('lodash/lang/isArguments.js'),
+isArray=require('lodash/lang/isArray.js'),
+isIndex=require('lodash/internal/isIndex.js'),
+isLength=require('lodash/internal/isLength.js'),
+isObject=require('lodash/lang/isObject.js');
+
+
+var objectProto=Object.prototype;
+
+
+var hasOwnProperty=objectProto.hasOwnProperty;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function keysIn(object){
+if(object==null){
+return [];}
+
+if(!isObject(object)){
+object=Object(object);}
+
+var length=object.length;
+length=length&&isLength(length)&&(
+isArray(object)||isArguments(object))&&length||0;
+
+var Ctor=object.constructor,
+index=-1,
+isProto=typeof Ctor=='function'&&Ctor.prototype===object,
+result=Array(length),
+skipIndexes=length>0;
+
+while(++index<length){
+result[index]=index+'';}
+
+for(var key in object){
+if(!(skipIndexes&&isIndex(key,length))&&
+!(key=='constructor'&&(isProto||!hasOwnProperty.call(object,key)))){
+result.push(key);}}
+
+
+return result;}
+
+
+module.exports=keysIn;
+});
+__d('lodash/internal/isIndex.js',function(global, require, module, exports) {  var 
+reIsUint=/^\d+$/;
+
+
+
+
+
+var MAX_SAFE_INTEGER=9007199254740991;
+
+
+
+
+
+
+
+
+
+function isIndex(value,length){
+value=typeof value=='number'||reIsUint.test(value)?+value:-1;
+length=length==null?MAX_SAFE_INTEGER:length;
+return value>-1&&value%1==0&&value<length;}
+
+
+module.exports=isIndex;
+});
+__d('lodash/function/restParam.js',function(global, require, module, exports) {  var 
+FUNC_ERROR_TEXT='Expected a function';
+
+
+var nativeMax=Math.max;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function restParam(func,start){
+if(typeof func!='function'){
+throw new TypeError(FUNC_ERROR_TEXT);}
+
+start=nativeMax(start===undefined?func.length-1:+start||0,0);
+return function(){
+var args=arguments,
+index=-1,
+length=nativeMax(args.length-start,0),
+rest=Array(length);
+
+while(++index<length){
+rest[index]=args[start+index];}
+
+switch(start){
+case 0:return func.call(this,rest);
+case 1:return func.call(this,args[0],rest);
+case 2:return func.call(this,args[0],args[1],rest);}
+
+var otherArgs=Array(start+1);
+index=-1;
+while(++index<start){
+otherArgs[index]=args[index];}
+
+otherArgs[start]=rest;
+return func.apply(this,otherArgs);};}
+
+
+
+module.exports=restParam;
+});
+__d('lodash/object/omit.js',function(global, require, module, exports) {  var arrayMap=require('lodash/internal/arrayMap.js'),
+baseDifference=require('lodash/internal/baseDifference.js'),
+baseFlatten=require('lodash/internal/baseFlatten.js'),
+bindCallback=require('lodash/internal/bindCallback.js'),
+keysIn=require('lodash/object/keysIn.js'),
+pickByArray=require('lodash/internal/pickByArray.js'),
+pickByCallback=require('lodash/internal/pickByCallback.js'),
+restParam=require('lodash/function/restParam.js');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var omit=restParam(function(object,props){
+if(object==null){
+return {};}
+
+if(typeof props[0]!='function'){
+var props=arrayMap(baseFlatten(props),String);
+return pickByArray(object,baseDifference(keysIn(object),props));}
+
+var predicate=bindCallback(props[0],props[1],3);
+return pickByCallback(object,function(value,key,object){
+return !predicate(value,key,object);});});
+
+
+
+module.exports=omit;
+});
+__d('lodash/internal/arrayMap.js',function(global, require, module, exports) {  function 
+
+
+
+
+
+
+
+
+arrayMap(array,iteratee){
+var index=-1,
+length=array.length,
+result=Array(length);
+
+while(++index<length){
+result[index]=iteratee(array[index],index,array);}
+
+return result;}
+
+
+module.exports=arrayMap;
+});
+__d('lodash/internal/baseDifference.js',function(global, require, module, exports) {  var baseIndexOf=require('lodash/internal/baseIndexOf.js'),
+cacheIndexOf=require('lodash/internal/cacheIndexOf.js'),
+createCache=require('lodash/internal/createCache.js');
+
+
+var LARGE_ARRAY_SIZE=200;
+
+
+
+
+
+
+
+
+
+
+function baseDifference(array,values){
+var length=array?array.length:0,
+result=[];
+
+if(!length){
+return result;}
+
+var index=-1,
+indexOf=baseIndexOf,
+isCommon=true,
+cache=isCommon&&values.length>=LARGE_ARRAY_SIZE?createCache(values):null,
+valuesLength=values.length;
+
+if(cache){
+indexOf=cacheIndexOf;
+isCommon=false;
+values=cache;}
+
+outer: 
+while(++index<length){
+var value=array[index];
+
+if(isCommon&&value===value){
+var valuesIndex=valuesLength;
+while(valuesIndex--){
+if(values[valuesIndex]===value){
+continue outer;}}
+
+
+result.push(value);}else 
+
+if(indexOf(values,value,0)<0){
+result.push(value);}}
+
+
+return result;}
+
+
+module.exports=baseDifference;
+});
+__d('lodash/internal/baseIndexOf.js',function(global, require, module, exports) {  var indexOfNaN=require('lodash/internal/indexOfNaN.js');
+
+
+
+
+
+
+
+
+
+
+function baseIndexOf(array,value,fromIndex){
+if(value!==value){
+return indexOfNaN(array,fromIndex);}
+
+var index=fromIndex-1,
+length=array.length;
+
+while(++index<length){
+if(array[index]===value){
+return index;}}
+
+
+return -1;}
+
+
+module.exports=baseIndexOf;
+});
+__d('lodash/internal/indexOfNaN.js',function(global, require, module, exports) {  function 
+
+
+
+
+
+
+
+
+indexOfNaN(array,fromIndex,fromRight){
+var length=array.length,
+index=fromIndex+(fromRight?0:-1);
+
+while(fromRight?index--:++index<length){
+var other=array[index];
+if(other!==other){
+return index;}}
+
+
+return -1;}
+
+
+module.exports=indexOfNaN;
+});
+__d('lodash/internal/cacheIndexOf.js',function(global, require, module, exports) {  var isObject=require('lodash/lang/isObject.js');
+
+
+
+
+
+
+
+
+
+
+function cacheIndexOf(cache,value){
+var data=cache.data,
+result=typeof value=='string'||isObject(value)?data.set.has(value):data.hash[value];
+
+return result?0:-1;}
+
+
+module.exports=cacheIndexOf;
+});
+__d('lodash/internal/createCache.js',function(global, require, module, exports) {  var SetCache=require('lodash/internal/SetCache.js'),
+getNative=require('lodash/internal/getNative.js');
+
+
+var Set=getNative(global,'Set');
+
+
+var nativeCreate=getNative(Object,'create');
+
+
+
+
+
+
+
+
+function createCache(values){
+return nativeCreate&&Set?new SetCache(values):null;}
+
+
+module.exports=createCache;
+});
+__d('lodash/internal/SetCache.js',function(global, require, module, exports) {  var cachePush=require('lodash/internal/cachePush.js'),
+getNative=require('lodash/internal/getNative.js');
+
+
+var Set=getNative(global,'Set');
+
+
+var nativeCreate=getNative(Object,'create');
+
+
+
+
+
+
+
+
+function SetCache(values){
+var length=values?values.length:0;
+
+this.data={'hash':nativeCreate(null),'set':new Set()};
+while(length--){
+this.push(values[length]);}}
+
+
+
+
+SetCache.prototype.push=cachePush;
+
+module.exports=SetCache;
+});
+__d('lodash/internal/cachePush.js',function(global, require, module, exports) {  var isObject=require('lodash/lang/isObject.js');
+
+
+
+
+
+
+
+
+
+function cachePush(value){
+var data=this.data;
+if(typeof value=='string'||isObject(value)){
+data.set.add(value);}else 
+{
+data.hash[value]=true;}}
+
+
+
+module.exports=cachePush;
+});
+__d('lodash/lang/isString.js',function(global, require, module, exports) {  var isObjectLike=require('lodash/internal/isObjectLike.js');
+
+
+var stringTag='[object String]';
+
+
+var objectProto=Object.prototype;
+
+
+
+
+
+var objToString=objectProto.toString;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function isString(value){
+return typeof value=='string'||isObjectLike(value)&&objToString.call(value)==stringTag;}
+
+
+module.exports=isString;
+});
+__d('lodash/lang/isEqual.js',function(global, require, module, exports) {  var baseIsEqual=require('lodash/internal/baseIsEqual.js'),
+bindCallback=require('lodash/internal/bindCallback.js');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function isEqual(value,other,customizer,thisArg){
+customizer=typeof customizer=='function'?bindCallback(customizer,thisArg,3):undefined;
+var result=customizer?customizer(value,other):undefined;
+return result===undefined?baseIsEqual(value,other,customizer):!!result;}
+
+
+module.exports=isEqual;
+});
+__d('lodash/internal/baseIsEqual.js',function(global, require, module, exports) {  var baseIsEqualDeep=require('lodash/internal/baseIsEqualDeep.js'),
+isObject=require('lodash/lang/isObject.js'),
+isObjectLike=require('lodash/internal/isObjectLike.js');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function baseIsEqual(value,other,customizer,isLoose,stackA,stackB){
+if(value===other){
+return true;}
+
+if(value==null||other==null||!isObject(value)&&!isObjectLike(other)){
+return value!==value&&other!==other;}
+
+return baseIsEqualDeep(value,other,baseIsEqual,customizer,isLoose,stackA,stackB);}
+
+
+module.exports=baseIsEqual;
+});
+__d('lodash/internal/baseIsEqualDeep.js',function(global, require, module, exports) {  var equalArrays=require('lodash/internal/equalArrays.js'),
+equalByTag=require('lodash/internal/equalByTag.js'),
+equalObjects=require('lodash/internal/equalObjects.js'),
+isArray=require('lodash/lang/isArray.js'),
+isTypedArray=require('lodash/lang/isTypedArray.js');
+
+
+var argsTag='[object Arguments]',
+arrayTag='[object Array]',
+objectTag='[object Object]';
+
+
+var objectProto=Object.prototype;
+
+
+var hasOwnProperty=objectProto.hasOwnProperty;
+
+
+
+
+
+var objToString=objectProto.toString;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function baseIsEqualDeep(object,other,equalFunc,customizer,isLoose,stackA,stackB){
+var objIsArr=isArray(object),
+othIsArr=isArray(other),
+objTag=arrayTag,
+othTag=arrayTag;
+
+if(!objIsArr){
+objTag=objToString.call(object);
+if(objTag==argsTag){
+objTag=objectTag;}else 
+if(objTag!=objectTag){
+objIsArr=isTypedArray(object);}}
+
+
+if(!othIsArr){
+othTag=objToString.call(other);
+if(othTag==argsTag){
+othTag=objectTag;}else 
+if(othTag!=objectTag){
+othIsArr=isTypedArray(other);}}
+
+
+var objIsObj=objTag==objectTag,
+othIsObj=othTag==objectTag,
+isSameTag=objTag==othTag;
+
+if(isSameTag&&!(objIsArr||objIsObj)){
+return equalByTag(object,other,objTag);}
+
+if(!isLoose){
+var objIsWrapped=objIsObj&&hasOwnProperty.call(object,'__wrapped__'),
+othIsWrapped=othIsObj&&hasOwnProperty.call(other,'__wrapped__');
+
+if(objIsWrapped||othIsWrapped){
+return equalFunc(objIsWrapped?object.value():object,othIsWrapped?other.value():other,customizer,isLoose,stackA,stackB);}}
+
+
+if(!isSameTag){
+return false;}
+
+
+
+stackA||(stackA=[]);
+stackB||(stackB=[]);
+
+var length=stackA.length;
+while(length--){
+if(stackA[length]==object){
+return stackB[length]==other;}}
+
+
+
+stackA.push(object);
+stackB.push(other);
+
+var result=(objIsArr?equalArrays:equalObjects)(object,other,equalFunc,customizer,isLoose,stackA,stackB);
+
+stackA.pop();
+stackB.pop();
+
+return result;}
+
+
+module.exports=baseIsEqualDeep;
+});
+__d('lodash/internal/equalArrays.js',function(global, require, module, exports) {  var arraySome=require('lodash/internal/arraySome.js');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function equalArrays(array,other,equalFunc,customizer,isLoose,stackA,stackB){
+var index=-1,
+arrLength=array.length,
+othLength=other.length;
+
+if(arrLength!=othLength&&!(isLoose&&othLength>arrLength)){
+return false;}
+
+
+while(++index<arrLength){
+var arrValue=array[index],
+othValue=other[index],
+result=customizer?customizer(isLoose?othValue:arrValue,isLoose?arrValue:othValue,index):undefined;
+
+if(result!==undefined){
+if(result){
+continue;}
+
+return false;}
+
+
+if(isLoose){
+if(!arraySome(other,function(othValue){
+return arrValue===othValue||equalFunc(arrValue,othValue,customizer,isLoose,stackA,stackB);}))
+{
+return false;}}else 
+
+if(!(arrValue===othValue||equalFunc(arrValue,othValue,customizer,isLoose,stackA,stackB))){
+return false;}}
+
+
+return true;}
+
+
+module.exports=equalArrays;
+});
+__d('lodash/internal/arraySome.js',function(global, require, module, exports) {  function 
+
+
+
+
+
+
+
+
+
+arraySome(array,predicate){
+var index=-1,
+length=array.length;
+
+while(++index<length){
+if(predicate(array[index],index,array)){
+return true;}}
+
+
+return false;}
+
+
+module.exports=arraySome;
+});
+__d('lodash/internal/equalByTag.js',function(global, require, module, exports) {  var 
+boolTag='[object Boolean]',
+dateTag='[object Date]',
+errorTag='[object Error]',
+numberTag='[object Number]',
+regexpTag='[object RegExp]',
+stringTag='[object String]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function equalByTag(object,other,tag){
+switch(tag){
+case boolTag:
+case dateTag:
+
+
+return +object==+other;
+
+case errorTag:
+return object.name==other.name&&object.message==other.message;
+
+case numberTag:
+
+return object!=+object?
+other!=+other:
+object==+other;
+
+case regexpTag:
+case stringTag:
+
+
+return object==other+'';}
+
+return false;}
+
+
+module.exports=equalByTag;
+});
+__d('lodash/internal/equalObjects.js',function(global, require, module, exports) {  var keys=require('lodash/object/keys.js');
+
+
+var objectProto=Object.prototype;
+
+
+var hasOwnProperty=objectProto.hasOwnProperty;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function equalObjects(object,other,equalFunc,customizer,isLoose,stackA,stackB){
+var objProps=keys(object),
+objLength=objProps.length,
+othProps=keys(other),
+othLength=othProps.length;
+
+if(objLength!=othLength&&!isLoose){
+return false;}
+
+var index=objLength;
+while(index--){
+var key=objProps[index];
+if(!(isLoose?key in other:hasOwnProperty.call(other,key))){
+return false;}}
+
+
+var skipCtor=isLoose;
+while(++index<objLength){
+key=objProps[index];
+var objValue=object[key],
+othValue=other[key],
+result=customizer?customizer(isLoose?othValue:objValue,isLoose?objValue:othValue,key):undefined;
+
+
+if(!(result===undefined?equalFunc(objValue,othValue,customizer,isLoose,stackA,stackB):result)){
+return false;}
+
+skipCtor||(skipCtor=key=='constructor');}
+
+if(!skipCtor){
+var objCtor=object.constructor,
+othCtor=other.constructor;
+
+
+if(objCtor!=othCtor&&
+'constructor' in object&&'constructor' in other&&
+!(typeof objCtor=='function'&&objCtor instanceof objCtor&&
+typeof othCtor=='function'&&othCtor instanceof othCtor)){
+return false;}}
+
+
+return true;}
+
+
+module.exports=equalObjects;
+});
+__d('lodash/object/keys.js',function(global, require, module, exports) {  var getNative=require('lodash/internal/getNative.js'),
+isArrayLike=require('lodash/internal/isArrayLike.js'),
+isObject=require('lodash/lang/isObject.js'),
+shimKeys=require('lodash/internal/shimKeys.js');
+
+
+var nativeKeys=getNative(Object,'keys');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var keys=!nativeKeys?shimKeys:function(object){
+var Ctor=object==null?undefined:object.constructor;
+if(typeof Ctor=='function'&&Ctor.prototype===object||
+typeof object!='function'&&isArrayLike(object)){
+return shimKeys(object);}
+
+return isObject(object)?nativeKeys(object):[];};
+
+
+module.exports=keys;
+});
+__d('lodash/internal/shimKeys.js',function(global, require, module, exports) {  var isArguments=require('lodash/lang/isArguments.js'),
+isArray=require('lodash/lang/isArray.js'),
+isIndex=require('lodash/internal/isIndex.js'),
+isLength=require('lodash/internal/isLength.js'),
+keysIn=require('lodash/object/keysIn.js');
+
+
+var objectProto=Object.prototype;
+
+
+var hasOwnProperty=objectProto.hasOwnProperty;
+
+
+
+
+
+
+
+
+
+function shimKeys(object){
+var props=keysIn(object),
+propsLength=props.length,
+length=propsLength&&object.length;
+
+var allowIndexes=!!length&&isLength(length)&&(
+isArray(object)||isArguments(object));
+
+var index=-1,
+result=[];
+
+while(++index<propsLength){
+var key=props[index];
+if(allowIndexes&&isIndex(key,length)||hasOwnProperty.call(object,key)){
+result.push(key);}}
+
+
+return result;}
+
+
+module.exports=shimKeys;
+});
+__d('lodash/lang/isTypedArray.js',function(global, require, module, exports) {  var isLength=require('lodash/internal/isLength.js'),
+isObjectLike=require('lodash/internal/isObjectLike.js');
+
+
+var argsTag='[object Arguments]',
+arrayTag='[object Array]',
+boolTag='[object Boolean]',
+dateTag='[object Date]',
+errorTag='[object Error]',
+funcTag='[object Function]',
+mapTag='[object Map]',
+numberTag='[object Number]',
+objectTag='[object Object]',
+regexpTag='[object RegExp]',
+setTag='[object Set]',
+stringTag='[object String]',
+weakMapTag='[object WeakMap]';
+
+var arrayBufferTag='[object ArrayBuffer]',
+float32Tag='[object Float32Array]',
+float64Tag='[object Float64Array]',
+int8Tag='[object Int8Array]',
+int16Tag='[object Int16Array]',
+int32Tag='[object Int32Array]',
+uint8Tag='[object Uint8Array]',
+uint8ClampedTag='[object Uint8ClampedArray]',
+uint16Tag='[object Uint16Array]',
+uint32Tag='[object Uint32Array]';
+
+
+var typedArrayTags={};
+typedArrayTags[float32Tag]=typedArrayTags[float64Tag]=
+typedArrayTags[int8Tag]=typedArrayTags[int16Tag]=
+typedArrayTags[int32Tag]=typedArrayTags[uint8Tag]=
+typedArrayTags[uint8ClampedTag]=typedArrayTags[uint16Tag]=
+typedArrayTags[uint32Tag]=true;
+typedArrayTags[argsTag]=typedArrayTags[arrayTag]=
+typedArrayTags[arrayBufferTag]=typedArrayTags[boolTag]=
+typedArrayTags[dateTag]=typedArrayTags[errorTag]=
+typedArrayTags[funcTag]=typedArrayTags[mapTag]=
+typedArrayTags[numberTag]=typedArrayTags[objectTag]=
+typedArrayTags[regexpTag]=typedArrayTags[setTag]=
+typedArrayTags[stringTag]=typedArrayTags[weakMapTag]=false;
+
+
+var objectProto=Object.prototype;
+
+
+
+
+
+var objToString=objectProto.toString;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function isTypedArray(value){
+return isObjectLike(value)&&isLength(value.length)&&!!typedArrayTags[objToString.call(value)];}
+
+
+module.exports=isTypedArray;
 });
 __d('Snatural/app/styles/indexPage.js',function(global, require, module, exports) {  'use strict';
 
@@ -57098,28 +59624,28 @@ var React=require('react-native/Libraries/react-native/react-native.js');var _re
 
 
 
-require('Snatural/app/styles/variables.js');var COLOR_DARK=_require.COLOR_DARK;var COLOR_MAIN=_require.COLOR_MAIN;
+
+
+require('Snatural/app/styles/variables.js');var COLOR_DARK=_require.COLOR_DARK;var COLOR_MAIN=_require.COLOR_MAIN;var FONT_ICON=_require.FONT_ICON;var FONT_S_SIZE=_require.FONT_S_SIZE;
 
 module.exports=React.StyleSheet.create({
 container:{
 flex:1},
 
-tabView:{
-flex:1},
-
-tabs:{
-flexDirection:'row'},
-
 tab:{
 flex:1,
-height:48,
-backgroundColor:COLOR_MAIN},
+backgroundColor:COLOR_MAIN,
+alignItems:'center',
+justifyContent:'center'},
+
+tabIcon:{
+fontSize:FONT_ICON,
+color:'white'},
 
 tabText:{
-flex:1,
 color:'white',
 textAlign:'center',
-marginTop:22},
+fontSize:FONT_S_SIZE},
 
 activeTab:{
 backgroundColor:COLOR_DARK}});
@@ -57140,6 +59666,7 @@ exports.COLOR_BACKGROUND='#f1f1f1';
 exports.COLOR_DARK='#76b68c';
 exports.COLOR_MAIN='#98d1ad';
 
+exports.FONT_ICON=26;
 exports.FONT_X_SIZE=22;
 exports.FONT_L_SIZE=18;
 exports.FONT_M_SIZE=16;
@@ -57149,6 +59676,198 @@ exports.PADDING_X_SIZE=20;
 exports.PADDING_L_SIZE=15;
 exports.PADDING_M_SIZE=10;
 exports.PADDING_S_SIZE=5;
+});
+__d('Snatural/app/components/TabBar.js',function(global, require, module, exports) {  'use strict';
+
+
+
+
+
+var React=require('react-native/Libraries/react-native/react-native.js');
+
+var styles=require('Snatural/app/styles/tabBar.js');var _require=
+require('Snatural/app/styles/variables.js');var SCREEN_WIDTH=_require.SCREEN_WIDTH;var 
+
+
+View=
+
+
+
+
+React.View;var ScrollView=React.ScrollView;var ViewPagerAndroid=React.ViewPagerAndroid;var TouchableWithoutFeedback=React.TouchableWithoutFeedback;var Platform=React.Platform;
+
+var Tabbar=React.createClass({displayName:'Tabbar',
+propTypes:{
+activeTabStyle:React.PropTypes.number,
+initalActive:React.PropTypes.string,
+tabPosition:React.PropTypes.oneOf(['top','bottom'])},
+
+
+getInitialState:function(){
+return {
+active:this.props.initalActive};},
+
+
+
+render:function(){var _this=this;
+var contents=this._createContents(this.props);var _renderTabs=
+
+this._renderTabs(this.props.tabPosition,contents.tabs);var topTabs=_renderTabs.topTabs;var bottomTabs=_renderTabs.bottomTabs;
+if(Platform.OS==='ios'){
+return (
+React.createElement(View,{style:styles.container},
+topTabs,
+React.createElement(ScrollView,{
+horizontal:true,
+pagingEnabled:true,
+directionalLockEnabled:true,
+showsHorizontalScrollIndicator:false,
+showsVerticalScrollIndicator:false,
+bounces:false,
+style:styles.viewContainer,
+onMomentumScrollEnd:this._onMomentumScrollEnd,
+ref:function(viewPager){_this.viewPager=viewPager;}},
+contents.views),
+
+bottomTabs));}else 
+
+
+{
+return (
+React.createElement(View,{style:styles.container},
+topTabs,
+React.createElement(ViewPagerAndroid,{
+style:styles.viewContainer,
+initialPage:0,
+onPageSelected:this._onPageSelected,
+ref:function(viewPager){_this.viewPager=viewPager;}},
+contents.views),
+
+bottomTabs));}},
+
+
+
+
+
+_renderTabs:function(tabPosition,tabs){
+var tabContainer=
+React.createElement(View,{style:styles.tabContainer},
+tabs);
+
+
+return tabPosition==='top'?
+{topTabs:tabContainer}:
+{bottomTabs:tabContainer};},
+
+
+_onMomentumScrollEnd:function(e){
+var activeIndex=e.nativeEvent.contentOffset.x/SCREEN_WIDTH;
+this.setState({active:this.activeMapping[activeIndex]});},
+
+
+_onPageSelected:function(e){
+this.setState({active:this.activeMapping[e.nativeEvent.position]});},
+
+
+_createContents:function(props){var _this2=this;
+var contents={views:[],tabs:[]};
+
+this.activeMapping=[];
+var activeIndex=0;
+
+React.Children.forEach(props.children,function(child){
+if(!child)return;
+if(child.type.displayName==='Tabbar.View'){
+_this2.activeMapping[activeIndex++]=child.key;
+contents.views.push(_this2._createView(child.key,child));}else 
+{
+contents.tabs.push(_this2._createTab(child.key,child));}});
+
+
+return contents;},
+
+_createView:function(key,element){
+return (
+React.createElement(View,{key:'view:'+key,style:styles.view},
+element));},
+
+
+
+_createTab:function(key,element){var _this3=this;
+return React.cloneElement(element,{
+key:'tab:'+key,
+activeStyle:key===this.state.active?this.props.activeTabStyle:null,
+onPress:function(){
+_this3._switchTo(key);
+element.props.onPress&&element.props.onPress(key);}});},
+
+
+
+
+_switchTo:function(key){
+var page=0;
+for(var index in this.activeMapping){
+if(key===this.activeMapping[index]){
+page=index;
+break;}}
+
+
+if(Platform.OS==='ios'){
+this.viewPager.scrollTo(0,page*SCREEN_WIDTH);}else 
+{
+this.viewPager.setPage(page);}
+
+this.setState({active:key});}});
+
+
+
+Tabbar.View=React.createClass({
+displayName:'Tabbar.View',
+render:function(){
+return React.Children.only(this.props.children);}});
+
+
+
+Tabbar.Tab=React.createClass({
+displayName:'Tabbar.Tab',
+render:function(){var _props=
+this.props;var onPress=_props.onPress;var activeStyle=_props.activeStyle;var children=_props.children;var style=_props.style;
+return (
+React.createElement(TouchableWithoutFeedback,{onPress:onPress},
+React.createElement(View,{style:[styles.tab,style,activeStyle]},
+React.Children.map(children,function(child){return child;}))));}});
+
+
+
+
+
+
+module.exports=Tabbar;
+});
+__d('Snatural/app/styles/tabBar.js',function(global, require, module, exports) {  'use strict';
+
+var React=require('react-native/Libraries/react-native/react-native.js');var _require=
+
+require('Snatural/app/styles/variables.js');var SCREEN_WIDTH=_require.SCREEN_WIDTH;
+
+module.exports=React.StyleSheet.create({
+container:{
+flex:1},
+
+viewContainer:{
+flex:1,
+flexDirection:'row'},
+
+view:{
+width:SCREEN_WIDTH},
+
+tabContainer:{
+height:48,
+flexDirection:'row'},
+
+tab:{
+flex:1,
+height:48}});
 });
 __d('Snatural/app/pages/Home.js',function(global, require, module, exports) {  'use strict';
 
@@ -57170,6 +59889,8 @@ var Loading=require('Snatural/app/components/Loading.js');
 var Product=require('Snatural/app/components/Product.js');
 var PageMixin=require('Snatural/app/pages/PageMixin.js');
 
+var RefreshableListView=require('Snatural/app/components/RefreshableListView.js');
+
 var listData=[{"productId":"0000001158","title":"RedSeal红印黑糖（1箱6瓶）500g/瓶","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1446633279427.jpeg!200","price":270.0},{"productId":"0000001157","title":"GoodHealth好健康液体钙胶囊+VD（1瓶）150粒/瓶","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1446629580291.jpeg!200","price":600.0},{"productId":"0000001156","title":"Whittaker's黑巧克力250g(1块)+cadbury白巧克力220g（1块）+Whittaker's苹果香草味巧克力100g(1块)","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451295596766.png!200","price":169.0},{"productId":"0000001155","title":"费列罗榛子巧克力球375g（1盒）+费列罗巧克力球混合版269g（1盒）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451295561114.jpeg!200","price":280.0},{"productId":"0000001154","title":"Only organic 有机磨牙棒*2+Only organic 果泥*3","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451294857119.png!200","price":249.0},{"productId":"0000001153","title":"好健康液体钙胶囊+VD150粒 + 好健康儿童聪慧鱼油 120粒 + 纽乐蔓越莓 50000 50粒","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451294543280.jpeg!200","price":448.5},{"productId":"0000001152","title":"Red Seal蜂胶牙膏*2+去烟渍牙膏*2+儿童牙膏*2","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451294132770.jpeg!200","price":188.0},{"productId":"0000001151","title":"好健康儿童聪慧鱼油120粒（1盒）+THOMPSON's儿童综合复合维生素90片（1盒）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451293927975.jpeg!200","price":328.5},{"productId":"0000001150","title":"Pro-Life 加钙羊奶片500片（1瓶）+好健康儿童聪慧鱼油 120粒（1瓶）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451293686227.jpeg!200","price":375.0},{"productId":"0000001149","title":"Equazen妈妈鱼油30粒（1盒）+百丽康美孕哺乳期黄金素 120粒（1瓶）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451293476672.jpeg!200","price":390.0}];
 
 var HeaderSection=function(props){
@@ -57185,122 +59906,161 @@ var RefreshingIndicator=function(props){
 return React.createElement(Text,{style:styles.loading},'Loading...');};
 
 
-var Home=React.createClass({displayName:'Home',
 
-mixins:[TimerMixin,PageMixin],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var Home=React.createClass({displayName:'Home',
+mixins:[TimerMixin],
 
 getInitialState:function(){
 var ds=new ListView.DataSource({
-rowHasChanged:function(row1,row2){return row1!==row2;},
-sectionHeaderHasChanged:function(section1,section2){return section1!==section2;}});
+rowHasChanged:function(row1,row2){return row1!==row2;}});
 
-var data={s1:[false],s2:[]};
 return {
-data:data,
-dataSource:ds.cloneWithRowsAndSections(data),
-refreshing:false};},
+fetched:false,
+dataSource:ds};},
 
 
 
-render:function(){var 
-dataSource=this.state.dataSource;
-
+render:function(){
+if(this.state.fetched){
 return (
-React.createElement(View,{style:styles.container},
-React.createElement(ListView,{
-dataSource:dataSource,
-
-renderRow:this._renderRow,
-renderSeparator:this._renderSeparator,
-renderFooter:this._renderFooter,
-
-onEndReached:this._onEndReached,
-onEndReachedThreshold:30,
-
-initialListSize:3,
-pageSize:3,
-
-style:styles.list})));},
-
-
-
-
-
-_renderRow:function(data,sectionId){
-if(sectionId==='s2'){
-if(data){
-return (
-React.createElement(Product,babelHelpers.extends({},
-data,{
-key:data.productId,
-onPress:this._onProductPress})));}else 
+React.createElement(RefreshableListView,{
+dataSource:this.dataSource,
+renderRow:this._renderRow}));}else 
 
 
 {
-return React.createElement(Loading,null);}}else 
-
-{
-return React.createElement(HeaderSection,null);}},
+return React.createElement(View,{style:styles.container},React.createElement(Loading,null));}},
 
 
 
-_renderSeparator:function(sectionId,rowId){
-if(sectionId==='s1'){}else 
-
-{
-return React.createElement(View,{style:styles.separator,key:rowId});}},
+_renderRow:function(data){
+return React.createElement(Text,{style:{flex:1,height:300}},data.productId);},
 
 
-
-_renderFooter:function(){
-if(this.state.refreshing){
-return React.createElement(RefreshingIndicator,null);}else 
-{
-return null;}},
-
-
-
-_onEndReached:function(){
-
-this.setState({
-refreshing:true});},
+componentDidMount:function(){}});
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-_onProductPress:function(productId){
-console.log(1);
-this.goto('Detail',{productId:productId});},
-
-
-componentDidMount:function(){
-this.fetchData();},
-
-
-fetchData:function(){var _this=this;
-this.state.data.s2=listData;
-
-this.setTimeout(function(){
-_this.setState({
-dataSource:_this.state.dataSource.cloneWithRowsAndSections(_this.state.data)});},
-
-1000);},
-
-
-searchProduct:function(word){
-console.log(word);}});
 
 
 
@@ -57387,9 +60147,7 @@ height:135},
 
 
 image:{
-width:SCREEN_WIDTH,
-height:135,
-backgroundColor:'#f00'}});
+height:135}});
 });
 __d('Snatural/app/components/ImageSlider.js',function(global, require, module, exports) {  'use strict';
 
@@ -57433,8 +60191,7 @@ this._renderIndicators(this.props)));},
 
 
 
-_renderIOS:function(props){var 
-children=props.children;
+_renderIOS:function(props){var _this=this;
 return (
 React.createElement(ScrollView,{
 horizontal:true,
@@ -57442,34 +60199,44 @@ pagingEnabled:true,
 showsHorizontalScrollIndicator:false,
 alwaysBounceVertical:false,
 style:styles.container,
-onMomentumScrollEnd:this._onMomentumScrollEnd},
-React.Children.map(children,function(child){return child;})));},
+onMomentumScrollEnd:this._onMomentumScrollEnd,
+ref:function(viewPager){_this.viewPager=viewPager;}},
+this._children(props.children)));},
 
 
 
 
-_renderAndroid:function(props){var 
-children=props.children;
+_renderAndroid:function(props){var _this2=this;
 return (
 React.createElement(ViewPagerAndroid,{
 style:styles.container,
 initialPage:0,
-onPageSelected:this._onPageSelected},
-React.Children.map(children,function(child,i){
-return child;})));},
+onPageSelected:this._onPageSelected,
+ref:function(viewPager){_this2.viewPager=viewPager;}},
+this._children(props.children)));},
+
+
+
+
+_children:function(children){
+return React.Children.map(children,function(child,i){
+return (
+React.createElement(View,{key:'page_'+i,style:styles.page},
+child));});},
 
 
 
 
 
-_renderIndicators:function(props){
+_renderIndicators:function(props){var _this3=this;
 var activePage=this.state.activePage;
-var indicators=[];
-for(var i=0,l=props.children.length;i<l;i++){
+var indicators=[];var _loop=function(
+i,l){
 indicators.push(
 React.createElement(Text,{
 key:'indicator_'+i,
-style:[styles.indicator,activePage===i?styles.activeIndicator:null]},'•'));}
+onPress:function(){return _this3._goto(i);},
+style:[styles.indicator,activePage===i?styles.activeIndicator:null]},'•'));};for(var i=0,l=props.children.length;i<l;i++){_loop(i,l);}
 
 
 
@@ -57481,6 +60248,15 @@ React.createElement(View,{style:[styles.indicatorContainer,position]},
 indicators));},
 
 
+
+
+_goto:function(page){
+if(Platform.OS==='ios'){
+this.viewPager.scrollTo(0,page*SCREEN_WIDTH);}else 
+{
+this.viewPager.setPage(page);}
+
+this.setState({activePage:page});},
 
 
 _onMomentumScrollEnd:function(e){
@@ -57501,13 +60277,19 @@ var React=require('react-native/Libraries/react-native/react-native.js');var _re
 
 
 
-require('Snatural/app/styles/variables.js');var PADDING_S_SIZE=_require.PADDING_S_SIZE;
+
+require('Snatural/app/styles/variables.js');var PADDING_S_SIZE=_require.PADDING_S_SIZE;var SCREEN_WIDTH=_require.SCREEN_WIDTH;
 
 var INDICATOR_SIZE=24;
 
 var style=React.StyleSheet.create({
 container:{
 flex:1},
+
+
+page:{
+width:SCREEN_WIDTH,
+backgroundColor:'#ff0'},
 
 
 indicatorContainer:{
@@ -57524,6 +60306,7 @@ indicator:{
 color:'#666',
 fontSize:32,
 lineHeight:INDICATOR_SIZE,
+height:INDICATOR_SIZE,
 width:INDICATOR_SIZE,
 textAlign:'center',
 backgroundColor:'transparent',
@@ -57552,6 +60335,8 @@ View=
 
 React.View;var TextInput=React.TextInput;
 
+var Icon=require('FontAwesome');
+
 var styles=require('Snatural/app/styles/searchBox.js');
 
 var SearchBox=React.createClass({displayName:'SearchBox',
@@ -57567,9 +60352,11 @@ React.createElement(View,{style:styles.container},
 React.createElement(TextInput,{
 style:styles.textInput,
 autoCorrect:false,
+placeholder:'请输入商品名称',
 onChangeText:this._onChangeText,
-onSubmitEditing:this._onSubmitEditing})));},
+onSubmitEditing:this._onSubmitEditing}),
 
+React.createElement(Icon,{name:'search',style:styles.icon})));},
 
 
 
@@ -57593,7 +60380,9 @@ var React=require('react-native/Libraries/react-native/react-native.js');var _re
 
 
 
-require('Snatural/app/styles/variables.js');var PADDING_M_SIZE=_require.PADDING_M_SIZE;var PADDING_S_SIZE=_require.PADDING_S_SIZE;var COLOR_BORDER=_require.COLOR_BORDER;
+
+
+require('Snatural/app/styles/variables.js');var PADDING_M_SIZE=_require.PADDING_M_SIZE;var PADDING_S_SIZE=_require.PADDING_S_SIZE;var COLOR_BORDER=_require.COLOR_BORDER;var FONT_ICON=_require.FONT_ICON;var FONT_M_SIZE=_require.FONT_M_SIZE;
 
 module.exports=React.StyleSheet.create({
 container:{
@@ -57601,13 +60390,22 @@ padding:PADDING_M_SIZE,
 marginLeft:PADDING_S_SIZE,
 marginRight:PADDING_S_SIZE},
 
+icon:{
+fontSize:FONT_ICON,
+color:'#999',
+position:'absolute',
+top:13,
+left:15,
+backgroundColor:'transparent'},
+
 textInput:{
 height:35,
 borderColor:COLOR_BORDER,
 borderWidth:1,
 borderRadius:PADDING_S_SIZE,
 backgroundColor:'white',
-paddingLeft:32}});
+paddingLeft:35,
+fontSize:FONT_M_SIZE-2}});
 });
 __d('Snatural/app/components/Loading.js',function(global, require, module, exports) {  'use strict';
 
@@ -57620,25 +60418,31 @@ var React=require('react-native/Libraries/react-native/react-native.js');var
 
 View=
 
-React.View;var Text=React.Text;
+
+
+React.View;var Platform=React.Platform;var ActivityIndicatorIOS=React.ActivityIndicatorIOS;var ProgressBarAndroid=React.ProgressBarAndroid;
 
 var styles=require('Snatural/app/styles/loading.js');
 
 var Loading=function(props){
-var androidIndicator=
-React.createElement(Text,{style:styles.text},'Loading...');
-
-
-
-
-
-
-
-
-
+if(Platform.OS==='ios'){
 return (
 React.createElement(View,{style:styles.container},
-androidIndicator));};
+React.createElement(ActivityIndicatorIOS,{
+animating:true,
+style:styles.spinner,
+size:'large'})));}else 
+
+
+
+{
+return (
+React.createElement(View,{style:styles.container},
+React.createElement(ProgressBarAndroid,{
+styleAttr:'Inverse',
+style:styles.spinner})));}};
+
+
 
 
 
@@ -57655,17 +60459,11 @@ require('Snatural/app/styles/variables.js');var FONT_X_SIZE=_require.FONT_X_SIZE
 
 module.exports=React.StyleSheet.create({
 container:{
-flex:1},
-
-text:{
 flex:1,
-fontWeight:'bold',
-fontSize:FONT_X_SIZE,
-textAlign:'center',
-marginTop:40},
+justifyContent:'center',
+alignItems:'center'},
 
-spinner:{
-marginTop:40}});
+spinner:{}});
 });
 __d('Snatural/app/components/Product.js',function(global, require, module, exports) {  'use strict';
 
@@ -57749,7 +60547,11 @@ flex:1},
 favCount:{
 flex:1}});
 });
-__d('Snatural/app/pages/PageMixin.js',function(global, require, module, exports) {  module.exports={
+__d('Snatural/app/pages/PageMixin.js',function(global, require, module, exports) {  var React=require('react-native/Libraries/react-native/react-native.js');
+
+var NavigatorBar=require('Snatural/app/components/NavigatorBar.js');
+
+module.exports={
 
 goto:function(pageKey){var params=arguments.length<=1||arguments[1]===undefined?{}:arguments[1];var _props=
 this.props;var navigator=_props.navigator;var routes=_props.routes;
@@ -57762,7 +60564,906 @@ navigator.push(nextRoute);},
 
 goBack:function(){var 
 navigator=this.props.navigator;
-navigator.pop();}};
+navigator.pop();},
+
+
+_renderNavigatorBar:function(){var _this=this;
+return (
+React.createElement(NavigatorBar,{onBack:function(){return _this.goBack();}}));}};
+});
+__d('Snatural/app/components/NavigatorBar.js',function(global, require, module, exports) {  'use strict';
+
+
+
+
+
+var React=require('react-native/Libraries/react-native/react-native.js');var 
+
+
+View=
+
+
+React.View;var Text=React.Text;var TouchableWithoutFeedback=React.TouchableWithoutFeedback;
+
+var Icon=require('Ionicons');
+
+var styles=require('Snatural/app/styles/navigatorBar.js');
+
+var NavigatorBar=function(props){var 
+onBack=props.onBack;
+return (
+React.createElement(View,{style:styles.container},
+React.createElement(TouchableWithoutFeedback,{onPress:onBack},
+React.createElement(View,{style:styles.back},
+React.createElement(Icon,{name:'chevron-left',style:styles.backIcon}),
+React.createElement(Text,{style:styles.backText},'返回')))));};
+
+
+
+
+
+
+module.exports=NavigatorBar;
+});
+__d('Ionicons',function(global, require, module, exports) {  'use strict';
+
+
+
+
+
+
+
+var createIconSet=require('createIconSet');
+var glyphMap={
+"alert":61697,
+"alert-circled":61696,
+"android-add":62151,
+"android-add-circle":62297,
+"android-alarm-clock":62298,
+"android-alert":62299,
+"android-apps":62300,
+"android-archive":62153,
+"android-arrow-back":62154,
+"android-arrow-down":62301,
+"android-arrow-dropdown":62303,
+"android-arrow-dropdown-circle":62302,
+"android-arrow-dropleft":62305,
+"android-arrow-dropleft-circle":62304,
+"android-arrow-dropright":62307,
+"android-arrow-dropright-circle":62306,
+"android-arrow-dropup":62309,
+"android-arrow-dropup-circle":62308,
+"android-arrow-forward":62223,
+"android-arrow-up":62310,
+"android-attach":62311,
+"android-bar":62312,
+"android-bicycle":62313,
+"android-boat":62314,
+"android-bookmark":62315,
+"android-bulb":62316,
+"android-bus":62317,
+"android-calendar":62161,
+"android-call":62162,
+"android-camera":62163,
+"android-cancel":62318,
+"android-car":62319,
+"android-cart":62320,
+"android-chat":62164,
+"android-checkbox":62324,
+"android-checkbox-blank":62321,
+"android-checkbox-outline":62323,
+"android-checkbox-outline-blank":62322,
+"android-checkmark-circle":62325,
+"android-clipboard":62326,
+"android-close":62167,
+"android-cloud":62330,
+"android-cloud-circle":62327,
+"android-cloud-done":62328,
+"android-cloud-outline":62329,
+"android-color-palette":62331,
+"android-compass":62332,
+"android-contact":62168,
+"android-contacts":62169,
+"android-contract":62333,
+"android-create":62334,
+"android-delete":62335,
+"android-desktop":62336,
+"android-document":62337,
+"android-done":62339,
+"android-done-all":62338,
+"android-download":62173,
+"android-drafts":62340,
+"android-exit":62341,
+"android-expand":62342,
+"android-favorite":62344,
+"android-favorite-outline":62343,
+"android-film":62345,
+"android-folder":62176,
+"android-folder-open":62346,
+"android-funnel":62347,
+"android-globe":62348,
+"android-hand":62179,
+"android-hangout":62349,
+"android-happy":62350,
+"android-home":62351,
+"android-image":62180,
+"android-laptop":62352,
+"android-list":62353,
+"android-locate":62185,
+"android-lock":62354,
+"android-mail":62187,
+"android-map":62355,
+"android-menu":62356,
+"android-microphone":62188,
+"android-microphone-off":62357,
+"android-more-horizontal":62358,
+"android-more-vertical":62359,
+"android-navigate":62360,
+"android-notifications":62363,
+"android-notifications-none":62361,
+"android-notifications-off":62362,
+"android-open":62364,
+"android-options":62365,
+"android-people":62366,
+"android-person":62368,
+"android-person-add":62367,
+"android-phone-landscape":62369,
+"android-phone-portrait":62370,
+"android-pin":62371,
+"android-plane":62372,
+"android-playstore":62192,
+"android-print":62373,
+"android-radio-button-off":62374,
+"android-radio-button-on":62375,
+"android-refresh":62376,
+"android-remove":62196,
+"android-remove-circle":62377,
+"android-restaurant":62378,
+"android-sad":62379,
+"android-search":62197,
+"android-send":62198,
+"android-settings":62199,
+"android-share":62200,
+"android-share-alt":62380,
+"android-star":62204,
+"android-star-half":62381,
+"android-star-outline":62382,
+"android-stopwatch":62205,
+"android-subway":62383,
+"android-sunny":62384,
+"android-sync":62385,
+"android-textsms":62386,
+"android-time":62387,
+"android-train":62388,
+"android-unlock":62389,
+"android-upload":62390,
+"android-volume-down":62391,
+"android-volume-mute":62392,
+"android-volume-off":62393,
+"android-volume-up":62394,
+"android-walk":62395,
+"android-warning":62396,
+"android-watch":62397,
+"android-wifi":62213,
+"aperture":62227,
+"archive":61698,
+"arrow-down-a":61699,
+"arrow-down-b":61700,
+"arrow-down-c":61701,
+"arrow-expand":62046,
+"arrow-graph-down-left":62047,
+"arrow-graph-down-right":62048,
+"arrow-graph-up-left":62049,
+"arrow-graph-up-right":62050,
+"arrow-left-a":61702,
+"arrow-left-b":61703,
+"arrow-left-c":61704,
+"arrow-move":62051,
+"arrow-resize":62052,
+"arrow-return-left":62053,
+"arrow-return-right":62054,
+"arrow-right-a":61705,
+"arrow-right-b":61706,
+"arrow-right-c":61707,
+"arrow-shrink":62055,
+"arrow-swap":62056,
+"arrow-up-a":61708,
+"arrow-up-b":61709,
+"arrow-up-c":61710,
+"asterisk":62228,
+"at":61711,
+"backspace":62399,
+"backspace-outline":62398,
+"bag":61712,
+"battery-charging":61713,
+"battery-empty":61714,
+"battery-full":61715,
+"battery-half":61716,
+"battery-low":61717,
+"beaker":62057,
+"beer":62058,
+"bluetooth":61718,
+"bonfire":62229,
+"bookmark":62059,
+"bowtie":62400,
+"briefcase":62060,
+"bug":62142,
+"calculator":62061,
+"calendar":61719,
+"camera":61720,
+"card":61721,
+"cash":62230,
+"chatbox":61723,
+"chatbox-working":61722,
+"chatboxes":61724,
+"chatbubble":61726,
+"chatbubble-working":61725,
+"chatbubbles":61727,
+"checkmark":61730,
+"checkmark-circled":61728,
+"checkmark-round":61729,
+"chevron-down":61731,
+"chevron-left":61732,
+"chevron-right":61733,
+"chevron-up":61734,
+"clipboard":61735,
+"clock":62062,
+"close":61738,
+"close-circled":61736,
+"close-round":61737,
+"closed-captioning":62231,
+"cloud":61739,
+"code":62065,
+"code-download":62063,
+"code-working":62064,
+"coffee":62066,
+"compass":62067,
+"compose":61740,
+"connection-bars":62068,
+"contrast":62069,
+"crop":62401,
+"cube":62232,
+"disc":61741,
+"document":61743,
+"document-text":61742,
+"drag":61744,
+"earth":62070,
+"easel":62402,
+"edit":62143,
+"egg":62071,
+"eject":61745,
+"email":61746,
+"email-unread":62403,
+"erlenmeyer-flask":62405,
+"erlenmeyer-flask-bubbles":62404,
+"eye":61747,
+"eye-disabled":62214,
+"female":62072,
+"filing":61748,
+"film-marker":61749,
+"fireball":62233,
+"flag":62073,
+"flame":62234,
+"flash":61751,
+"flash-off":61750,
+"folder":61753,
+"fork":62074,
+"fork-repo":62144,
+"forward":61754,
+"funnel":62235,
+"gear-a":61757,
+"gear-b":61758,
+"grid":61759,
+"hammer":62075,
+"happy":62236,
+"happy-outline":62406,
+"headphone":61760,
+"heart":61761,
+"heart-broken":62237,
+"help":61763,
+"help-buoy":62076,
+"help-circled":61762,
+"home":61764,
+"icecream":62077,
+"image":61767,
+"images":61768,
+"information":61770,
+"information-circled":61769,
+"ionic":61771,
+"ios-alarm":62408,
+"ios-alarm-outline":62407,
+"ios-albums":62410,
+"ios-albums-outline":62409,
+"ios-americanfootball":62412,
+"ios-americanfootball-outline":62411,
+"ios-analytics":62414,
+"ios-analytics-outline":62413,
+"ios-arrow-back":62415,
+"ios-arrow-down":62416,
+"ios-arrow-forward":62417,
+"ios-arrow-left":62418,
+"ios-arrow-right":62419,
+"ios-arrow-thin-down":62420,
+"ios-arrow-thin-left":62421,
+"ios-arrow-thin-right":62422,
+"ios-arrow-thin-up":62423,
+"ios-arrow-up":62424,
+"ios-at":62426,
+"ios-at-outline":62425,
+"ios-barcode":62428,
+"ios-barcode-outline":62427,
+"ios-baseball":62430,
+"ios-baseball-outline":62429,
+"ios-basketball":62432,
+"ios-basketball-outline":62431,
+"ios-bell":62434,
+"ios-bell-outline":62433,
+"ios-body":62436,
+"ios-body-outline":62435,
+"ios-bolt":62438,
+"ios-bolt-outline":62437,
+"ios-book":62440,
+"ios-book-outline":62439,
+"ios-bookmarks":62442,
+"ios-bookmarks-outline":62441,
+"ios-box":62444,
+"ios-box-outline":62443,
+"ios-briefcase":62446,
+"ios-briefcase-outline":62445,
+"ios-browsers":62448,
+"ios-browsers-outline":62447,
+"ios-calculator":62450,
+"ios-calculator-outline":62449,
+"ios-calendar":62452,
+"ios-calendar-outline":62451,
+"ios-camera":62454,
+"ios-camera-outline":62453,
+"ios-cart":62456,
+"ios-cart-outline":62455,
+"ios-chatboxes":62458,
+"ios-chatboxes-outline":62457,
+"ios-chatbubble":62460,
+"ios-chatbubble-outline":62459,
+"ios-checkmark":62463,
+"ios-checkmark-empty":62461,
+"ios-checkmark-outline":62462,
+"ios-circle-filled":62464,
+"ios-circle-outline":62465,
+"ios-clock":62467,
+"ios-clock-outline":62466,
+"ios-close":62470,
+"ios-close-empty":62468,
+"ios-close-outline":62469,
+"ios-cloud":62476,
+"ios-cloud-download":62472,
+"ios-cloud-download-outline":62471,
+"ios-cloud-outline":62473,
+"ios-cloud-upload":62475,
+"ios-cloud-upload-outline":62474,
+"ios-cloudy":62480,
+"ios-cloudy-night":62478,
+"ios-cloudy-night-outline":62477,
+"ios-cloudy-outline":62479,
+"ios-cog":62482,
+"ios-cog-outline":62481,
+"ios-color-filter":62484,
+"ios-color-filter-outline":62483,
+"ios-color-wand":62486,
+"ios-color-wand-outline":62485,
+"ios-compose":62488,
+"ios-compose-outline":62487,
+"ios-contact":62490,
+"ios-contact-outline":62489,
+"ios-copy":62492,
+"ios-copy-outline":62491,
+"ios-crop":62494,
+"ios-crop-strong":62493,
+"ios-download":62496,
+"ios-download-outline":62495,
+"ios-drag":62497,
+"ios-email":62499,
+"ios-email-outline":62498,
+"ios-eye":62501,
+"ios-eye-outline":62500,
+"ios-fastforward":62503,
+"ios-fastforward-outline":62502,
+"ios-filing":62505,
+"ios-filing-outline":62504,
+"ios-film":62507,
+"ios-film-outline":62506,
+"ios-flag":62509,
+"ios-flag-outline":62508,
+"ios-flame":62511,
+"ios-flame-outline":62510,
+"ios-flask":62513,
+"ios-flask-outline":62512,
+"ios-flower":62515,
+"ios-flower-outline":62514,
+"ios-folder":62517,
+"ios-folder-outline":62516,
+"ios-football":62519,
+"ios-football-outline":62518,
+"ios-game-controller-a":62521,
+"ios-game-controller-a-outline":62520,
+"ios-game-controller-b":62523,
+"ios-game-controller-b-outline":62522,
+"ios-gear":62525,
+"ios-gear-outline":62524,
+"ios-glasses":62527,
+"ios-glasses-outline":62526,
+"ios-grid-view":62529,
+"ios-grid-view-outline":62528,
+"ios-heart":62531,
+"ios-heart-outline":62530,
+"ios-help":62534,
+"ios-help-empty":62532,
+"ios-help-outline":62533,
+"ios-home":62536,
+"ios-home-outline":62535,
+"ios-infinite":62538,
+"ios-infinite-outline":62537,
+"ios-information":62541,
+"ios-information-empty":62539,
+"ios-information-outline":62540,
+"ios-ionic-outline":62542,
+"ios-keypad":62544,
+"ios-keypad-outline":62543,
+"ios-lightbulb":62546,
+"ios-lightbulb-outline":62545,
+"ios-list":62548,
+"ios-list-outline":62547,
+"ios-location":62550,
+"ios-location-outline":62549,
+"ios-locked":62552,
+"ios-locked-outline":62551,
+"ios-loop":62554,
+"ios-loop-strong":62553,
+"ios-medical":62556,
+"ios-medical-outline":62555,
+"ios-medkit":62558,
+"ios-medkit-outline":62557,
+"ios-mic":62561,
+"ios-mic-off":62559,
+"ios-mic-outline":62560,
+"ios-minus":62564,
+"ios-minus-empty":62562,
+"ios-minus-outline":62563,
+"ios-monitor":62566,
+"ios-monitor-outline":62565,
+"ios-moon":62568,
+"ios-moon-outline":62567,
+"ios-more":62570,
+"ios-more-outline":62569,
+"ios-musical-note":62571,
+"ios-musical-notes":62572,
+"ios-navigate":62574,
+"ios-navigate-outline":62573,
+"ios-nutrition":62576,
+"ios-nutrition-outline":62575,
+"ios-paper":62578,
+"ios-paper-outline":62577,
+"ios-paperplane":62580,
+"ios-paperplane-outline":62579,
+"ios-partlysunny":62582,
+"ios-partlysunny-outline":62581,
+"ios-pause":62584,
+"ios-pause-outline":62583,
+"ios-paw":62586,
+"ios-paw-outline":62585,
+"ios-people":62588,
+"ios-people-outline":62587,
+"ios-person":62590,
+"ios-person-outline":62589,
+"ios-personadd":62592,
+"ios-personadd-outline":62591,
+"ios-photos":62594,
+"ios-photos-outline":62593,
+"ios-pie":62596,
+"ios-pie-outline":62595,
+"ios-pint":62598,
+"ios-pint-outline":62597,
+"ios-play":62600,
+"ios-play-outline":62599,
+"ios-plus":62603,
+"ios-plus-empty":62601,
+"ios-plus-outline":62602,
+"ios-pricetag":62605,
+"ios-pricetag-outline":62604,
+"ios-pricetags":62607,
+"ios-pricetags-outline":62606,
+"ios-printer":62609,
+"ios-printer-outline":62608,
+"ios-pulse":62611,
+"ios-pulse-strong":62610,
+"ios-rainy":62613,
+"ios-rainy-outline":62612,
+"ios-recording":62615,
+"ios-recording-outline":62614,
+"ios-redo":62617,
+"ios-redo-outline":62616,
+"ios-refresh":62620,
+"ios-refresh-empty":62618,
+"ios-refresh-outline":62619,
+"ios-reload":62621,
+"ios-reverse-camera":62623,
+"ios-reverse-camera-outline":62622,
+"ios-rewind":62625,
+"ios-rewind-outline":62624,
+"ios-rose":62627,
+"ios-rose-outline":62626,
+"ios-search":62629,
+"ios-search-strong":62628,
+"ios-settings":62631,
+"ios-settings-strong":62630,
+"ios-shuffle":62633,
+"ios-shuffle-strong":62632,
+"ios-skipbackward":62635,
+"ios-skipbackward-outline":62634,
+"ios-skipforward":62637,
+"ios-skipforward-outline":62636,
+"ios-snowy":62638,
+"ios-speedometer":62640,
+"ios-speedometer-outline":62639,
+"ios-star":62643,
+"ios-star-half":62641,
+"ios-star-outline":62642,
+"ios-stopwatch":62645,
+"ios-stopwatch-outline":62644,
+"ios-sunny":62647,
+"ios-sunny-outline":62646,
+"ios-telephone":62649,
+"ios-telephone-outline":62648,
+"ios-tennisball":62651,
+"ios-tennisball-outline":62650,
+"ios-thunderstorm":62653,
+"ios-thunderstorm-outline":62652,
+"ios-time":62655,
+"ios-time-outline":62654,
+"ios-timer":62657,
+"ios-timer-outline":62656,
+"ios-toggle":62659,
+"ios-toggle-outline":62658,
+"ios-trash":62661,
+"ios-trash-outline":62660,
+"ios-undo":62663,
+"ios-undo-outline":62662,
+"ios-unlocked":62665,
+"ios-unlocked-outline":62664,
+"ios-upload":62667,
+"ios-upload-outline":62666,
+"ios-videocam":62669,
+"ios-videocam-outline":62668,
+"ios-volume-high":62670,
+"ios-volume-low":62671,
+"ios-wineglass":62673,
+"ios-wineglass-outline":62672,
+"ios-world":62675,
+"ios-world-outline":62674,
+"ipad":61945,
+"iphone":61946,
+"ipod":61947,
+"jet":62101,
+"key":62102,
+"knife":62103,
+"laptop":61948,
+"leaf":61949,
+"levels":62104,
+"lightbulb":62105,
+"link":61950,
+"load-a":62106,
+"load-b":62107,
+"load-c":62108,
+"load-d":62109,
+"location":61951,
+"lock-combination":62676,
+"locked":61952,
+"log-in":62110,
+"log-out":62111,
+"loop":61953,
+"magnet":62112,
+"male":62113,
+"man":61954,
+"map":61955,
+"medkit":62114,
+"merge":62271,
+"mic-a":61956,
+"mic-b":61957,
+"mic-c":61958,
+"minus":61961,
+"minus-circled":61959,
+"minus-round":61960,
+"model-s":62145,
+"monitor":61962,
+"more":61963,
+"mouse":62272,
+"music-note":61964,
+"navicon":61966,
+"navicon-round":61965,
+"navigate":62115,
+"network":62273,
+"no-smoking":62146,
+"nuclear":62116,
+"outlet":62274,
+"paintbrush":62677,
+"paintbucket":62678,
+"paper-airplane":62147,
+"paperclip":61967,
+"pause":61968,
+"person":61971,
+"person-add":61969,
+"person-stalker":61970,
+"pie-graph":62117,
+"pin":62118,
+"pinpoint":62119,
+"pizza":62120,
+"plane":61972,
+"planet":62275,
+"play":61973,
+"playstation":62218,
+"plus":61976,
+"plus-circled":61974,
+"plus-round":61975,
+"podium":62276,
+"pound":61977,
+"power":62121,
+"pricetag":62122,
+"pricetags":62123,
+"printer":61978,
+"pull-request":62277,
+"qr-scanner":62278,
+"quote":62279,
+"radio-waves":62124,
+"record":61979,
+"refresh":61980,
+"reply":61982,
+"reply-all":61981,
+"ribbon-a":62280,
+"ribbon-b":62281,
+"sad":62282,
+"sad-outline":62679,
+"scissors":62283,
+"search":61983,
+"settings":62125,
+"share":61984,
+"shuffle":61985,
+"skip-backward":61986,
+"skip-forward":61987,
+"social-android":61989,
+"social-android-outline":61988,
+"social-angular":62681,
+"social-angular-outline":62680,
+"social-apple":61991,
+"social-apple-outline":61990,
+"social-bitcoin":62127,
+"social-bitcoin-outline":62126,
+"social-buffer":61993,
+"social-buffer-outline":61992,
+"social-chrome":62683,
+"social-chrome-outline":62682,
+"social-codepen":62685,
+"social-codepen-outline":62684,
+"social-css3":62687,
+"social-css3-outline":62686,
+"social-designernews":61995,
+"social-designernews-outline":61994,
+"social-dribbble":61997,
+"social-dribbble-outline":61996,
+"social-dropbox":61999,
+"social-dropbox-outline":61998,
+"social-euro":62689,
+"social-euro-outline":62688,
+"social-facebook":62001,
+"social-facebook-outline":62000,
+"social-foursquare":62285,
+"social-foursquare-outline":62284,
+"social-freebsd-devil":62148,
+"social-github":62003,
+"social-github-outline":62002,
+"social-google":62287,
+"social-google-outline":62286,
+"social-googleplus":62005,
+"social-googleplus-outline":62004,
+"social-hackernews":62007,
+"social-hackernews-outline":62006,
+"social-html5":62691,
+"social-html5-outline":62690,
+"social-instagram":62289,
+"social-instagram-outline":62288,
+"social-javascript":62693,
+"social-javascript-outline":62692,
+"social-linkedin":62009,
+"social-linkedin-outline":62008,
+"social-markdown":62694,
+"social-nodejs":62695,
+"social-octocat":62696,
+"social-pinterest":62129,
+"social-pinterest-outline":62128,
+"social-python":62697,
+"social-reddit":62011,
+"social-reddit-outline":62010,
+"social-rss":62013,
+"social-rss-outline":62012,
+"social-sass":62698,
+"social-skype":62015,
+"social-skype-outline":62014,
+"social-snapchat":62700,
+"social-snapchat-outline":62699,
+"social-tumblr":62017,
+"social-tumblr-outline":62016,
+"social-tux":62149,
+"social-twitch":62702,
+"social-twitch-outline":62701,
+"social-twitter":62019,
+"social-twitter-outline":62018,
+"social-usd":62291,
+"social-usd-outline":62290,
+"social-vimeo":62021,
+"social-vimeo-outline":62020,
+"social-whatsapp":62704,
+"social-whatsapp-outline":62703,
+"social-windows":62023,
+"social-windows-outline":62022,
+"social-wordpress":62025,
+"social-wordpress-outline":62024,
+"social-yahoo":62027,
+"social-yahoo-outline":62026,
+"social-yen":62706,
+"social-yen-outline":62705,
+"social-youtube":62029,
+"social-youtube-outline":62028,
+"soup-can":62708,
+"soup-can-outline":62707,
+"speakerphone":62130,
+"speedometer":62131,
+"spoon":62132,
+"star":62030,
+"stats-bars":62133,
+"steam":62219,
+"stop":62031,
+"thermometer":62134,
+"thumbsdown":62032,
+"thumbsup":62033,
+"toggle":62293,
+"toggle-filled":62292,
+"transgender":62709,
+"trash-a":62034,
+"trash-b":62035,
+"trophy":62294,
+"tshirt":62711,
+"tshirt-outline":62710,
+"umbrella":62135,
+"university":62295,
+"unlocked":62036,
+"upload":62037,
+"usb":62136,
+"videocamera":62038,
+"volume-high":62039,
+"volume-low":62040,
+"volume-medium":62041,
+"volume-mute":62042,
+"wand":62296,
+"waterdrop":62043,
+"wifi":62044,
+"wineglass":62137,
+"woman":62045,
+"wrench":62138,
+"xbox":62220};
+
+
+var Ionicons=createIconSet(glyphMap,'Ionicons','Ionicons.ttf');
+
+module.exports=Ionicons;
+module.exports.glyphMap=glyphMap;
+});
+__d('Snatural/app/styles/navigatorBar.js',function(global, require, module, exports) {  'use strict';
+
+var React=require('react-native/Libraries/react-native/react-native.js');var _require=
+
+
+
+
+
+
+require('Snatural/app/styles/variables.js');var COLOR_MAIN=_require.COLOR_MAIN;var FONT_L_SIZE=_require.FONT_L_SIZE;var FONT_ICON=_require.FONT_ICON;var PADDING_S_SIZE=_require.PADDING_S_SIZE;
+
+module.exports=React.StyleSheet.create({
+container:{
+height:48,
+backgroundColor:COLOR_MAIN,
+flexDirection:'row',
+alignItems:'center'},
+
+back:{
+width:120,
+flexDirection:'row',
+alignItems:'center'},
+
+backIcon:{
+height:FONT_ICON,
+lineHeight:FONT_ICON,
+width:FONT_ICON-PADDING_S_SIZE,
+fontSize:FONT_ICON,
+color:'white',
+marginLeft:PADDING_S_SIZE},
+
+backText:{
+fontSize:FONT_L_SIZE,
+color:'white'}});
+});
+__d('Snatural/app/components/RefreshableListView.js',function(global, require, module, exports) {  'use strict';
+
+
+
+
+
+var React=require('react-native/Libraries/react-native/react-native.js');var 
+
+
+View=
+
+
+React.View;var Text=React.Text;var ListView=React.ListView;
+
+var styles=require('Snatural/app/styles/refreshableListView.js');
+
+var Loading=require('Snatural/app/components/Loading.js');
+
+var RefreshableListView=React.createClass({displayName:'RefreshableListView',
+
+propTypes:{
+onRefresh:React.PropTypes.func,
+onInfinite:React.PropTypes.func},
+
+
+getInitalState:function(){
+return {
+infiniting:false};},
+
+
+
+render:function(){
+return (
+React.createElement(ListView,{
+renderFooter:this._renderFooter,
+onEndReached:this._onEndReached,
+onEndReachedThreshold:30,
+initialListSize:3,
+pageSize:3,
+style:styles.list}));},
+
+
+
+
+_renderFooter:function(){
+if(this.state.refreshing){
+return React.createElement(Loading,null);}else 
+{
+return null;}},
+
+
+
+_onEndReached:function(){
+console.log('End reached');}});
+
+
+
+module.exports=RefreshableListView;
+});
+__d('Snatural/app/styles/refreshableListView.js',function(global, require, module, exports) {  'use strict';
+
+var React=require('react-native/Libraries/react-native/react-native.js');var _require=
+
+
+
+require('Snatural/app/styles/variables.js');var PADDING_S_SIZE=_require.PADDING_S_SIZE;
+
+module.exports=React.StyleSheet.create({
+container:{
+flex:1},
+
+
+list:{
+flex:1}});
 });
 __d('Snatural/app/pages/Me.js',function(global, require, module, exports) {  'use strict';
 
@@ -57771,26 +61472,32 @@ var React=require('react-native/Libraries/react-native/react-native.js');var
 
 View=
 
-React.View;var Text=React.Text;
+
+React.View;var Text=React.Text;var TouchableHighlight=React.TouchableHighlight;
+
+var Icon=require('Ionicons');
 
 var styles=require('Snatural/app/styles/mePage.js');
 
-var Avatar=function(props){
-return (
-React.createElement(View,{style:styles.avatar}));};
-
-
+var Avatar=require('Snatural/app/components/Avatar.js');
+var PageMixin=require('Snatural/app/pages/PageMixin.js');
 
 var Bar=function(props){var 
-icon=props.icon;var title=props.title;
+icon=props.icon;var title=props.title;var color=props.color;var onPress=props.onPress;
 return (
+React.createElement(TouchableHighlight,{onPress:onPress},
 React.createElement(View,{style:styles.bar},
-React.createElement(Text,{style:styles.barText},title)));};
+React.createElement(Icon,{name:icon,color:color,style:styles.barIcon}),
+React.createElement(Text,{style:styles.barText},title),
+React.createElement(Icon,{name:'ios-arrow-forward',style:styles.barArrow}))));};
+
 
 
 
 
 var Me=React.createClass({displayName:'Me',
+
+mixins:[PageMixin],
 
 getInitialState:function(){
 return {};},
@@ -57798,18 +61505,24 @@ return {};},
 
 
 
-render:function(){
-var data=["全部订单","地址管理","我的喜欢","意见反馈"];
+render:function(){var _this=this;
+var data=[
+{title:"全部订单",color:'#fd9055',target:'OrderList',icon:'android-list'},
+{title:"地址管理",color:'#349cf2',target:'OrderList',icon:'android-pin'},
+{title:"我的喜欢",color:'#fc6875',target:'OrderList',icon:'heart'},
+{title:"意见反馈",color:'#99d0ac',target:'OrderList',icon:'chatbubble-working'}];
+
 return (
 React.createElement(View,{style:styles.container},
 React.createElement(View,{style:styles.header},
-React.createElement(Avatar,null),
+React.createElement(Avatar,{imageUrl:'http://wx.qlogo.cn/mmopen/Q3auHgzwzM5nicORia5VjicDtiaBVEdhvShRu6iaIrrkg6T6uGxjMrQISADvW5Oib66tXXvArMxXFQJ92YcDYN7VtvrDe2VDCSRG2b6mUVfj0cQFo/0'}),
 React.createElement(Text,{style:styles.login},'登录')),
 
 React.createElement(View,{style:styles.tabs}),
 React.createElement(View,{style:styles.bars},
 data.map(function(item,i){
-return React.createElement(Bar,{key:i,title:item});}))));}});
+return React.createElement(Bar,babelHelpers.extends({key:i},item,{onPress:function(){return _this.goto(item.target);}}));}))));}});
+
 
 
 
@@ -57830,7 +61543,8 @@ var React=require('react-native/Libraries/react-native/react-native.js');var _re
 
 
 
-require('Snatural/app/styles/variables.js');var COLOR_MAIN=_require.COLOR_MAIN;var COLOR_BORDER=_require.COLOR_BORDER;var PADDING_M_SIZE=_require.PADDING_M_SIZE;var PADDING_L_SIZE=_require.PADDING_L_SIZE;var FONT_M_SIZE=_require.FONT_M_SIZE;var FONT_S_SIZE=_require.FONT_S_SIZE;
+
+require('Snatural/app/styles/variables.js');var COLOR_MAIN=_require.COLOR_MAIN;var COLOR_BORDER=_require.COLOR_BORDER;var PADDING_S_SIZE=_require.PADDING_S_SIZE;var PADDING_M_SIZE=_require.PADDING_M_SIZE;var PADDING_L_SIZE=_require.PADDING_L_SIZE;var FONT_M_SIZE=_require.FONT_M_SIZE;var FONT_ICON=_require.FONT_ICON;
 
 
 module.exports=React.StyleSheet.create({
@@ -57852,12 +61566,6 @@ marginTop:16,
 backgroundColor:'white',
 padding:PADDING_M_SIZE},
 
-avatar:{
-width:64,
-height:64,
-borderRadius:32,
-backgroundColor:'white'},
-
 login:{
 fontSize:FONT_M_SIZE,
 paddingTop:PADDING_M_SIZE,
@@ -57868,10 +61576,76 @@ borderBottomWidth:1,
 borderBottomColor:COLOR_BORDER,
 paddingTop:PADDING_M_SIZE,
 paddingBottom:PADDING_M_SIZE,
-flexDirection:'row'},
+flexDirection:'row',
+justifyContent:'center'},
+
+barIcon:{
+fontSize:FONT_ICON,
+width:FONT_ICON,
+textAlign:'center'},
 
 barText:{
-fontSize:FONT_M_SIZE}});
+fontSize:FONT_M_SIZE,
+alignSelf:'center',
+flex:1,
+paddingLeft:PADDING_S_SIZE},
+
+barArrow:{
+fontSize:FONT_ICON,
+width:FONT_ICON,
+textAlign:'right',
+color:'#c1c1c1'}});
+});
+__d('Snatural/app/components/Avatar.js',function(global, require, module, exports) {  'use strict';
+
+
+
+
+
+var React=require('react-native/Libraries/react-native/react-native.js');var 
+
+
+View=
+
+React.View;var Image=React.Image;
+
+var styles=require('Snatural/app/styles/avatar.js');
+
+var Avatar=function(props){var 
+imageUrl=props.imageUrl;
+imageUrl=imageUrl||'http://snatural.com.cn/weixin/assets/images/avatar.png';
+return (
+React.createElement(View,{style:styles.container},
+React.createElement(Image,{
+style:styles.image,
+source:{uri:imageUrl}})));};
+
+
+
+
+
+module.exports=Avatar;
+});
+__d('Snatural/app/styles/avatar.js',function(global, require, module, exports) {  'use strict';
+
+var React=require('react-native/Libraries/react-native/react-native.js');var _require=
+
+require('Snatural/app/styles/variables.js');var FONT_ICON=_require.FONT_ICON;
+
+module.exports=React.StyleSheet.create({
+image:{
+width:64,
+height:64,
+backgroundColor:'transparent'},
+
+container:{
+width:64,
+height:64,
+borderRadius:32,
+backgroundColor:'white',
+alignItems:'center',
+justifyContent:'center',
+overflow:'hidden'}});
 });
 __d('Snatural/app/pages/Detail.js',function(global, require, module, exports) {  'use strict';
 
@@ -57931,19 +61705,17 @@ var Detail=React.createClass({displayName:'Detail',
 
 mixins:[PageMixin],
 
-render:function(){var _this=this;var 
+render:function(){var 
 params=this.props.params;
-console.log(params);
+
+var actionBar=this._renderNavigatorBar();
+
 return (
 React.createElement(View,{style:styles.container},
 React.createElement(Product,data),
 React.createElement(Brand,data.brand),
 React.createElement(View,{style:styles.detail}),
-React.createElement(TouchableWithoutFeedback,{onPress:function(){return _this.goBack();}},
-React.createElement(View,{style:styles.back},
-React.createElement(Text,{style:styles.backText},'返回')))));}});
-
-
+actionBar));}});
 
 
 
@@ -58000,10 +61772,10 @@ flex:1,
 flexDirection:'row'},
 
 stock:{
-width:100},
+flex:1},
 
 fav:{
-flex:1},
+width:50},
 
 favCount:{
 flex:1},
@@ -58025,18 +61797,212 @@ flex:1},
 
 
 detail:{
+flex:1}});
+});
+__d('Snatural/app/pages/OrderList.js',function(global, require, module, exports) {  'use strict';
+
+
+
+
+
+var React=require('react-native/Libraries/react-native/react-native.js');var 
+
+
+View=
+
+React.View;var Text=React.Text;
+
+var styles=require('Snatural/app/styles/orderListPage.js');
+
+var TabBar=require('Snatural/app/components/TabBar.js');
+var PageMixin=require('Snatural/app/pages/PageMixin.js');
+var Order=require('Snatural/app/components/Order.js');var _require=
+
+require('Snatural/app/constants/OrderConstants.js');var ORDER_STATUS=_require.ORDER_STATUS;
+
+var data=[{"orderId":"151130000421","totalPrice":285.0,"orderStatus":3,"createTime":1448883356000,"products":[{"productId":"0000000995","title":"Good Health 深海鱼油胶囊1500mg 400粒/瓶（2瓶）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448554281556.jpeg!200","price":285.0,"buyCount":1}]},{"orderId":"151129000201","totalPrice":420.0,"orderStatus":3,"createTime":1448803578000,"products":[{"productId":"0000000886","title":"Anchor安佳奶粉套装 3袋全脂+3袋脱脂","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1447154437435.png!200","price":420.0,"buyCount":1}]},{"orderId":"151129000191","totalPrice":420.0,"orderStatus":3,"createTime":1448803287000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151129000071","totalPrice":420.0,"orderStatus":7,"createTime":1448774139000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151126000751","totalPrice":858.0,"orderStatus":3,"createTime":1448549667000,"products":[{"productId":"0000000906","title":"Karicare可瑞康金装1段婴幼儿奶粉（6罐装）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448460776768.png!200","price":780.0,"buyCount":1}]},{"orderId":"151126000741","totalPrice":420.0,"orderStatus":3,"createTime":1448549170000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151126000201","totalPrice":420.0,"orderStatus":3,"createTime":1448521895000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151126000181","totalPrice":420.0,"orderStatus":3,"createTime":1448521647000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151126000161","totalPrice":420.0,"orderStatus":3,"createTime":1448521459000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151125000011","totalPrice":65.0,"orderStatus":6,"createTime":1448454392000,"products":[{"productId":"0000000894","title":"Parrs帕氏麦卢卡蜂胶蜂蜜皂140g 洗脸沐浴控油去痘手工皂","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448453381271.jpeg!200","price":65.0,"buyCount":1}]}];
+
+var OrderList=React.createClass({displayName:'OrderList',
+mixins:[PageMixin],
+
+getInitialState:function(){
+return {
+activeTab:'all'};},
+
+
+
+render:function(){var _this=this;var _props=
+this.props;var navigator=_props.navigator;var routes=_props.routes;var 
+activeTab=this.state.activeTab;
+
+var data=[
+{title:'全部',key:'all'},
+{title:'待支付',key:'paying'},
+{title:'待收货',key:'receiving'},
+{title:'已完成',key:'complete'}];
+
+
+return (
+React.createElement(View,{style:styles.container},
+React.createElement(TabBar,{activeTabStyle:styles.activeTab,initalActive:'all',tabPosition:'top'},
+data.map(function(item){
+return (
+React.createElement(TabBar.Tab,{
+key:item.key,
+style:styles.tab,
+onPress:function(){return _this.setState({activeTab:item.key});}},
+React.createElement(Text,{style:[styles.tabText,activeTab===item.key?styles.activeTabText:null]},
+item.title)));}),
+
+
+
+
+data.map(function(item){
+return (
+React.createElement(TabBar.View,{key:item.key},
+React.createElement(Text,{style:{flex:1}},item.title)));})),
+
+
+
+
+this._renderNavigatorBar()));},
+
+
+
+
+componentDidMount:function(){
+this.fetchData();},
+
+
+fetchData:function(){
+this.state.data=data;}});
+
+
+
+module.exports=OrderList;
+});
+__d('Snatural/app/styles/orderListPage.js',function(global, require, module, exports) {  'use strict';
+
+var React=require('react-native/Libraries/react-native/react-native.js');var _require=
+
+
+
+
+
+
+require('Snatural/app/styles/variables.js');var FONT_ICON=_require.FONT_ICON;var COLOR_MAIN=_require.COLOR_MAIN;var COLOR_DARK=_require.COLOR_DARK;var COLOR_BORDER=_require.COLOR_BORDER;
+
+module.exports=React.StyleSheet.create({
+container:{
 flex:1},
 
 
-back:{
-height:48,
-backgroundColor:COLOR_MAIN,
-justifyContent:'center'},
+tab:{
+flex:1,
+alignItems:'center',
+justifyContent:'center',
+height:45,
+borderBottomWidth:3,
+borderBottomColor:COLOR_BORDER,
+backgroundColor:'white'},
 
-backText:{
-fontSize:FONT_X_SIZE,
-color:'white',
-paddingLeft:PADDING_L_SIZE}});
+tabText:{},
+
+activeTab:{
+borderBottomColor:COLOR_MAIN},
+
+activeTabText:{
+color:COLOR_DARK}});
+});
+__d('Snatural/app/components/Order.js',function(global, require, module, exports) {  'use strict';
+
+
+
+
+
+var React=require('react-native/Libraries/react-native/react-native.js');var 
+
+
+Image=
+
+
+React.Image;var View=React.View;var Text=React.Text;
+
+var styles=require('Snatural/app/styles/order.js');var _require=
+require('Snatural/app/constants/OrderConstants.js');var ORDER_STATUS_TEXT=_require.ORDER_STATUS_TEXT;
+
+var formatTime=function(timestamp){
+var date=new Date(timestamp);
+return date.getFullYear()+'.'+(date.getMonth()+1)+'.'+date.getDate();};
+
+
+var Order=function(props){var 
+orderStatus=props.orderStatus;var createTime=props.createTime;var orderId=props.orderId;var products=props.products;
+var firstProduct=products[0];
+return (
+React.createElement(View,{style:styles.container},
+React.createElement(View,{style:styles.head},
+React.createElement(Text,{style:styles.status},ORDER_STATUS_TEXT[orderStatus]),
+React.createElement(View,{style:styles.info},
+React.createElement(Text,{style:styles.orderId},'订单号: ',orderId),
+React.createElement(Text,{style:styles.createTime},formatTime(createTime)))),
+
+
+React.createElement(View,{style:styles.body},
+React.createElement(Image,{
+style:styles.productImage,
+uri:firstProduct.imageUrl}),
+React.createElement(View,{style:styles.detail},
+React.createElement(Text,{style:styles.title},firstProduct.title),
+React.createElement(Text,{style:styles.price},firstProduct.price),
+React.createElement(Text,{style:styles.buyCount},firstProduct.buyCount)))));};
+
+
+
+
+
+
+module.exports=Order;
+});
+__d('Snatural/app/styles/order.js',function(global, require, module, exports) {  'use strict';
+
+var React=require('react-native/Libraries/react-native/react-native.js');var _require=
+
+
+
+require('Snatural/app/styles/variables.js');var PADDING_S_SIZE=_require.PADDING_S_SIZE;
+
+module.exports=React.StyleSheet.create({
+container:{
+flex:1},
+
+
+list:{
+flex:1}});
+});
+__d('Snatural/app/constants/OrderConstants.js',function(global, require, module, exports) {  var _ORDER_STATUS_TEXT;var ORDER_STATUS={
+WAIT_PAY:1,
+WAIT_DEAL:2,
+WAIT_DELIVER:3,
+DELIVERING:4,
+COMPLETED:5,
+CANCELED:6,
+CLOSED:7};
+
+
+var ORDER_STATUS_TEXT=(_ORDER_STATUS_TEXT={},babelHelpers.defineProperty(_ORDER_STATUS_TEXT,
+ORDER_STATUS.WAIT_PAY,'待支付'),babelHelpers.defineProperty(_ORDER_STATUS_TEXT,
+ORDER_STATUS.WAIT_DEAL,'待处理'),babelHelpers.defineProperty(_ORDER_STATUS_TEXT,
+ORDER_STATUS.WAIT_DELIVER,'待发货'),babelHelpers.defineProperty(_ORDER_STATUS_TEXT,
+ORDER_STATUS.DELIVERING,'运输中'),babelHelpers.defineProperty(_ORDER_STATUS_TEXT,
+ORDER_STATUS.COMPLETED,'已完成'),babelHelpers.defineProperty(_ORDER_STATUS_TEXT,
+ORDER_STATUS.CANCELED,'已取消'),babelHelpers.defineProperty(_ORDER_STATUS_TEXT,
+ORDER_STATUS.CLOSED,'已关闭'),_ORDER_STATUS_TEXT);
+
+
+module.exports={
+ORDER_STATUS:ORDER_STATUS,
+ORDER_STATUS_TEXT:ORDER_STATUS_TEXT};
 });
 ;require("InitializeJavaScriptAppEngine");
 ;require("Snatural/index.android.js");
