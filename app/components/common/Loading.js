@@ -13,7 +13,7 @@ let {
 	ProgressBarAndroid
 } = React;
 
-const styles = require('../styles/loading');
+const styles = require('./Loading.style');
 
 const Loading = (props) => {
 	if(Platform.OS === 'ios'){

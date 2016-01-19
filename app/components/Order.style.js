@@ -7,7 +7,7 @@ const {
 	COLOR_LIGHT,
 	PADDING_M_SIZE,
 	PADDING_X_SIZE
-} = require('./variables');
+} = require('../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
 	container: {

@@ -7,7 +7,7 @@ const {
 	FONT_L_SIZE,
 	FONT_ICON,
 	PADDING_S_SIZE
-} = require('./variables');
+} = require('../../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
 	container: {

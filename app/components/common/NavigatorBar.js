@@ -14,7 +14,7 @@ let {
 
 const Icon = require('react-native-vector-icons/Ionicons');
 
-const styles = require('../styles/navigatorBar');
+const styles = require('./NavigatorBar.style');
 
 const NavigatorBar = (props) => {
 	let {onBack} = props;

@@ -12,14 +12,15 @@ let {
   ListView
 } = React;
 
-const styles = require('../styles/orderListPage');
+const styles = require('./OrderList.style');
 
 const TimerMixin = require('react-timer-mixin');
-const TabBar = require('../components/TabBar');
+const TabBar = require('../components/common/TabBar');
+const RefreshableListView = require('../components/common/RefreshableListView');
+const Loading = require('../components/common/Loading');
 const PageMixin = require('./PageMixin');
 const Order = require('../components/Order');
-const RefreshableListView = require('../components/RefreshableListView');
-const Loading = require('../components/Loading');
+
 
 const {ORDER_STATUS} = require('../constants/OrderConstants');
 

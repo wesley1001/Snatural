@@ -13,7 +13,7 @@ let {
 
 const Icon = require('react-native-vector-icons/FontAwesome');
 
-const styles = require('../styles/searchBox');
+const styles = require('./SearchBox.style');
 
 const SearchBox = React.createClass({
 	getInitialState(){

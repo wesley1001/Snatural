@@ -6,8 +6,8 @@
 
 const React = require('react-native');
 
-const styles = require('../styles/tabBar');
-const {SCREEN_WIDTH} = require('../styles/variables');
+const styles = require('./TabBar.style');
+const {SCREEN_WIDTH} = require('../../constants/StyleConstants');
 
 const {
   View,

@@ -13,7 +13,7 @@ let {
 	TouchableHighlight
 } = React;
 
-const styles = require('../styles/product');
+const styles = require('./Product.style');
 
 const Product = (props) => {
 	let {productId, title, imageUrl, price, onPress} = props;

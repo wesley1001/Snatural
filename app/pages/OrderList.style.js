@@ -6,7 +6,7 @@ const {
 	COLOR_MAIN,
 	COLOR_DARK,
 	COLOR_BORDER
-} = require('./variables');
+} = require('../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
 	container: {

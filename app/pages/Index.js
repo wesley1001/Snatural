@@ -13,9 +13,9 @@ let {
 
 const Icon = require('react-native-vector-icons/FontAwesome')
 
-const styles = require('../styles/indexPage');
+const styles = require('./Index.style');
 
-const TabBar = require('../components/TabBar');
+const TabBar = require('../components/common/TabBar');
 const Home = require('./Home');
 const Me = require('./Me');
 

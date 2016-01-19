@@ -11,9 +11,9 @@ let {
 	Image
 } = React;
 
-const styles = require('../styles/banner');
+const styles = require('./Banner.style');
 
-const ImageSlider = require('./ImageSlider');
+const ImageSlider = require('./common/ImageSlider');
 
 let data = [{imageUrl: 'https://img.alicdn.com/tps/i1/TB1.94dLpXXXXbfXFXXeRTP_XXX-1125-543.jpg_q30.jpg'},{imageUrl: 'https://img.alicdn.com/tps/i4/TB1pcX5LpXXXXawXXXXeRTP_XXX-1125-543.jpg_q30.jpg'}, {imageUrl: 'https://img.alicdn.com/imgextra/i3/2360209412/TB2phL.jpXXXXc5XXXXXXXXXXXX-2360209412.jpg_q30.jpg'}]
 

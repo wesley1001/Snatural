@@ -11,7 +11,7 @@ let {
 	Image
 } = React;
 
-const styles = require('../styles/avatar');
+const styles = require('./Avatar.style');
 
 const Avatar = (props) => {
 	let { imageUrl } = props;

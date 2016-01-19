@@ -9,7 +9,7 @@ let {
 	TouchableWithoutFeedback
 } = React;
 
-let styles = require('../styles/detailPage');
+let styles = require('./Detail.style');
 
 const PageMixin = require('./PageMixin');
 

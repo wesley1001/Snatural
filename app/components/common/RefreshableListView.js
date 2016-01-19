@@ -12,7 +12,7 @@ let {
 	ListView
 } = React;
 
-const styles = require('../styles/refreshableListView');
+const styles = require('./RefreshableListView.style');
 
 const Loading = require('./Loading');
 

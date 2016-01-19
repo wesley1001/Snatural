@@ -5,7 +5,7 @@ let React = require('react-native');
 const { 
 	PADDING_S_SIZE,
 	SCREEN_WIDTH
-} = require('./variables');
+} = require('../../constants/StyleConstants');
 
 const INDICATOR_SIZE = 24;
 

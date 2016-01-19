@@ -2,7 +2,7 @@
 
 let React = require('react-native');
 
-const { FONT_ICON } = require('./variables');
+const { FONT_ICON } = require('../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
 	image: {

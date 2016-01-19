@@ -6,7 +6,7 @@ const {
 	COLOR_PRICE,
 	FONT_X_SIZE,
 	PADDING_M_SIZE
-} = require('./variables');
+} = require('../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
 	container: {

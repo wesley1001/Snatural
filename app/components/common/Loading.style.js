@@ -2,16 +2,13 @@
 
 let React = require('react-native');
 
-const {
-	SCREEN_WIDTH
-} = require('./variables');
-
 module.exports = React.StyleSheet.create({
 	container: {
-		height: 135
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
+	spinner: {
 
-	image: {
-		height: 135
 	}
 });

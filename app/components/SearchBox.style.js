@@ -8,7 +8,7 @@ const {
 	COLOR_BORDER,
 	FONT_ICON,
 	FONT_M_SIZE
-} = require('./variables');
+} = require('../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
 	container: {

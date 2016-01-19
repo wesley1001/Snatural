@@ -12,7 +12,7 @@ let {
 	Text
 } = React;
 
-const styles = require('../styles/order');
+const styles = require('./Order.style');
 const { ORDER_STATUS_TEXT } = require('../constants/OrderConstants');
 
 const formatTime = (timestamp) => {

@@ -10,7 +10,7 @@ const {
 	PADDING_L_SIZE,
 	FONT_M_SIZE,
 	FONT_ICON
-} = require('./variables');
+} = require('../constants/StyleConstants');
 
 
 module.exports = React.StyleSheet.create({

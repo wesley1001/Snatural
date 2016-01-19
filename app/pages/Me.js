@@ -10,7 +10,7 @@ let {
 
 const Icon = require('react-native-vector-icons/Ionicons');
 
-let styles = require('../styles/mePage');
+let styles = require('./Me.style');
 
 const Avatar = require('../components/Avatar');
 const PageMixin = require('./PageMixin');

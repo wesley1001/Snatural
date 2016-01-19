@@ -15,9 +15,9 @@ let {
 	Platform
 } = React;
 
-const styles = require('../styles/imageSlider');
+const styles = require('./ImageSlider.style');
 const INDICATOR_SIZE = styles.INDICATOR_SIZE;
-const { SCREEN_WIDTH } = require('../styles/variables');
+const { SCREEN_WIDTH } = require('../../constants/StyleConstants');
 
 const ImageSlider = React.createClass({
 

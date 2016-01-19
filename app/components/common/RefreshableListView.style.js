@@ -4,7 +4,7 @@ let React = require('react-native');
 
 const {
 	PADDING_S_SIZE
-} = require('./variables');
+} = require('../../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
 	container: {

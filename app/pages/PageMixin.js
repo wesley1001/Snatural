@@ -1,6 +1,6 @@
 let React = require('react-native');
 
-const NavigatorBar = require('../components/NavigatorBar');
+const NavigatorBar = require('../components/common/NavigatorBar');
 
 module.exports = {
 	
