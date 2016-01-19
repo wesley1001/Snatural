@@ -11,6 +11,7 @@ exports.SCREEN_HEIGHT = screenHeight;
 exports.COLOR_PRICE = '#fd8e56';
 exports.COLOR_BORDER = '#e8e8e8';
 exports.COLOR_BACKGROUND = '#f1f1f1';
+exports.COLOR_LIGHT = '#f0f9f4';
 exports.COLOR_DARK = '#76b68c';
 exports.COLOR_MAIN = '#98d1ad';
 
