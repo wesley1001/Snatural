@@ -18,7 +18,7 @@ const PageMixin = require('./PageMixin');
 const Bar = (props) => {
 	let {icon, title, color, onPress} = props;
 	return (
-		<TouchableHighlight onPress={onPress}>
+		<TouchableHighlight onPress={onPress} underlayColor="white">
 			<View style={styles.bar}>
 				<Icon name={icon} color={color} style={styles.barIcon}/>
 				<Text style={styles.barText}>{title}</Text>
