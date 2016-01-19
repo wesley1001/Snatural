@@ -8,7 +8,6 @@ let React = require('react-native');
 
 let {
 	StyleSheet,
-	View,
 	Navigator,
 	NavigatorIOS,
 	Platform
@@ -53,7 +52,7 @@ const Router = (props) => {
 	let { store } = props;
 
 	if(Platform.OS === 'ios'){
-		return renderIOSRouter(store);	
+		return renderIOSRouter(store);
 	}else{
 		return renderAndroidRouter(store);
 	}
