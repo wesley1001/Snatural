@@ -20,8 +20,7 @@ const RefreshableListView = React.createClass({
 
   propTypes: {
     onRefresh: React.PropTypes.func,
-    onInfinite: React.PropTypes.func,
-    // initialDataSource: React.PropTypes.object.isRequired
+    onInfinite: React.PropTypes.func
   },
 
 	getInitialState(){
@@ -75,7 +74,7 @@ const RefreshableListView = React.createClass({
 
 	updateDataSource(dataSource){
 		this.setState({
-			dataSource: dataSource
+			dataSource
 		})
 	}
 });

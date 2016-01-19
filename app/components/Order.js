@@ -35,11 +35,11 @@ const Order = (props) => {
       <View style={styles.body}>
         <Image
           style={styles.productImage}
-          uri={firstProduct.imageUrl}/>
+          source={{uri: firstProduct.imageUrl}}/>
         <View style={styles.detail}>
           <Text style={styles.title}>{firstProduct.title}</Text>
           <View style={styles.buyInfo}>
-            <Text style={styles.price}>{firstProduct.price}</Text>
+            <Text style={styles.price}>￥{firstProduct.price}</Text>
             <Text style={styles.buyCount}>{firstProduct.buyCount}</Text>
           </View>
         </View>

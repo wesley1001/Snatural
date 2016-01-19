@@ -5,25 +5,31 @@ let React = require('react-native');
 const {
 	COLOR_MAIN,
 	COLOR_LIGHT,
-	PADDING_M_SIZE
+	PADDING_M_SIZE,
+	PADDING_X_SIZE
 } = require('./variables');
 
 module.exports = React.StyleSheet.create({
 	container: {
-		flex: 1
+		flex: 1,
+		marginTop: PADDING_X_SIZE
 	},
 	head: {
 		flexDirection: 'row',
+		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: COLOR_LIGHT,
-		height: 48
+		height: 48,
+		paddingLeft: PADDING_M_SIZE,
+		paddingRight: PADDING_M_SIZE
 	},
 	status: {
+		flex: 1,
 		textAlign: 'left',
 		color: COLOR_MAIN
 	},
 	info: {
-		textAlign: 'right'
+		flex: 1
 	},
 	orderId: {
 		textAlign: 'right',
@@ -39,24 +45,27 @@ module.exports = React.StyleSheet.create({
 		backgroundColor: 'white'
 	},
 	productImage: {
-		width: 160,
-		height: 160
+		width: 150,
+		height: 130
 	},
 	detail: {
-		flex: 1
+		flex: 1,
+		padding: PADDING_M_SIZE
 	},
 	title: {
-		flex: 1,
-		paddingBottom: PADDING_M_SIZE
+		flex: 1
 	},
 	buyInfo: {
-		flexDirection: 'row'
+		flexDirection: 'row',
+		padding: PADDING_M_SIZE
 	},
 	price: {
+		flex: 1,
 		fontWeight: 'bold',
 		textAlign: 'left'
 	},
 	buyCount: {
+		flex: 1,
 		textAlign: 'right'
 	}
 });

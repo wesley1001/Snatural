@@ -3,7 +3,6 @@
 let React = require('react-native');
 
 const { 
-	FONT_ICON,
 	COLOR_MAIN,
 	COLOR_DARK,
 	COLOR_BORDER
@@ -18,7 +17,7 @@ module.exports = React.StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		height: 45,
+		height: 48,
 		borderBottomWidth: 3,
 		borderBottomColor: COLOR_BORDER,
 		backgroundColor: 'white'
