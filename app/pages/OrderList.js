@@ -94,7 +94,11 @@ const OrderList = React.createClass({
   },
 
   _renderRow(data){
-    return <Order {...data} />
+    return <Order {...data} onPress={this._onOrderPress}/>
+  },
+
+  _onOrderPress(orderId){
+    this.goto('OrderDetail', {orderId});
   },
 
   componentDidMount() {

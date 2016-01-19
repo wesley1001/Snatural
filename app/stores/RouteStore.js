@@ -12,5 +12,9 @@ module.exports = {
 	OrderList: {
 		component: require('../pages/OrderList'),
 		title: '订单列表'
+	},
+	OrderDetail: {
+		component: require('../pages/OrderDetail'),
+		title: '订单详情'
 	}
 }

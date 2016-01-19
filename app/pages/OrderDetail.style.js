@@ -5,7 +5,10 @@ let React = require('react-native');
 const {
 	PADDING_X_SIZE,
 	PADDING_M_SIZE,
-	COLOR_MAIN
+	PADDING_S_SIZE,
+	COLOR_MAIN,
+	COLOR_BORDER,
+	SCREEN_WIDTH
 } = require('../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
@@ -15,52 +18,67 @@ module.exports = React.StyleSheet.create({
 
 	orderInfo:{
 		backgroundColor: COLOR_MAIN,
-		padding: PADDING_M_SIZE
+		padding: PADDING_M_SIZE,
+		height: 90
 	},
 	info:{
-		flexDirection: 'row'
+		flexDirection: 'row',
+		flex: 1,
+		color: 'white'
 	},
-	label:{
-		width: 70,
-		justifyContent: 'justify'
+	orderId:{
+		textAlign: 'justify',
+		letterSpacing: 5
 	},
 	strong:{
 		fontWeight: 'bold'
 	},
 
 	address: {
-		flex: 1,
 		marginTop: PADDING_X_SIZE
 	},
 	addressBackground: {
-		flex: 1
+		height: 100,
+		width: SCREEN_WIDTH,
+		justifyContent: 'center',
+		padding: PADDING_M_SIZE
 	},
 	addressText: {
-		flex: 1
+		color: '#666',
+		backgroundColor: 'transparent',
+		paddingBottom: PADDING_M_SIZE
 	},
 
 	comment: {
 		marginTop: PADDING_X_SIZE,
-		padding: PADDING_M_SIZE
+		padding: PADDING_M_SIZE,
+		backgroundColor: 'white',
+		flexDirection: 'row'
 	},
 	bars:{
 		flex: 1,
-		marginTop: PADDING_X_SIZE
+		marginTop: PADDING_X_SIZE,
+		backgroundColor: 'white'
 	},
 	bar: {
-		flex: 1,
+		height: 44,
 		flexDirection: 'row',
-		padding: PADDING_M_SIZE
+		padding: PADDING_M_SIZE,
+		borderBottomWidth: 1,
+		borderBottomColor: COLOR_BORDER,
+		alignItems: 'center'
 	},
 	title: {
-		width: 70,
+		width: 80,
 		textAlign: 'left'
 	},
 	content: {
+		flex: 1,
 		textAlign: 'right',
 		fontWeight: 'bold'
 	},
 	commentContent: {
+		flex: 1,
 		textAlign: 'right'
 	}
 });
