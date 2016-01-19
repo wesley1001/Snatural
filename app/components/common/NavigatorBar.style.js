@@ -6,6 +6,7 @@ const {
 	COLOR_MAIN, 
 	FONT_L_SIZE,
 	FONT_ICON,
+	PADDING_M_SIZE,
 	PADDING_S_SIZE
 } = require('../../constants/StyleConstants');
 
@@ -17,6 +18,7 @@ module.exports = React.StyleSheet.create({
 		alignItems: 'center'
 	},
 	back: {
+		height: 48,
 		width: 120,
 		flexDirection: 'row',
 		alignItems: 'center'
@@ -27,7 +29,7 @@ module.exports = React.StyleSheet.create({
 		width: FONT_ICON - PADDING_S_SIZE,
 		fontSize: FONT_ICON,
 		color: 'white',
-		marginLeft: PADDING_S_SIZE
+		marginLeft: PADDING_M_SIZE
 	},
 	backText: {
 		fontSize: FONT_L_SIZE,
