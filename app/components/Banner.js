@@ -15,7 +15,7 @@ const styles = require('./Banner.style');
 
 const ImageSlider = require('./common/ImageSlider');
 
-let data = [{imageUrl: 'https://img.alicdn.com/tps/i1/TB1.94dLpXXXXbfXFXXeRTP_XXX-1125-543.jpg_q30.jpg'},{imageUrl: 'https://img.alicdn.com/tps/i4/TB1pcX5LpXXXXawXXXXeRTP_XXX-1125-543.jpg_q30.jpg'}, {imageUrl: 'https://img.alicdn.com/imgextra/i3/2360209412/TB2phL.jpXXXXc5XXXXXXXXXXXX-2360209412.jpg_q30.jpg'}]
+let data = [{"imageUrl":"http://zxs-image.b0.upaiyun.com/icon/1452680099244.png!415","pageType":0,"value":null},{"imageUrl":"http://zxs-image.b0.upaiyun.com/icon/1451460634217.png!415","pageType":2,"value":"4"},{"imageUrl":"http://zxs-image.b0.upaiyun.com/icon/1451461782194.png!415","pageType":0,"value":null},{"imageUrl":"http://zxs-image.b0.upaiyun.com/icon/1451461771375.png!415","pageType":0,"value":null}]
 
 const Banner = (props) => {
 	return (

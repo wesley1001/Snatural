@@ -56963,8 +56963,7 @@ StyleSheet=
 
 
 
-
-React.StyleSheet;var View=React.View;var Navigator=React.Navigator;var NavigatorIOS=React.NavigatorIOS;var Platform=React.Platform;
+React.StyleSheet;var Navigator=React.Navigator;var NavigatorIOS=React.NavigatorIOS;var Platform=React.Platform;
 
 var renderIOSRouter=function(store){
 var route=babelHelpers.extends(
@@ -57032,7 +57031,11 @@ title:'产品详情'},
 
 OrderList:{
 component:require('Snatural/app/pages/OrderList.js'),
-title:'订单列表'}};
+title:'订单列表'},
+
+OrderDetail:{
+component:require('Snatural/app/pages/OrderDetail.js'),
+title:'订单详情'}};
 });
 __d('Snatural/app/pages/Index.js',function(global, require, module, exports) {  'use strict';
 
@@ -57049,9 +57052,9 @@ React.View;var Text=React.Text;
 
 var Icon=require('FontAwesome');
 
-var styles=require('Snatural/app/styles/indexPage.js');
+var styles=require('Snatural/app/pages/Index.style.js');
 
-var TabBar=require('Snatural/app/components/TabBar.js');
+var TabBar=require('Snatural/app/components/common/TabBar.js');
 var Home=require('Snatural/app/pages/Home.js');
 var Me=require('Snatural/app/pages/Me.js');
 
@@ -59616,7 +59619,7 @@ return isObjectLike(value)&&isLength(value.length)&&!!typedArrayTags[objToString
 
 module.exports=isTypedArray;
 });
-__d('Snatural/app/styles/indexPage.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/pages/Index.style.js',function(global, require, module, exports) {  'use strict';
 
 
 var React=require('react-native/Libraries/react-native/react-native.js');var _require=
@@ -59626,7 +59629,7 @@ var React=require('react-native/Libraries/react-native/react-native.js');var _re
 
 
 
-require('Snatural/app/styles/variables.js');var COLOR_DARK=_require.COLOR_DARK;var COLOR_MAIN=_require.COLOR_MAIN;var FONT_ICON=_require.FONT_ICON;var FONT_S_SIZE=_require.FONT_S_SIZE;
+require('Snatural/app/constants/StyleConstants.js');var COLOR_DARK=_require.COLOR_DARK;var COLOR_MAIN=_require.COLOR_MAIN;var FONT_ICON=_require.FONT_ICON;var FONT_S_SIZE=_require.FONT_S_SIZE;
 
 module.exports=React.StyleSheet.create({
 container:{
@@ -59650,7 +59653,7 @@ fontSize:FONT_S_SIZE},
 activeTab:{
 backgroundColor:COLOR_DARK}});
 });
-__d('Snatural/app/styles/variables.js',function(global, require, module, exports) {  var React=require('react-native/Libraries/react-native/react-native.js');var _React$Dimensions$get=
+__d('Snatural/app/constants/StyleConstants.js',function(global, require, module, exports) {  var React=require('react-native/Libraries/react-native/react-native.js');var _React$Dimensions$get=
 
 
 
@@ -59663,6 +59666,7 @@ exports.SCREEN_HEIGHT=screenHeight;
 exports.COLOR_PRICE='#fd8e56';
 exports.COLOR_BORDER='#e8e8e8';
 exports.COLOR_BACKGROUND='#f1f1f1';
+exports.COLOR_LIGHT='#f0f9f4';
 exports.COLOR_DARK='#76b68c';
 exports.COLOR_MAIN='#98d1ad';
 
@@ -59677,7 +59681,7 @@ exports.PADDING_L_SIZE=15;
 exports.PADDING_M_SIZE=10;
 exports.PADDING_S_SIZE=5;
 });
-__d('Snatural/app/components/TabBar.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/components/common/TabBar.js',function(global, require, module, exports) {  'use strict';
 
 
 
@@ -59685,16 +59689,13 @@ __d('Snatural/app/components/TabBar.js',function(global, require, module, export
 
 var React=require('react-native/Libraries/react-native/react-native.js');
 
-var styles=require('Snatural/app/styles/tabBar.js');var _require=
-require('Snatural/app/styles/variables.js');var SCREEN_WIDTH=_require.SCREEN_WIDTH;var 
+var styles=require('Snatural/app/components/common/TabBar.style.js');var _require=
+require('Snatural/app/constants/StyleConstants.js');var SCREEN_WIDTH=_require.SCREEN_WIDTH;var 
 
 
 View=
 
-
-
-
-React.View;var ScrollView=React.ScrollView;var ViewPagerAndroid=React.ViewPagerAndroid;var TouchableWithoutFeedback=React.TouchableWithoutFeedback;var Platform=React.Platform;
+React.View;var TouchableWithoutFeedback=React.TouchableWithoutFeedback;
 
 var Tabbar=React.createClass({displayName:'Tabbar',
 propTypes:{
@@ -59709,42 +59710,15 @@ active:this.props.initalActive};},
 
 
 
-render:function(){var _this=this;
+render:function(){
 var contents=this._createContents(this.props);var _renderTabs=
 
 this._renderTabs(this.props.tabPosition,contents.tabs);var topTabs=_renderTabs.topTabs;var bottomTabs=_renderTabs.bottomTabs;
-if(Platform.OS==='ios'){
 return (
 React.createElement(View,{style:styles.container},
 topTabs,
-React.createElement(ScrollView,{
-horizontal:true,
-pagingEnabled:true,
-directionalLockEnabled:true,
-showsHorizontalScrollIndicator:false,
-showsVerticalScrollIndicator:false,
-bounces:false,
-style:styles.viewContainer,
-onMomentumScrollEnd:this._onMomentumScrollEnd,
-ref:function(viewPager){_this.viewPager=viewPager;}},
-contents.views),
-
-bottomTabs));}else 
-
-
-{
-return (
-React.createElement(View,{style:styles.container},
-topTabs,
-React.createElement(ViewPagerAndroid,{
-style:styles.viewContainer,
-initialPage:0,
-onPageSelected:this._onPageSelected,
-ref:function(viewPager){_this.viewPager=viewPager;}},
-contents.views),
-
-bottomTabs));}},
-
+contents.activeView,
+bottomTabs));},
 
 
 
@@ -59760,63 +59734,39 @@ return tabPosition==='top'?
 {bottomTabs:tabContainer};},
 
 
-_onMomentumScrollEnd:function(e){
-var activeIndex=e.nativeEvent.contentOffset.x/SCREEN_WIDTH;
-this.setState({active:this.activeMapping[activeIndex]});},
-
-
-_onPageSelected:function(e){
-this.setState({active:this.activeMapping[e.nativeEvent.position]});},
-
-
-_createContents:function(props){var _this2=this;
-var contents={views:[],tabs:[]};
-
-this.activeMapping=[];
-var activeIndex=0;
-
+_createContents:function(props){var _this=this;
+var contents={activeView:null,tabs:[]};
+var active=this.state.active;
 React.Children.forEach(props.children,function(child){
 if(!child)return;
 if(child.type.displayName==='Tabbar.View'){
-_this2.activeMapping[activeIndex++]=child.key;
-contents.views.push(_this2._createView(child.key,child));}else 
+if(child.key===active)
+contents.activeView=_this._createView(child.key,child);}else 
 {
-contents.tabs.push(_this2._createTab(child.key,child));}});
+contents.tabs.push(_this._createTab(child.key,child));}});
 
 
 return contents;},
 
 _createView:function(key,element){
 return (
-React.createElement(View,{key:'view:'+key,style:styles.view},
+React.createElement(View,{style:styles.viewContainer},
 element));},
 
 
 
-_createTab:function(key,element){var _this3=this;
+_createTab:function(key,element){var _this2=this;
 return React.cloneElement(element,{
 key:'tab:'+key,
 activeStyle:key===this.state.active?this.props.activeTabStyle:null,
 onPress:function(){
-_this3._switchTo(key);
+_this2._switchTo(key);
 element.props.onPress&&element.props.onPress(key);}});},
 
 
 
 
 _switchTo:function(key){
-var page=0;
-for(var index in this.activeMapping){
-if(key===this.activeMapping[index]){
-page=index;
-break;}}
-
-
-if(Platform.OS==='ios'){
-this.viewPager.scrollTo(0,page*SCREEN_WIDTH);}else 
-{
-this.viewPager.setPage(page);}
-
 this.setState({active:key});}});
 
 
@@ -59844,11 +59794,11 @@ React.Children.map(children,function(child){return child;}))));}});
 
 module.exports=Tabbar;
 });
-__d('Snatural/app/styles/tabBar.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/components/common/TabBar.style.js',function(global, require, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');var _require=
 
-require('Snatural/app/styles/variables.js');var SCREEN_WIDTH=_require.SCREEN_WIDTH;
+require('Snatural/app/constants/StyleConstants.js');var SCREEN_WIDTH=_require.SCREEN_WIDTH;
 
 module.exports=React.StyleSheet.create({
 container:{
@@ -59881,15 +59831,14 @@ React.View;var Text=React.Text;var ListView=React.ListView;
 
 var TimerMixin=require('react-timer-mixin/TimerMixin.js');
 
-var styles=require('Snatural/app/styles/homePage.js');
+var styles=require('Snatural/app/pages/Home.style.js');
 
+var Loading=require('Snatural/app/components/common/Loading.js');
+var RefreshableListView=require('Snatural/app/components/common/RefreshableListView.js');
 var Banner=require('Snatural/app/components/Banner.js');
 var SearchBox=require('Snatural/app/components/SearchBox.js');
-var Loading=require('Snatural/app/components/Loading.js');
 var Product=require('Snatural/app/components/Product.js');
 var PageMixin=require('Snatural/app/pages/PageMixin.js');
-
-var RefreshableListView=require('Snatural/app/components/RefreshableListView.js');
 
 var listData=[{"productId":"0000001158","title":"RedSeal红印黑糖（1箱6瓶）500g/瓶","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1446633279427.jpeg!200","price":270.0},{"productId":"0000001157","title":"GoodHealth好健康液体钙胶囊+VD（1瓶）150粒/瓶","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1446629580291.jpeg!200","price":600.0},{"productId":"0000001156","title":"Whittaker's黑巧克力250g(1块)+cadbury白巧克力220g（1块）+Whittaker's苹果香草味巧克力100g(1块)","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451295596766.png!200","price":169.0},{"productId":"0000001155","title":"费列罗榛子巧克力球375g（1盒）+费列罗巧克力球混合版269g（1盒）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451295561114.jpeg!200","price":280.0},{"productId":"0000001154","title":"Only organic 有机磨牙棒*2+Only organic 果泥*3","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451294857119.png!200","price":249.0},{"productId":"0000001153","title":"好健康液体钙胶囊+VD150粒 + 好健康儿童聪慧鱼油 120粒 + 纽乐蔓越莓 50000 50粒","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451294543280.jpeg!200","price":448.5},{"productId":"0000001152","title":"Red Seal蜂胶牙膏*2+去烟渍牙膏*2+儿童牙膏*2","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451294132770.jpeg!200","price":188.0},{"productId":"0000001151","title":"好健康儿童聪慧鱼油120粒（1盒）+THOMPSON's儿童综合复合维生素90片（1盒）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451293927975.jpeg!200","price":328.5},{"productId":"0000001150","title":"Pro-Life 加钙羊奶片500片（1瓶）+好健康儿童聪慧鱼油 120粒（1瓶）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451293686227.jpeg!200","price":375.0},{"productId":"0000001149","title":"Equazen妈妈鱼油30粒（1盒）+百丽康美孕哺乳期黄金素 120粒（1瓶）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1451293476672.jpeg!200","price":390.0}];
 
@@ -59902,177 +59851,114 @@ React.createElement(SearchBox,null)));};
 
 
 
-var RefreshingIndicator=function(props){
-return React.createElement(Text,{style:styles.loading},'Loading...');};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var Home=React.createClass({displayName:'Home',
-mixins:[TimerMixin],
+
+mixins:[TimerMixin,PageMixin],
 
 getInitialState:function(){
 var ds=new ListView.DataSource({
-rowHasChanged:function(row1,row2){return row1!==row2;}});
+rowHasChanged:function(row1,row2){return row1!==row2;},
+sectionHeaderHasChanged:function(section1,section2){return section1!==section2;}});
 
+var data={s1:[false],s2:[]};
 return {
-fetched:false,
-dataSource:ds};},
+data:data,
+dataSource:ds.cloneWithRowsAndSections(data),
+refreshing:false};},
 
 
 
-render:function(){
-if(this.state.fetched){
+render:function(){var 
+dataSource=this.state.dataSource;
+
 return (
+React.createElement(View,{style:styles.container},
 React.createElement(RefreshableListView,{
-dataSource:this.dataSource,
-renderRow:this._renderRow}));}else 
+dataSource:dataSource,
+renderRow:this._renderRow,
+renderSeparator:this._renderSeparator,
+
+onInfinite:this._fetchMore})));},
+
+
+
+
+
+_renderRow:function(data,sectionId){
+if(sectionId==='s2'){
+if(data){
+return (
+React.createElement(Product,babelHelpers.extends({},
+data,{
+key:data.productId,
+onPress:this._onProductPress})));}else 
 
 
 {
-return React.createElement(View,{style:styles.container},React.createElement(Loading,null));}},
+return React.createElement(Loading,null);}}else 
+
+{
+return React.createElement(HeaderSection,null);}},
 
 
 
-_renderRow:function(data){
-return React.createElement(Text,{style:{flex:1,height:300}},data.productId);},
+_renderSeparator:function(sectionId,rowId){
+if(sectionId==='s1'){}else 
 
-
-componentDidMount:function(){}});
-
-
+{
+return React.createElement(View,{style:styles.separator,key:rowId});}},
 
 
 
+_fetchMore:function(done){var _this=this;
+if(!this.state.data.s2.length)
+return;
+
+this.setTimeout(function(){var _state$data$s;
+var newData=listData.map(function(item,i){
+return babelHelpers.extends(item,{productId:i});});
+
+(_state$data$s=_this.state.data.s2).push.apply(_state$data$s,babelHelpers.toConsumableArray(newData));
+
+_this.setState({
+dataSource:_this.state.dataSource.cloneWithRowsAndSections(_this.state.data)});
+
+done();},
+2000);},
+
+
+_onProductPress:function(productId){
+this.goto('Detail',{productId:productId});},
+
+
+componentDidMount:function(){
+this.fetchData();},
+
+
+fetchData:function(){var _this2=this;
+this.state.data.s2=listData;
+
+this.setTimeout(function(){
+_this2.setState({
+dataSource:_this2.state.dataSource.cloneWithRowsAndSections(_this2.state.data)});},
+
+1000);},
+
+
+searchProduct:function(word){
+console.log(word);}});
 
 
 
 module.exports=Home;
 });
-__d('Snatural/app/styles/homePage.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/pages/Home.style.js',function(global, require, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');var _require=
 
 
 
-require('Snatural/app/styles/variables.js');var PADDING_S_SIZE=_require.PADDING_S_SIZE;
+require('Snatural/app/constants/StyleConstants.js');var PADDING_S_SIZE=_require.PADDING_S_SIZE;
 
 module.exports=React.StyleSheet.create({
 container:{
@@ -60094,6 +59980,159 @@ height:30,
 padding:PADDING_S_SIZE,
 textAlign:'center'}});
 });
+__d('Snatural/app/components/common/Loading.js',function(global, require, module, exports) {  'use strict';
+
+
+
+
+
+var React=require('react-native/Libraries/react-native/react-native.js');var 
+
+
+View=
+
+
+
+React.View;var Platform=React.Platform;var ActivityIndicatorIOS=React.ActivityIndicatorIOS;var ProgressBarAndroid=React.ProgressBarAndroid;
+
+var styles=require('Snatural/app/components/common/Loading.style.js');
+
+var Loading=function(props){
+if(Platform.OS==='ios'){
+return (
+React.createElement(View,{style:styles.container},
+React.createElement(ActivityIndicatorIOS,{
+animating:true,
+style:styles.spinner,
+size:'large'})));}else 
+
+
+
+{
+return (
+React.createElement(View,{style:styles.container},
+React.createElement(ProgressBarAndroid,{
+styleAttr:'Inverse',
+style:styles.spinner})));}};
+
+
+
+
+
+
+module.exports=Loading;
+});
+__d('Snatural/app/components/common/Loading.style.js',function(global, require, module, exports) {  'use strict';
+
+var React=require('react-native/Libraries/react-native/react-native.js');
+
+module.exports=React.StyleSheet.create({
+container:{
+flex:1,
+justifyContent:'center',
+alignItems:'center'},
+
+spinner:{}});
+});
+__d('Snatural/app/components/common/RefreshableListView.js',function(global, require, module, exports) {  'use strict';
+
+
+
+
+
+var React=require('react-native/Libraries/react-native/react-native.js');var 
+
+
+View=
+
+
+React.View;var Text=React.Text;var ListView=React.ListView;
+
+var styles=require('Snatural/app/components/common/RefreshableListView.style.js');
+
+var Loading=require('Snatural/app/components/common/Loading.js');
+
+var RefreshableListView=React.createClass({displayName:'RefreshableListView',
+
+propTypes:{
+onRefresh:React.PropTypes.func,
+onInfinite:React.PropTypes.func},
+
+
+getInitialState:function(){
+return {
+infiniting:false,
+dataSource:this.props.initialDataSource};},
+
+
+
+render:function(){
+return (
+React.createElement(ListView,babelHelpers.extends({
+renderFooter:this._renderFooter,
+onEndReached:this._onEndReached,
+onEndReachedThreshold:20,
+automaticallyAdjustContentInsets:false,
+initialListSize:3,
+pageSize:3,
+style:styles.list},
+this.props)));},
+
+
+
+
+_renderFooter:function(){
+if(this.state.infiniting){
+return React.createElement(Loading,null);}else 
+{
+return null;}},
+
+
+
+_onResponderGrant:function(e){},
+
+
+
+
+
+_onEndReached:function(){
+this.setState({
+infiniting:true});
+
+this.props.onInfinite(this._finishInfinite);},
+
+
+_finishInfinite:function(){
+this.setState({
+infiniting:false});},
+
+
+
+updateDataSource:function(dataSource){
+this.setState({
+dataSource:dataSource});}});
+
+
+
+
+module.exports=RefreshableListView;
+});
+__d('Snatural/app/components/common/RefreshableListView.style.js',function(global, require, module, exports) {  'use strict';
+
+var React=require('react-native/Libraries/react-native/react-native.js');var _require=
+
+
+
+require('Snatural/app/constants/StyleConstants.js');var PADDING_S_SIZE=_require.PADDING_S_SIZE;
+
+module.exports=React.StyleSheet.create({
+container:{
+flex:1},
+
+
+list:{
+flex:1}});
+});
 __d('Snatural/app/components/Banner.js',function(global, require, module, exports) {  'use strict';
 
 
@@ -60107,11 +60146,11 @@ View=
 
 React.View;var Image=React.Image;
 
-var styles=require('Snatural/app/styles/banner.js');
+var styles=require('Snatural/app/components/Banner.style.js');
 
-var ImageSlider=require('Snatural/app/components/ImageSlider.js');
+var ImageSlider=require('Snatural/app/components/common/ImageSlider.js');
 
-var data=[{imageUrl:'https://img.alicdn.com/tps/i1/TB1.94dLpXXXXbfXFXXeRTP_XXX-1125-543.jpg_q30.jpg'},{imageUrl:'https://img.alicdn.com/tps/i4/TB1pcX5LpXXXXawXXXXeRTP_XXX-1125-543.jpg_q30.jpg'},{imageUrl:'https://img.alicdn.com/imgextra/i3/2360209412/TB2phL.jpXXXXc5XXXXXXXXXXXX-2360209412.jpg_q30.jpg'}];
+var data=[{"imageUrl":"http://zxs-image.b0.upaiyun.com/icon/1452680099244.png!415","pageType":0,"value":null},{"imageUrl":"http://zxs-image.b0.upaiyun.com/icon/1451460634217.png!415","pageType":2,"value":"4"},{"imageUrl":"http://zxs-image.b0.upaiyun.com/icon/1451461782194.png!415","pageType":0,"value":null},{"imageUrl":"http://zxs-image.b0.upaiyun.com/icon/1451461771375.png!415","pageType":0,"value":null}];
 
 var Banner=function(props){
 return (
@@ -60133,13 +60172,13 @@ style:styles.image}));}))));};
 
 module.exports=Banner;
 });
-__d('Snatural/app/styles/banner.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/components/Banner.style.js',function(global, require, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');var _require=
 
 
 
-require('Snatural/app/styles/variables.js');var SCREEN_WIDTH=_require.SCREEN_WIDTH;
+require('Snatural/app/constants/StyleConstants.js');var SCREEN_WIDTH=_require.SCREEN_WIDTH;
 
 module.exports=React.StyleSheet.create({
 container:{
@@ -60149,7 +60188,7 @@ height:135},
 image:{
 height:135}});
 });
-__d('Snatural/app/components/ImageSlider.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/components/common/ImageSlider.js',function(global, require, module, exports) {  'use strict';
 
 
 
@@ -60166,9 +60205,9 @@ View=
 
 React.View;var Text=React.Text;var ScrollView=React.ScrollView;var ViewPagerAndroid=React.ViewPagerAndroid;var Platform=React.Platform;
 
-var styles=require('Snatural/app/styles/imageSlider.js');
+var styles=require('Snatural/app/components/common/ImageSlider.style.js');
 var INDICATOR_SIZE=styles.INDICATOR_SIZE;var _require=
-require('Snatural/app/styles/variables.js');var SCREEN_WIDTH=_require.SCREEN_WIDTH;
+require('Snatural/app/constants/StyleConstants.js');var SCREEN_WIDTH=_require.SCREEN_WIDTH;
 
 var ImageSlider=React.createClass({displayName:'ImageSlider',
 
@@ -60271,14 +60310,14 @@ this.setState({activePage:e.nativeEvent.position});}});
 
 module.exports=ImageSlider;
 });
-__d('Snatural/app/styles/imageSlider.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/components/common/ImageSlider.style.js',function(global, require, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');var _require=
 
 
 
 
-require('Snatural/app/styles/variables.js');var PADDING_S_SIZE=_require.PADDING_S_SIZE;var SCREEN_WIDTH=_require.SCREEN_WIDTH;
+require('Snatural/app/constants/StyleConstants.js');var PADDING_S_SIZE=_require.PADDING_S_SIZE;var SCREEN_WIDTH=_require.SCREEN_WIDTH;
 
 var INDICATOR_SIZE=24;
 
@@ -60337,7 +60376,7 @@ React.View;var TextInput=React.TextInput;
 
 var Icon=require('FontAwesome');
 
-var styles=require('Snatural/app/styles/searchBox.js');
+var styles=require('Snatural/app/components/SearchBox.style.js');
 
 var SearchBox=React.createClass({displayName:'SearchBox',
 getInitialState:function(){
@@ -60372,7 +60411,7 @@ this.props.onSearch(this.state.searchWord);}});
 
 module.exports=SearchBox;
 });
-__d('Snatural/app/styles/searchBox.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/components/SearchBox.style.js',function(global, require, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');var _require=
 
@@ -60382,7 +60421,7 @@ var React=require('react-native/Libraries/react-native/react-native.js');var _re
 
 
 
-require('Snatural/app/styles/variables.js');var PADDING_M_SIZE=_require.PADDING_M_SIZE;var PADDING_S_SIZE=_require.PADDING_S_SIZE;var COLOR_BORDER=_require.COLOR_BORDER;var FONT_ICON=_require.FONT_ICON;var FONT_M_SIZE=_require.FONT_M_SIZE;
+require('Snatural/app/constants/StyleConstants.js');var PADDING_M_SIZE=_require.PADDING_M_SIZE;var PADDING_S_SIZE=_require.PADDING_S_SIZE;var COLOR_BORDER=_require.COLOR_BORDER;var FONT_ICON=_require.FONT_ICON;var FONT_M_SIZE=_require.FONT_M_SIZE;
 
 module.exports=React.StyleSheet.create({
 container:{
@@ -60407,64 +60446,6 @@ backgroundColor:'white',
 paddingLeft:35,
 fontSize:FONT_M_SIZE-2}});
 });
-__d('Snatural/app/components/Loading.js',function(global, require, module, exports) {  'use strict';
-
-
-
-
-
-var React=require('react-native/Libraries/react-native/react-native.js');var 
-
-
-View=
-
-
-
-React.View;var Platform=React.Platform;var ActivityIndicatorIOS=React.ActivityIndicatorIOS;var ProgressBarAndroid=React.ProgressBarAndroid;
-
-var styles=require('Snatural/app/styles/loading.js');
-
-var Loading=function(props){
-if(Platform.OS==='ios'){
-return (
-React.createElement(View,{style:styles.container},
-React.createElement(ActivityIndicatorIOS,{
-animating:true,
-style:styles.spinner,
-size:'large'})));}else 
-
-
-
-{
-return (
-React.createElement(View,{style:styles.container},
-React.createElement(ProgressBarAndroid,{
-styleAttr:'Inverse',
-style:styles.spinner})));}};
-
-
-
-
-
-
-module.exports=Loading;
-});
-__d('Snatural/app/styles/loading.js',function(global, require, module, exports) {  'use strict';
-
-var React=require('react-native/Libraries/react-native/react-native.js');var _require=
-
-
-
-require('Snatural/app/styles/variables.js');var FONT_X_SIZE=_require.FONT_X_SIZE;
-
-module.exports=React.StyleSheet.create({
-container:{
-flex:1,
-justifyContent:'center',
-alignItems:'center'},
-
-spinner:{}});
-});
 __d('Snatural/app/components/Product.js',function(global, require, module, exports) {  'use strict';
 
 
@@ -60480,7 +60461,7 @@ View=
 
 React.View;var Text=React.Text;var Image=React.Image;var TouchableHighlight=React.TouchableHighlight;
 
-var styles=require('Snatural/app/styles/product.js');
+var styles=require('Snatural/app/components/Product.style.js');
 
 var Product=function(props){var 
 productId=props.productId;var title=props.title;var imageUrl=props.imageUrl;var price=props.price;var onPress=props.onPress;
@@ -60505,7 +60486,7 @@ React.createElement(Text,{style:styles.favCount},'喜欢 7'))))));};
 
 module.exports=Product;
 });
-__d('Snatural/app/styles/product.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/components/Product.style.js',function(global, require, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');var _require=
 
@@ -60513,7 +60494,7 @@ var React=require('react-native/Libraries/react-native/react-native.js');var _re
 
 
 
-require('Snatural/app/styles/variables.js');var COLOR_PRICE=_require.COLOR_PRICE;var FONT_X_SIZE=_require.FONT_X_SIZE;var PADDING_M_SIZE=_require.PADDING_M_SIZE;
+require('Snatural/app/constants/StyleConstants.js');var COLOR_PRICE=_require.COLOR_PRICE;var FONT_X_SIZE=_require.FONT_X_SIZE;var PADDING_M_SIZE=_require.PADDING_M_SIZE;
 
 module.exports=React.StyleSheet.create({
 container:{
@@ -60549,7 +60530,7 @@ flex:1}});
 });
 __d('Snatural/app/pages/PageMixin.js',function(global, require, module, exports) {  var React=require('react-native/Libraries/react-native/react-native.js');
 
-var NavigatorBar=require('Snatural/app/components/NavigatorBar.js');
+var NavigatorBar=require('Snatural/app/components/common/NavigatorBar.js');
 
 module.exports={
 
@@ -60571,7 +60552,7 @@ _renderNavigatorBar:function(){var _this=this;
 return (
 React.createElement(NavigatorBar,{onBack:function(){return _this.goBack();}}));}};
 });
-__d('Snatural/app/components/NavigatorBar.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/components/common/NavigatorBar.js',function(global, require, module, exports) {  'use strict';
 
 
 
@@ -60587,7 +60568,7 @@ React.View;var Text=React.Text;var TouchableWithoutFeedback=React.TouchableWitho
 
 var Icon=require('Ionicons');
 
-var styles=require('Snatural/app/styles/navigatorBar.js');
+var styles=require('Snatural/app/components/common/NavigatorBar.style.js');
 
 var NavigatorBar=function(props){var 
 onBack=props.onBack;
@@ -61355,7 +61336,7 @@ var Ionicons=createIconSet(glyphMap,'Ionicons','Ionicons.ttf');
 module.exports=Ionicons;
 module.exports.glyphMap=glyphMap;
 });
-__d('Snatural/app/styles/navigatorBar.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/components/common/NavigatorBar.style.js',function(global, require, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');var _require=
 
@@ -61364,7 +61345,8 @@ var React=require('react-native/Libraries/react-native/react-native.js');var _re
 
 
 
-require('Snatural/app/styles/variables.js');var COLOR_MAIN=_require.COLOR_MAIN;var FONT_L_SIZE=_require.FONT_L_SIZE;var FONT_ICON=_require.FONT_ICON;var PADDING_S_SIZE=_require.PADDING_S_SIZE;
+
+require('Snatural/app/constants/StyleConstants.js');var COLOR_MAIN=_require.COLOR_MAIN;var FONT_L_SIZE=_require.FONT_L_SIZE;var FONT_ICON=_require.FONT_ICON;var PADDING_M_SIZE=_require.PADDING_M_SIZE;var PADDING_S_SIZE=_require.PADDING_S_SIZE;
 
 module.exports=React.StyleSheet.create({
 container:{
@@ -61374,6 +61356,7 @@ flexDirection:'row',
 alignItems:'center'},
 
 back:{
+height:48,
 width:120,
 flexDirection:'row',
 alignItems:'center'},
@@ -61384,86 +61367,11 @@ lineHeight:FONT_ICON,
 width:FONT_ICON-PADDING_S_SIZE,
 fontSize:FONT_ICON,
 color:'white',
-marginLeft:PADDING_S_SIZE},
+marginLeft:PADDING_M_SIZE},
 
 backText:{
 fontSize:FONT_L_SIZE,
 color:'white'}});
-});
-__d('Snatural/app/components/RefreshableListView.js',function(global, require, module, exports) {  'use strict';
-
-
-
-
-
-var React=require('react-native/Libraries/react-native/react-native.js');var 
-
-
-View=
-
-
-React.View;var Text=React.Text;var ListView=React.ListView;
-
-var styles=require('Snatural/app/styles/refreshableListView.js');
-
-var Loading=require('Snatural/app/components/Loading.js');
-
-var RefreshableListView=React.createClass({displayName:'RefreshableListView',
-
-propTypes:{
-onRefresh:React.PropTypes.func,
-onInfinite:React.PropTypes.func},
-
-
-getInitalState:function(){
-return {
-infiniting:false};},
-
-
-
-render:function(){
-return (
-React.createElement(ListView,{
-renderFooter:this._renderFooter,
-onEndReached:this._onEndReached,
-onEndReachedThreshold:30,
-initialListSize:3,
-pageSize:3,
-style:styles.list}));},
-
-
-
-
-_renderFooter:function(){
-if(this.state.refreshing){
-return React.createElement(Loading,null);}else 
-{
-return null;}},
-
-
-
-_onEndReached:function(){
-console.log('End reached');}});
-
-
-
-module.exports=RefreshableListView;
-});
-__d('Snatural/app/styles/refreshableListView.js',function(global, require, module, exports) {  'use strict';
-
-var React=require('react-native/Libraries/react-native/react-native.js');var _require=
-
-
-
-require('Snatural/app/styles/variables.js');var PADDING_S_SIZE=_require.PADDING_S_SIZE;
-
-module.exports=React.StyleSheet.create({
-container:{
-flex:1},
-
-
-list:{
-flex:1}});
 });
 __d('Snatural/app/pages/Me.js',function(global, require, module, exports) {  'use strict';
 
@@ -61477,7 +61385,7 @@ React.View;var Text=React.Text;var TouchableHighlight=React.TouchableHighlight;
 
 var Icon=require('Ionicons');
 
-var styles=require('Snatural/app/styles/mePage.js');
+var styles=require('Snatural/app/pages/Me.style.js');
 
 var Avatar=require('Snatural/app/components/Avatar.js');
 var PageMixin=require('Snatural/app/pages/PageMixin.js');
@@ -61485,7 +61393,7 @@ var PageMixin=require('Snatural/app/pages/PageMixin.js');
 var Bar=function(props){var 
 icon=props.icon;var title=props.title;var color=props.color;var onPress=props.onPress;
 return (
-React.createElement(TouchableHighlight,{onPress:onPress},
+React.createElement(TouchableHighlight,{onPress:onPress,underlayColor:'white'},
 React.createElement(View,{style:styles.bar},
 React.createElement(Icon,{name:icon,color:color,style:styles.barIcon}),
 React.createElement(Text,{style:styles.barText},title),
@@ -61532,7 +61440,7 @@ return React.createElement(Bar,babelHelpers.extends({key:i},item,{onPress:functi
 
 module.exports=Me;
 });
-__d('Snatural/app/styles/mePage.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/pages/Me.style.js',function(global, require, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');var _require=
 
@@ -61544,7 +61452,7 @@ var React=require('react-native/Libraries/react-native/react-native.js');var _re
 
 
 
-require('Snatural/app/styles/variables.js');var COLOR_MAIN=_require.COLOR_MAIN;var COLOR_BORDER=_require.COLOR_BORDER;var PADDING_S_SIZE=_require.PADDING_S_SIZE;var PADDING_M_SIZE=_require.PADDING_M_SIZE;var PADDING_L_SIZE=_require.PADDING_L_SIZE;var FONT_M_SIZE=_require.FONT_M_SIZE;var FONT_ICON=_require.FONT_ICON;
+require('Snatural/app/constants/StyleConstants.js');var COLOR_MAIN=_require.COLOR_MAIN;var COLOR_BORDER=_require.COLOR_BORDER;var PADDING_S_SIZE=_require.PADDING_S_SIZE;var PADDING_M_SIZE=_require.PADDING_M_SIZE;var PADDING_L_SIZE=_require.PADDING_L_SIZE;var FONT_M_SIZE=_require.FONT_M_SIZE;var FONT_ICON=_require.FONT_ICON;
 
 
 module.exports=React.StyleSheet.create({
@@ -61609,7 +61517,7 @@ View=
 
 React.View;var Image=React.Image;
 
-var styles=require('Snatural/app/styles/avatar.js');
+var styles=require('Snatural/app/components/Avatar.style.js');
 
 var Avatar=function(props){var 
 imageUrl=props.imageUrl;
@@ -61626,11 +61534,11 @@ source:{uri:imageUrl}})));};
 
 module.exports=Avatar;
 });
-__d('Snatural/app/styles/avatar.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/components/Avatar.style.js',function(global, require, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');var _require=
 
-require('Snatural/app/styles/variables.js');var FONT_ICON=_require.FONT_ICON;
+require('Snatural/app/constants/StyleConstants.js');var FONT_ICON=_require.FONT_ICON;
 
 module.exports=React.StyleSheet.create({
 image:{
@@ -61658,7 +61566,7 @@ View=
 
 React.View;var Image=React.Image;var Text=React.Text;var TouchableWithoutFeedback=React.TouchableWithoutFeedback;
 
-var styles=require('Snatural/app/styles/detailPage.js');
+var styles=require('Snatural/app/pages/Detail.style.js');
 
 var PageMixin=require('Snatural/app/pages/PageMixin.js');
 
@@ -61723,7 +61631,7 @@ actionBar));}});
 
 module.exports=Detail;
 });
-__d('Snatural/app/styles/detailPage.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/pages/Detail.style.js',function(global, require, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');var _require=
 
@@ -61733,7 +61641,7 @@ var React=require('react-native/Libraries/react-native/react-native.js');var _re
 
 
 
-require('Snatural/app/styles/variables.js');var FONT_X_SIZE=_require.FONT_X_SIZE;var PADDING_M_SIZE=_require.PADDING_M_SIZE;var PADDING_L_SIZE=_require.PADDING_L_SIZE;var COLOR_MAIN=_require.COLOR_MAIN;var COLOR_PRICE=_require.COLOR_PRICE;
+require('Snatural/app/constants/StyleConstants.js');var FONT_X_SIZE=_require.FONT_X_SIZE;var PADDING_M_SIZE=_require.PADDING_M_SIZE;var PADDING_L_SIZE=_require.PADDING_L_SIZE;var COLOR_MAIN=_require.COLOR_MAIN;var COLOR_PRICE=_require.COLOR_PRICE;
 
 module.exports=React.StyleSheet.create({
 container:{
@@ -61810,37 +61718,46 @@ var React=require('react-native/Libraries/react-native/react-native.js');var
 
 View=
 
-React.View;var Text=React.Text;
 
-var styles=require('Snatural/app/styles/orderListPage.js');
+React.View;var Text=React.Text;var ListView=React.ListView;
 
-var TabBar=require('Snatural/app/components/TabBar.js');
+var styles=require('Snatural/app/pages/OrderList.style.js');
+
+var TimerMixin=require('react-timer-mixin/TimerMixin.js');
+var TabBar=require('Snatural/app/components/common/TabBar.js');
+var RefreshableListView=require('Snatural/app/components/common/RefreshableListView.js');
+var Loading=require('Snatural/app/components/common/Loading.js');
 var PageMixin=require('Snatural/app/pages/PageMixin.js');
 var Order=require('Snatural/app/components/Order.js');var _require=
 
+
 require('Snatural/app/constants/OrderConstants.js');var ORDER_STATUS=_require.ORDER_STATUS;
-
-var data=[{"orderId":"151130000421","totalPrice":285.0,"orderStatus":3,"createTime":1448883356000,"products":[{"productId":"0000000995","title":"Good Health 深海鱼油胶囊1500mg 400粒/瓶（2瓶）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448554281556.jpeg!200","price":285.0,"buyCount":1}]},{"orderId":"151129000201","totalPrice":420.0,"orderStatus":3,"createTime":1448803578000,"products":[{"productId":"0000000886","title":"Anchor安佳奶粉套装 3袋全脂+3袋脱脂","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1447154437435.png!200","price":420.0,"buyCount":1}]},{"orderId":"151129000191","totalPrice":420.0,"orderStatus":3,"createTime":1448803287000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151129000071","totalPrice":420.0,"orderStatus":7,"createTime":1448774139000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151126000751","totalPrice":858.0,"orderStatus":3,"createTime":1448549667000,"products":[{"productId":"0000000906","title":"Karicare可瑞康金装1段婴幼儿奶粉（6罐装）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448460776768.png!200","price":780.0,"buyCount":1}]},{"orderId":"151126000741","totalPrice":420.0,"orderStatus":3,"createTime":1448549170000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151126000201","totalPrice":420.0,"orderStatus":3,"createTime":1448521895000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151126000181","totalPrice":420.0,"orderStatus":3,"createTime":1448521647000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151126000161","totalPrice":420.0,"orderStatus":3,"createTime":1448521459000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151125000011","totalPrice":65.0,"orderStatus":6,"createTime":1448454392000,"products":[{"productId":"0000000894","title":"Parrs帕氏麦卢卡蜂胶蜂蜜皂140g 洗脸沐浴控油去痘手工皂","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448453381271.jpeg!200","price":65.0,"buyCount":1}]}];
-
-var OrderList=React.createClass({displayName:'OrderList',
-mixins:[PageMixin],
-
-getInitialState:function(){
-return {
-activeTab:'all'};},
-
-
-
-render:function(){var _this=this;var _props=
-this.props;var navigator=_props.navigator;var routes=_props.routes;var 
-activeTab=this.state.activeTab;
 
 var data=[
 {title:'全部',key:'all'},
-{title:'待支付',key:'paying'},
-{title:'待收货',key:'receiving'},
-{title:'已完成',key:'complete'}];
+{title:'待支付',key:ORDER_STATUS.WAIT_PAY},
+{title:'待收货',key:ORDER_STATUS.WAIT_DELIVER},
+{title:'已完成',key:ORDER_STATUS.COMPLETED}];
 
+var listData=[{"orderId":"151130000421","totalPrice":285.0,"orderStatus":3,"createTime":1448883356000,"products":[{"productId":"0000000995","title":"Good Health 深海鱼油胶囊1500mg 400粒/瓶（2瓶）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448554281556.jpeg!200","price":285.0,"buyCount":1}]},{"orderId":"151129000201","totalPrice":420.0,"orderStatus":3,"createTime":1448803578000,"products":[{"productId":"0000000886","title":"Anchor安佳奶粉套装 3袋全脂+3袋脱脂","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1447154437435.png!200","price":420.0,"buyCount":1}]},{"orderId":"151129000191","totalPrice":420.0,"orderStatus":3,"createTime":1448803287000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151129000071","totalPrice":420.0,"orderStatus":7,"createTime":1448774139000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151126000751","totalPrice":858.0,"orderStatus":3,"createTime":1448549667000,"products":[{"productId":"0000000906","title":"Karicare可瑞康金装1段婴幼儿奶粉（6罐装）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448460776768.png!200","price":780.0,"buyCount":1}]},{"orderId":"151126000741","totalPrice":420.0,"orderStatus":3,"createTime":1448549170000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151126000201","totalPrice":420.0,"orderStatus":3,"createTime":1448521895000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151126000181","totalPrice":420.0,"orderStatus":3,"createTime":1448521647000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151126000161","totalPrice":420.0,"orderStatus":3,"createTime":1448521459000,"products":[{"productId":"0000000880","title":"Anchor安佳全脂成人奶粉 1KG（6袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448461650415.png!200","price":420.0,"buyCount":1}]},{"orderId":"151125000011","totalPrice":65.0,"orderStatus":6,"createTime":1448454392000,"products":[{"productId":"0000000894","title":"Parrs帕氏麦卢卡蜂胶蜂蜜皂140g 洗脸沐浴控油去痘手工皂","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1448453381271.jpeg!200","price":65.0,"buyCount":1}]}];
+
+var OrderList=React.createClass({displayName:'OrderList',
+mixins:[PageMixin,TimerMixin],
+
+getInitialState:function(){
+var dataSource={};
+data.forEach(function(item){
+dataSource[item.key]=new ListView.DataSource({rowHasChanged:function(row1,row2){return row1!==row2;}});});
+
+return {
+activeTab:'all',
+fetched:false,
+dataSource:dataSource};},
+
+
+
+render:function(){var _this=this;var 
+activeTab=this.state.activeTab;
 
 return (
 React.createElement(View,{style:styles.container},
@@ -61860,7 +61777,7 @@ item.title)));}),
 data.map(function(item){
 return (
 React.createElement(TabBar.View,{key:item.key},
-React.createElement(Text,{style:{flex:1}},item.title)));})),
+_this._renderList(item.key)));})),
 
 
 
@@ -61870,18 +61787,59 @@ this._renderNavigatorBar()));},
 
 
 
+_renderList:function(key){
+var dataSource=this.state.dataSource[key];
+if(this.state.fetched){
+return (
+React.createElement(RefreshableListView,{
+dataSource:dataSource,
+renderRow:this._renderRow,
+onInfinite:function(done){return console.log('hello world!');}}));}else 
+
+
+{
+return React.createElement(Loading,null);}},
+
+
+
+_renderRow:function(data){
+return React.createElement(Order,babelHelpers.extends({},data,{onPress:this._onOrderPress}));},
+
+
+_onOrderPress:function(orderId){
+this.goto('OrderDetail',{orderId:orderId});},
+
+
 componentDidMount:function(){
 this.fetchData();},
 
 
-fetchData:function(){
-this.state.data=data;}});
+fetchData:function(){var _this2=this;
+this.setTimeout(function(){
+var dataSource=_this2.state.dataSource;var _loop=function(
+key){
+if(key==='all'){
+dataSource[key]=dataSource[key].cloneWithRows(listData);}else 
+{
+dataSource[key]=dataSource[key].cloneWithRows(
+listData.filter(function(item){
+return item.orderStatus==key;}));}};for(var key in dataSource){_loop(key);}
+
+
+
+
+
+_this2.setState({
+fetched:true,
+dataSource:dataSource});},
+
+500);}});
 
 
 
 module.exports=OrderList;
 });
-__d('Snatural/app/styles/orderListPage.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/pages/OrderList.style.js',function(global, require, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');var _require=
 
@@ -61889,8 +61847,7 @@ var React=require('react-native/Libraries/react-native/react-native.js');var _re
 
 
 
-
-require('Snatural/app/styles/variables.js');var FONT_ICON=_require.FONT_ICON;var COLOR_MAIN=_require.COLOR_MAIN;var COLOR_DARK=_require.COLOR_DARK;var COLOR_BORDER=_require.COLOR_BORDER;
+require('Snatural/app/constants/StyleConstants.js');var COLOR_MAIN=_require.COLOR_MAIN;var COLOR_DARK=_require.COLOR_DARK;var COLOR_BORDER=_require.COLOR_BORDER;
 
 module.exports=React.StyleSheet.create({
 container:{
@@ -61901,7 +61858,7 @@ tab:{
 flex:1,
 alignItems:'center',
 justifyContent:'center',
-height:45,
+height:48,
 borderBottomWidth:3,
 borderBottomColor:COLOR_BORDER,
 backgroundColor:'white'},
@@ -61926,9 +61883,10 @@ var React=require('react-native/Libraries/react-native/react-native.js');var
 Image=
 
 
-React.Image;var View=React.View;var Text=React.Text;
 
-var styles=require('Snatural/app/styles/order.js');var _require=
+React.Image;var View=React.View;var Text=React.Text;var TouchableWithoutFeedback=React.TouchableWithoutFeedback;
+
+var styles=require('Snatural/app/components/Order.style.js');var _require=
 require('Snatural/app/constants/OrderConstants.js');var ORDER_STATUS_TEXT=_require.ORDER_STATUS_TEXT;
 
 var formatTime=function(timestamp){
@@ -61937,9 +61895,15 @@ return date.getFullYear()+'.'+(date.getMonth()+1)+'.'+date.getDate();};
 
 
 var Order=function(props){var 
-orderStatus=props.orderStatus;var createTime=props.createTime;var orderId=props.orderId;var products=props.products;
-var firstProduct=products[0];
+orderStatus=props.orderStatus;var createTime=props.createTime;var orderId=props.orderId;var products=props.products;var onPress=props.onPress;
+
+var firstProduct=undefined;
+if(props.packages)
+firstProduct=props.packages[0].products[0];else 
+
+firstProduct=products[0];
 return (
+React.createElement(TouchableWithoutFeedback,{onPress:onPress},
 React.createElement(View,{style:styles.container},
 React.createElement(View,{style:styles.head},
 React.createElement(Text,{style:styles.status},ORDER_STATUS_TEXT[orderStatus]),
@@ -61951,11 +61915,14 @@ React.createElement(Text,{style:styles.createTime},formatTime(createTime)))),
 React.createElement(View,{style:styles.body},
 React.createElement(Image,{
 style:styles.productImage,
-uri:firstProduct.imageUrl}),
+source:{uri:firstProduct.imageUrl}}),
 React.createElement(View,{style:styles.detail},
 React.createElement(Text,{style:styles.title},firstProduct.title),
-React.createElement(Text,{style:styles.price},firstProduct.price),
-React.createElement(Text,{style:styles.buyCount},firstProduct.buyCount)))));};
+React.createElement(View,{style:styles.buyInfo},
+React.createElement(Text,{style:styles.price},'￥',firstProduct.price),
+React.createElement(Text,{style:styles.buyCount},firstProduct.buyCount)))))));};
+
+
 
 
 
@@ -61964,21 +61931,75 @@ React.createElement(Text,{style:styles.buyCount},firstProduct.buyCount)))));};
 
 module.exports=Order;
 });
-__d('Snatural/app/styles/order.js',function(global, require, module, exports) {  'use strict';
+__d('Snatural/app/components/Order.style.js',function(global, require, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');var _require=
 
 
 
-require('Snatural/app/styles/variables.js');var PADDING_S_SIZE=_require.PADDING_S_SIZE;
+
+
+
+require('Snatural/app/constants/StyleConstants.js');var COLOR_MAIN=_require.COLOR_MAIN;var COLOR_LIGHT=_require.COLOR_LIGHT;var PADDING_M_SIZE=_require.PADDING_M_SIZE;var PADDING_X_SIZE=_require.PADDING_X_SIZE;
 
 module.exports=React.StyleSheet.create({
 container:{
+flex:1,
+marginTop:PADDING_X_SIZE},
+
+head:{
+flexDirection:'row',
+alignItems:'center',
+justifyContent:'center',
+backgroundColor:COLOR_LIGHT,
+height:48,
+paddingLeft:PADDING_M_SIZE,
+paddingRight:PADDING_M_SIZE},
+
+status:{
+flex:1,
+textAlign:'left',
+color:COLOR_MAIN},
+
+info:{
 flex:1},
 
+orderId:{
+textAlign:'right',
+color:COLOR_MAIN},
 
-list:{
-flex:1}});
+createTime:{
+textAlign:'right',
+color:COLOR_MAIN},
+
+body:{
+flex:1,
+flexDirection:'row',
+backgroundColor:'white'},
+
+productImage:{
+width:150,
+height:130},
+
+detail:{
+flex:1,
+padding:PADDING_M_SIZE},
+
+title:{
+flex:1},
+
+buyInfo:{
+flexDirection:'row',
+padding:PADDING_M_SIZE},
+
+price:{
+flex:1,
+fontWeight:'bold',
+textAlign:'left'},
+
+buyCount:{
+flex:1,
+textAlign:'right'}});
 });
 __d('Snatural/app/constants/OrderConstants.js',function(global, require, module, exports) {  var _ORDER_STATUS_TEXT;var ORDER_STATUS={
 WAIT_PAY:1,
@@ -62003,6 +62024,179 @@ ORDER_STATUS.CLOSED,'已关闭'),_ORDER_STATUS_TEXT);
 module.exports={
 ORDER_STATUS:ORDER_STATUS,
 ORDER_STATUS_TEXT:ORDER_STATUS_TEXT};
+});
+__d('Snatural/app/pages/OrderDetail.js',function(global, require, module, exports) {  'use strict';
+
+var React=require('react-native/Libraries/react-native/react-native.js');var 
+
+
+View=
+
+
+
+React.View;var Text=React.Text;var Image=React.Image;var ScrollView=React.ScrollView;
+
+var styles=require('Snatural/app/pages/OrderDetail.style.js');
+
+var Order=require('Snatural/app/components/Order.js');
+var PageMixin=require('Snatural/app/pages/PageMixin.js');
+
+
+var Address=function(props){var 
+consignee=props.consignee;var phone=props.phone;var province=props.province;var city=props.city;var district=props.district;var detail=props.detail;
+return (
+React.createElement(View,{style:styles.address},
+React.createElement(Image,{
+source:require('Snatural/app/resources/address.png'),
+style:styles.addressBackground,
+resizeMode:'stretch'},
+React.createElement(Text,{style:styles.addressText},'收货人：',consignee,' ',phone),
+React.createElement(Text,{style:styles.addressText},province,city,district,detail))));};
+
+
+
+
+
+var OrderDetail=React.createClass({displayName:'OrderDetail',
+
+mixins:[PageMixin],
+
+getInitialState:function(){
+return {
+data:{"orderId":"160110000321","totalPrice":220.0,"orderStatus":7,"createTime":1452438791000,"address":{"province":"上海市","city":"市辖区","district":"卢湾区","detail":"天山西路","consignee":"测试","phone":"18214261802","idCard":"360103199010135323","zipCode":null},"packages":[{"products":[{"productId":"0000000887","title":"Anchor安佳全脂成人奶粉 1KG/袋（3袋）","imageUrl":"http://zxs-image.b0.upaiyun.com/product/1447126666916.jpeg!200","price":220.0,"buyCount":1}],"pkgStatus":0,"waybillNumber":null,"packageId":null}],"comment":"麻烦在双休日送货，派个帅气的小哥，呵呵呵呵。还有发票要打个给我。","price":220.0,"postage":0.0,"tariff":0.0}};},
+
+
+
+render:function(){
+var data=this.state.data;
+return (
+React.createElement(View,{style:styles.container},
+React.createElement(ScrollView,{style:styles.container},
+React.createElement(View,{style:styles.orderInfo},
+React.createElement(Text,{style:styles.info},'订单时间：',
+data.createTime),
+
+React.createElement(Text,{style:styles.info},'订单总额：',
+React.createElement(Text,{style:styles.strong},'￥',data.totalPrice)),
+
+React.createElement(Text,{style:styles.info},
+React.createElement(Text,{style:styles.orderId},'订单号'),'：',data.orderId)),
+
+
+React.createElement(Address,data.address),
+React.createElement(Order,data),
+React.createElement(View,{style:styles.comment},
+React.createElement(Text,{style:styles.title},'备注'),
+React.createElement(Text,{style:styles.commentContent,numberOfLines:1},data.comment)),
+
+React.createElement(View,{style:styles.bars},
+React.createElement(View,{style:styles.bar},
+React.createElement(Text,{style:styles.title},'商品总金额'),
+React.createElement(Text,{style:styles.content},'￥',data.totalPrice)),
+
+React.createElement(View,{style:styles.bar},
+React.createElement(Text,{style:styles.title},'运费'),
+React.createElement(Text,{style:styles.content},'￥',data.postage)),
+
+React.createElement(View,{style:styles.bar},
+React.createElement(Text,{style:styles.title},'关税'),
+React.createElement(Text,{style:styles.content},'￥',data.tariff)))),
+
+
+
+this._renderNavigatorBar()));}});
+
+
+
+
+
+
+module.exports=OrderDetail;
+});
+__d('Snatural/app/pages/OrderDetail.style.js',function(global, require, module, exports) {  'use strict';
+
+var React=require('react-native/Libraries/react-native/react-native.js');var _require=
+
+
+
+
+
+
+
+
+require('Snatural/app/constants/StyleConstants.js');var PADDING_X_SIZE=_require.PADDING_X_SIZE;var PADDING_M_SIZE=_require.PADDING_M_SIZE;var PADDING_S_SIZE=_require.PADDING_S_SIZE;var COLOR_MAIN=_require.COLOR_MAIN;var COLOR_BORDER=_require.COLOR_BORDER;var SCREEN_WIDTH=_require.SCREEN_WIDTH;
+
+module.exports=React.StyleSheet.create({
+container:{
+flex:1},
+
+
+orderInfo:{
+backgroundColor:COLOR_MAIN,
+padding:PADDING_M_SIZE,
+height:90},
+
+info:{
+flexDirection:'row',
+flex:1,
+color:'white'},
+
+orderId:{
+textAlign:'justify',
+letterSpacing:5},
+
+strong:{
+fontWeight:'bold'},
+
+
+address:{
+marginTop:PADDING_X_SIZE},
+
+addressBackground:{
+height:100,
+width:SCREEN_WIDTH,
+justifyContent:'center',
+padding:PADDING_M_SIZE},
+
+addressText:{
+color:'#666',
+backgroundColor:'transparent',
+paddingBottom:PADDING_M_SIZE},
+
+
+comment:{
+marginTop:PADDING_X_SIZE,
+padding:PADDING_M_SIZE,
+backgroundColor:'white',
+flexDirection:'row'},
+
+bars:{
+flex:1,
+marginTop:PADDING_X_SIZE,
+backgroundColor:'white'},
+
+bar:{
+height:44,
+flexDirection:'row',
+padding:PADDING_M_SIZE,
+borderBottomWidth:1,
+borderBottomColor:COLOR_BORDER,
+alignItems:'center'},
+
+title:{
+width:80,
+textAlign:'left'},
+
+content:{
+flex:1,
+textAlign:'right',
+fontWeight:'bold'},
+
+commentContent:{
+flex:1,
+textAlign:'right'}});
+});
+__d('Snatural/app/resources/address.png',function(global, require, module, exports) {  module.exports = require("AssetRegistry").registerAsset({"__packager_asset":true,"fileSystemLocation":"/Users/xujie/Documents/Github/Snatural/app/resources","httpServerLocation":"/assets/app/resources","width":472,"height":178,"scales":[1],"files":["/Users/xujie/Documents/Github/Snatural/app/resources/address.png"],"hash":"65436d83cc483a71b4d04b7fe4e43365","name":"address","type":"png"});
 });
 ;require("InitializeJavaScriptAppEngine");
 ;require("Snatural/index.android.js");
