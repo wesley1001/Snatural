@@ -1,6 +1,6 @@
 module.exports = {
 	start: 'Index',
-	
+
 	Index: {
 		component: require('../pages/Index'),
 		title: '首页'
@@ -16,5 +16,13 @@ module.exports = {
 	OrderDetail: {
 		component: require('../pages/OrderDetail'),
 		title: '订单详情'
+	},
+	AddressList: {
+		component: require('../pages/AddressList'),
+		title: '地址管理'
+	},
+	AddressEdit: {
+		component: require('../pages/AddressEdit'),
+		title: '地址编辑'
 	}
 }

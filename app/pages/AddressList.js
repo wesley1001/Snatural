@@ -95,19 +95,19 @@ const AddressList = React.createClass({
 	},
 
 	_addAddress() {
-
+		this.goto('AddressEdit')
 	},
 
 	_setDefault(addressId) {
-
+		// update store
 	},
 
 	_edit(addressId) {
-
+		this.goto('AddressEdit', { addressId })
 	},
 
 	_delete(addressId) {
-
+		// update store
 	},
 
 	componentDidMount() {
