@@ -34,12 +34,11 @@ const ImageSlider = React.createClass({
 	},
 
 	start(){
-		let activePage = this.state.activePage;
 		let count = this.props.children.length;
 	  this.setInterval(
 			() => {
 				this._goto(
-					(activePage + 1 >= count) ? 0 :
+					this.state.activePage >= (count-1) ? 0 :
 			  		(this.state.activePage +　1)
 				)
 			}, 5000
