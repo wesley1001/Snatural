@@ -2,8 +2,7 @@
 
 let React = require('react-native');
 
-const { 
-	PADDING_S_SIZE,
+const {
 	SCREEN_WIDTH
 } = require('../../constants/StyleConstants');
 
@@ -15,8 +14,7 @@ let style = React.StyleSheet.create({
 	},
 
 	page: {
-		width: SCREEN_WIDTH,
-		backgroundColor: '#ff0'
+		width: SCREEN_WIDTH
 	},
 
 	indicatorContainer: {

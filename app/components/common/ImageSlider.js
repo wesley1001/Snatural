@@ -15,16 +15,35 @@ let {
 	Platform
 } = React;
 
+const TimerMixin = require('react-timer-mixin');
 const styles = require('./ImageSlider.style');
 const INDICATOR_SIZE = styles.INDICATOR_SIZE;
 const { SCREEN_WIDTH } = require('../../constants/StyleConstants');
 
 const ImageSlider = React.createClass({
+	mixins: [TimerMixin],
 
 	getInitialState(){
 		return {
 			activePage: 0
 		}
+	},
+
+	componentDidMount(){
+		this.start();
+	},
+
+	start(){
+		let activePage = this.state.activePage;
+		let count = this.props.children.length;
+	  this.setInterval(
+			() => {
+				this._goto(
+					(activePage + 1 >= count) ? 0 :
+			  		(this.state.activePage +　1)
+				)
+			}, 5000
+		)
 	},
 
 	render(){

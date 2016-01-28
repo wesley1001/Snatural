@@ -9,7 +9,7 @@ let {
 	TouchableHighlight
 } = React;
 
-let styles = require('./AddressList.style');
+let styles = require('./Address.style');
 
 const PageMixin = require('./PageMixin');
 

@@ -5,8 +5,6 @@ let React = require('react-native');
 const {
 	FONT_X_SIZE,
 	PADDING_M_SIZE,
-	PADDING_L_SIZE,
-	COLOR_MAIN,
 	COLOR_PRICE
 } = require('../constants/StyleConstants');
 
