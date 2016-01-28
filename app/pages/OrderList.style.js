@@ -2,10 +2,11 @@
 
 let React = require('react-native');
 
-const { 
+const {
 	COLOR_MAIN,
 	COLOR_DARK,
-	COLOR_BORDER
+	COLOR_BORDER,
+	HEIGHT_BAR
 } = require('../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
@@ -17,7 +18,7 @@ module.exports = React.StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		height: 48,
+		height: HEIGHT_BAR,
 		borderBottomWidth: 3,
 		borderBottomColor: COLOR_BORDER,
 		backgroundColor: 'white'

@@ -2,7 +2,10 @@
 
 let React = require('react-native');
 
-const {SCREEN_WIDTH} = require('../../constants/StyleConstants');
+const {
+  SCREEN_WIDTH,
+  HEIGHT_BAR
+} = require('../../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
   container: {
@@ -16,11 +19,11 @@ module.exports = React.StyleSheet.create({
     width: SCREEN_WIDTH
   },
   tabContainer: {
-    height: 48,
+    height: HEIGHT_BAR,
     flexDirection: 'row'
   },
   tab: {
     flex: 1,
-    height: 48
+    height: HEIGHT_BAR
   }
 });

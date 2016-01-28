@@ -7,7 +7,9 @@ const {
 	PADDING_X_SIZE,
 	PADDING_M_SIZE,
 	COLOR_MAIN,
-	COLOR_BORDER
+	COLOR_BORDER,
+	HEIGHT_BAR,
+	BORDER_RADIUS
 } = require('../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
@@ -62,5 +64,20 @@ module.exports = React.StyleSheet.create({
 	btnAdd: {
 		flex: 1,
 		textAlign: 'center'
+	},
+
+	textInput: {
+		height: HEIGHT_BAR
+	},
+	textArea: {
+		height: 2 * HEIGHT_BAR
+	},
+
+	button: {
+		backgroundColor: COLOR_MAIN,
+		color: 'white',
+		textAlign: 'center',
+		height: HEIGHT_BAR,
+		borderRadius: BORDER_RADIUS
 	}
 });

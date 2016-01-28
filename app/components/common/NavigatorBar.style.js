@@ -2,23 +2,24 @@
 
 let React = require('react-native');
 
-const { 
-	COLOR_MAIN, 
+const {
+	COLOR_MAIN,
 	FONT_L_SIZE,
 	FONT_ICON,
 	PADDING_M_SIZE,
-	PADDING_S_SIZE
+	PADDING_S_SIZE,
+	HEIGHT_BAR
 } = require('../../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
 	container: {
-		height: 48,
+		height: HEIGHT_BAR,
 		backgroundColor: COLOR_MAIN,
 		flexDirection: 'row',
 		alignItems: 'center'
 	},
 	back: {
-		height: 48,
+		height: HEIGHT_BAR,
 		width: 120,
 		flexDirection: 'row',
 		alignItems: 'center'

@@ -7,7 +7,8 @@ const {
 	PADDING_S_SIZE,
 	COLOR_BORDER,
 	FONT_ICON,
-	FONT_M_SIZE
+	FONT_M_SIZE,
+	BORDER_RADIUS
 } = require('../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
@@ -28,7 +29,7 @@ module.exports = React.StyleSheet.create({
 		height: 35,
 		borderColor: COLOR_BORDER,
 		borderWidth: 1,
-		borderRadius: PADDING_S_SIZE,
+		borderRadius: BORDER_RADIUS,
 		backgroundColor: 'white',
 		paddingLeft: 35,
 		fontSize: FONT_M_SIZE - 2

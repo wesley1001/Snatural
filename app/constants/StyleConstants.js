@@ -25,3 +25,7 @@ exports.PADDING_X_SIZE = 20;
 exports.PADDING_L_SIZE = 15;
 exports.PADDING_M_SIZE = 10;
 exports.PADDING_S_SIZE = 5;
+
+exports.BORDER_RADIUS = 8;
+
+exports.HEIGHT_BAR = 48;

@@ -103,7 +103,10 @@ const AddressList = React.createClass({
 	},
 
 	_edit(addressId) {
-		this.goto('AddressEdit', { addressId })
+		let address = addressData.filter((item) => {
+		  return item.addressId === addressId
+		})[0];
+		this.goto('AddressEdit', address)
 	},
 
 	_delete(addressId) {

@@ -6,7 +6,8 @@ const {
 	COLOR_MAIN,
 	COLOR_LIGHT,
 	PADDING_M_SIZE,
-	PADDING_X_SIZE
+	PADDING_X_SIZE,
+	HEIGHT_BAR
 } = require('../constants/StyleConstants');
 
 module.exports = React.StyleSheet.create({
@@ -19,7 +20,7 @@ module.exports = React.StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: COLOR_LIGHT,
-		height: 48,
+		height: HEIGHT_BAR,
 		paddingLeft: PADDING_M_SIZE,
 		paddingRight: PADDING_M_SIZE
 	},
