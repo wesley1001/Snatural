@@ -24,5 +24,9 @@ module.exports = {
 	AddressEdit: {
 		component: require('../pages/AddressEdit'),
 		title: '地址编辑'
+	},
+	Distribution: {
+		component: require('../pages/Distribution'),
+		title: '分销管理'
 	}
 }

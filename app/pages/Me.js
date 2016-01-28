@@ -43,7 +43,8 @@ const Me = React.createClass({
 			{ title: "全部订单", color: '#fd9055', target: 'OrderList', icon: 'android-list'},
 			{ title: "地址管理", color: '#349cf2', target: 'AddressList', icon: 'android-pin'},
 			{ title: "我的喜欢", color: '#fc6875', target: 'OrderList', icon: 'heart'},
-			{ title: "意见反馈", color: '#99d0ac', target: 'OrderList', icon: 'chatbubble-working'}
+			{ title: "意见反馈", color: '#99d0ac', target: 'OrderList', icon: 'chatbubble-working'},
+			{ title: "我的分销", color: '#7690f4', target: 'Distribution', icon: 'ios-people'}
 		];
 		return (
 			<View style={styles.container}>

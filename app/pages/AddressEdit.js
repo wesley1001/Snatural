@@ -1,6 +1,5 @@
 'use strict';
 
-let _ = require('lodash');
 let React = require('react-native');
 
 let {
@@ -10,7 +9,7 @@ let {
 	TouchableHighlight
 } = React;
 
-let styles = require('./AddressEdit.style');
+let styles = require('./AddressList.style');
 
 const PageMixin = require('./PageMixin');
 
@@ -29,7 +28,8 @@ const AddressEdit = React.createClass({
 	mixins: [PageMixin],
 
 	getInitialState() {
-		return _.pick(this.props.params, ['consignee', 'phone', 'province', 'city', 'district', 'detail']);
+		let {consignee, phone, province, city, district, detail} = this.props.params;
+		return {consignee, phone, province, city, district, detail};
 	},
 
 	render(){

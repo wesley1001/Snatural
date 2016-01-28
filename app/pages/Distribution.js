@@ -8,9 +8,11 @@ let {
 	TouchableHighlight
 } = React;
 
-let styles = require('./AddressEdit.style');
+let styles = require('./Distribution.style');
 
 const PageMixin = require('./PageMixin');
+
+let statistics = { lastMonthIncome: 1200, lastMonthSales: 110, notSettledSales: 220, thisMonthIncome: 330, thisMonthSales: 550 };
 
 const Distribution = React.createClass({
 
@@ -25,6 +27,7 @@ const Distribution = React.createClass({
 	render(){
 		return (
 			<View style={styles.container}>
+
 			</View>
 		)
 	}
