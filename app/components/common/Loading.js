@@ -10,12 +10,11 @@ let {
 	View,
 	Platform,
 	ActivityIndicatorIOS,
-	ProgressBarAndroid
+	ProgressBarAndroid,
+	StyleSheet
 } = React;
 
-const styles = require('./Loading.style');
-
-const Loading = (props) => {
+const Loading = () => {
 	if(Platform.OS === 'ios'){
 		return (
 			<View style={styles.container}>
@@ -37,5 +36,13 @@ const Loading = (props) => {
 		);
 	}
 };
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center'
+	}
+});
 
 module.exports = Loading;

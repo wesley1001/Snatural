@@ -10,9 +10,8 @@ let {
 } = React;
 
 const Icon = require('react-native-vector-icons/Ionicons');
-
 const TimerMixin = require('react-timer-mixin');
-let styles = require('./Address.style');
+const styles = require('./Address.style');
 const Loading = require('../components/common/Loading');
 const PageMixin = require('./PageMixin');
 
@@ -62,24 +61,29 @@ const AddressList = React.createClass({
 		isDefault = isDefault == 1;
 		return (
 			<View style={styles.address}>
-				<View style={[styles.info, isDefault ? 'default': null]}>
-					<Text style={[styles.addressText, isDefault ? 'default': null]}>收货人：{consignee} {phone}</Text>
-					<Text style={[styles.addressText, isDefault ? 'default': null]}>{province}{city}{district}{detail}</Text>
+				<View style={[styles.info, isDefault ? styles.default: null]}>
+					<Text style={[styles.addressText, isDefault ? styles.defaultText: null]}>
+						收货人：{consignee} {phone}
+					</Text>
+					<Text style={[styles.addressText, isDefault ? styles.defaultText: null]}>
+						{province}{city}{district}{detail}
+					</Text>
 				</View>
 				<View style={styles.operation}>
-					<TouchableHighlight onPress={() => this._setDefault(addressId)}>
-						<RadioButton checked={isDefault} />
-						<Text style={styles.setDefault}>设为默认</Text>
+					<TouchableHighlight onPress={() => this._setDefault(addressId)} style={styles.setDefault}>
+						<View style={styles.buttonWrap}>
+							<RadioButton checked={isDefault} /><Text>设为默认</Text>
+						</View>
 					</TouchableHighlight>
-					<TouchableHighlight onPress={() => this._edit(addressId)}>
-						<Text style={styles.edit}>
-							<Icon name="compose" style={styles.icon} /> 编辑
-						</Text>
+					<TouchableHighlight onPress={() => this._edit(addressId)}  style={styles.edit}>
+						<View style={styles.buttonWrap}>
+							<Icon name="compose" style={styles.icon} /><Text>编辑</Text>
+						</View>
 					</TouchableHighlight>
-					<TouchableHighlight onPress={() => this._delete(addressId)}>
-						<Text style={styles.delete}>
-							<Icon name="ios-trash-outline" style={styles.icon} /> 删除
-						</Text>
+					<TouchableHighlight onPress={() => this._delete(addressId)} style={styles.delete}>
+						<View style={styles.buttonWrap}>
+							<Icon name="ios-trash-outline" style={styles.icon} /><Text>删除</Text>
+						</View>
 					</TouchableHighlight>
 				</View>
 			</View>
@@ -119,10 +123,12 @@ const AddressList = React.createClass({
 
 	fetchData() {
 		this.setTimeout(() => {
+			console.log(1);
 			this.setState({
+				loaded: true,
 				dataSource: this.state.dataSource.cloneWithRows(addressData)
 			});
-		}, 500);
+		}, 1000);
 	}
 
 })
