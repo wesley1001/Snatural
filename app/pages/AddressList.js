@@ -1,27 +1,28 @@
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
-let {
+const {
 	View,
 	ListView,
 	Text,
 	TouchableHighlight
 } = React;
 
-const Icon = require('react-native-vector-icons/Ionicons');
+const Icon = require('react-native-vector-icons/MaterialIcons');
 const TimerMixin = require('react-timer-mixin');
 const styles = require('./Address.style');
 const Loading = require('../components/common/Loading');
+const IconButton = require('../components/common/IconButton');
 const PageMixin = require('./PageMixin');
 
 let addressData = [{"addressId":423,"memberId":247,"idCard":"360103199010135323","province":"上海市","city":"市辖区","isDefault":1,"consignee":"测试","phone":"18214261802","district":"卢湾区","detail":"天山西路"},{"addressId":427,"memberId":247,"idCard":"360103198710251324","province":"天津市","city":"市辖区","isDefault":0,"consignee":"测试人","phone":"18216541230","district":"河东区","detail":"测试地址"},{"addressId":1101,"memberId":247,"idCard":null,"province":"河北省","city":"秦皇岛市","isDefault":0,"consignee":"Test","phone":"13857061324","district":"山海关区","detail":"测试地址"}];
 
 const RadioButton = (props) => {
-	if (props.selected) {
-		return <Icon name="checkmark-circled" style={styles.checked} />
+	if (props.checked) {
+		return <Icon name="check-circle" style={styles.checked} />
 	} else {
-		return <Icon name="ios-circle-outline" style={styles.unchecked} />
+		return <Icon name="radio-button-unchecked" style={styles.unchecked} />
 	}
 };
 
@@ -70,21 +71,34 @@ const AddressList = React.createClass({
 					</Text>
 				</View>
 				<View style={styles.operation}>
-					<TouchableHighlight onPress={() => this._setDefault(addressId)} style={styles.setDefault}>
-						<View style={styles.buttonWrap}>
-							<RadioButton checked={isDefault} /><Text>设为默认</Text>
-						</View>
-					</TouchableHighlight>
-					<TouchableHighlight onPress={() => this._edit(addressId)}  style={styles.edit}>
-						<View style={styles.buttonWrap}>
-							<Icon name="compose" style={styles.icon} /><Text>编辑</Text>
-						</View>
-					</TouchableHighlight>
-					<TouchableHighlight onPress={() => this._delete(addressId)} style={styles.delete}>
-						<View style={styles.buttonWrap}>
-							<Icon name="ios-trash-outline" style={styles.icon} /><Text>删除</Text>
-						</View>
-					</TouchableHighlight>
+					<IconButton
+						key="default"
+						text="设为默认"
+						renderIcon={() => {
+							return <RadioButton checked={isDefault}/>
+						}}
+						onPress={() => {
+							this._setDefault(addressId)
+						}}
+					/>
+					<IconButton 
+						key="edit"
+						text="编辑"
+						icon="edit"
+						wrapStyle={styles.edit}
+						onPress={() => {
+							this._edit(addressId)
+						}}
+					/>
+					<IconButton 
+						key="delete"
+						text="删除"
+						icon="delete"
+						wrapStyle={styles.edit}
+						onPress={() => {
+							this._delete(addressId)
+						}}
+					/>
 				</View>
 			</View>
 		)

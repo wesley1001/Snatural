@@ -1,4 +1,4 @@
-let React = require('react-native');
+const React = require('react-native');
 
 let {
 	width: screenWidth,

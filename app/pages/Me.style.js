@@ -1,6 +1,6 @@
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
 const {
 	COLOR_MAIN,
@@ -44,17 +44,6 @@ module.exports = React.StyleSheet.create({
 		paddingBottom: PADDING_M_SIZE,
 		flexDirection: 'row',
 		justifyContent: 'center'
-	},
-	barIcon: {
-		fontSize: FONT_ICON,
-		width: FONT_ICON,
-		textAlign: 'center'
-	},
-	barText: {
-		fontSize: FONT_M_SIZE,
-		alignSelf: 'center',
-		flex: 1,
-		paddingLeft: PADDING_S_SIZE
 	},
 	barArrow: {
 		fontSize: FONT_ICON,

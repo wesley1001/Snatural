@@ -5,9 +5,9 @@
 
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
-let {
+const {
 	View,
 	Text,
 	ScrollView,

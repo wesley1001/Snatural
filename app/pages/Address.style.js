@@ -1,11 +1,12 @@
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
 const {
 	FONT_ICON,
 	PADDING_X_SIZE,
 	PADDING_M_SIZE,
+	PADDING_S_SIZE,
 	COLOR_MAIN,
 	COLOR_BORDER,
 	HEIGHT_BAR,
@@ -41,24 +42,16 @@ module.exports = React.StyleSheet.create({
 		flex: 1,
 		flexDirection: 'row',
 		alignItems: 'center',
-		height: 50
+		height: 50,
+		paddingLeft: PADDING_M_SIZE,
+		paddingTop: PADDING_S_SIZE,
+		paddingBottom: PADDING_S_SIZE
 	},
 
-	buttonWrap: {
-		flexDirection: 'row',
-		alignItems: 'center'
-	},
-	setDefault: {
-		flex: 1,
-		paddingLeft: PADDING_M_SIZE
-	},
 	edit: {
+		flex: 0,
 		width: 70
 	},
-	delete: {
-		width: 70
-	},
-
 	checked: {
 		fontSize: FONT_ICON,
 		color: COLOR_MAIN

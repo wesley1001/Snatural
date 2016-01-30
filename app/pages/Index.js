@@ -4,14 +4,14 @@
 
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
-let {
+const {
 	View,
 	Text
 } = React;
 
-const Icon = require('react-native-vector-icons/FontAwesome')
+const Icon = require('react-native-vector-icons/MaterialIcons')
 
 const styles = require('./Index.style');
 
@@ -34,7 +34,7 @@ const Index = (props) => {
         <Text style={styles.tabText}>首页</Text>
       </TabBar.Tab>
       <TabBar.Tab key="me" style={styles.tab}>
-        <Icon name="user" style={styles.tabIcon} />
+        <Icon name="person" style={styles.tabIcon} />
         <Text style={styles.tabText}>我的</Text>
       </TabBar.Tab>
     </TabBar>

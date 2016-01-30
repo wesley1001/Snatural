@@ -1,6 +1,6 @@
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
 const {
 	PADDING_S_SIZE

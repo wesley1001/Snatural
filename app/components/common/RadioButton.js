@@ -1,12 +1,12 @@
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
-let {
+const {
 	StyleSheet
 } = React;
 
-const Icon = require('react-native-vector-icons/Ionicons');
+const Icon = require('react-native-vector-icons/MaterialIcons');
 
 const RadioButton = (props) => {
 	if (props.selected) {

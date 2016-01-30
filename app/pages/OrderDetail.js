@@ -1,15 +1,15 @@
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
-let {
+const {
   View,
   Text,
   Image,
   ScrollView
 } = React;
 
-let styles = require('./OrderDetail.style');
+const styles = require('./OrderDetail.style');
 
 const Order = require('../components/Order');
 const PageMixin = require('./PageMixin');

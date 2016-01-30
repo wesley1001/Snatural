@@ -1,6 +1,6 @@
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
 const { FONT_ICON } = require('../constants/StyleConstants');
 

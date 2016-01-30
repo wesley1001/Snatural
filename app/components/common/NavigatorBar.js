@@ -4,28 +4,27 @@
 
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
-let {
-	View,
-	Text,
-	TouchableWithoutFeedback
+const {
+	View
 } = React;
 
-const Icon = require('react-native-vector-icons/Ionicons');
-
 const styles = require('./NavigatorBar.style');
+const IconButton = require('./IconButton');
 
 const NavigatorBar = (props) => {
 	let {onBack} = props;
 	return (
 		<View style={styles.container}>
-			<TouchableWithoutFeedback onPress={onBack}>
-				<View style={styles.back}>
-					<Icon name="chevron-left" style={styles.backIcon}/>
-					<Text style={styles.backText}>返回</Text>
-				</View>
-			</TouchableWithoutFeedback>
+			<IconButton
+				onPress={onBack}				
+				icon="chevron-left"
+				text="返回"
+				wrapStyle={styles.back}
+				iconStyle={styles.backIcon}
+				textStyle={styles.backText}
+			/>
 		</View>
 	);
 };

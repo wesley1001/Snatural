@@ -1,6 +1,6 @@
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
 const {
 	PADDING_M_SIZE,
@@ -18,10 +18,11 @@ module.exports = React.StyleSheet.create({
 		marginRight: PADDING_S_SIZE
 	},
 	icon: {
-		fontSize: FONT_ICON,
+		fontSize: FONT_ICON + 3,
+		fontWeight: 'bold',
 		color: '#999',
 		position: 'absolute',
-		top: 13,
+		top: 14,
 		left: 15,
 		backgroundColor: 'transparent'
 	},

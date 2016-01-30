@@ -1,7 +1,7 @@
 
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
 const {
 	COLOR_DARK,

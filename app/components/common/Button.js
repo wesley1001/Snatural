@@ -1,8 +1,8 @@
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
-let {
+const {
   TouchableHighlight,
   Text,
 	StyleSheet

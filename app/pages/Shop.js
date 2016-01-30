@@ -1,14 +1,14 @@
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
-let {
+const {
 	View,
 	Text,
 	TouchableHighlight
 } = React;
 
-let styles = require('./AddressEdit.style');
+const styles = require('./AddressEdit.style');
 
 const PageMixin = require('./PageMixin');
 

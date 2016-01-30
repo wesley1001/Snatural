@@ -4,14 +4,14 @@
 
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
-let {
+const {
 	View,
 	TextInput
 } = React;
 
-const Icon = require('react-native-vector-icons/FontAwesome');
+const Icon = require('react-native-vector-icons/MaterialIcons');
 
 const styles = require('./SearchBox.style');
 

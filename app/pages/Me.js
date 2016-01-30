@@ -1,28 +1,40 @@
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
-let {
+const {
 	View,
 	Text,
 	TouchableHighlight
 } = React;
 
-const Icon = require('react-native-vector-icons/Ionicons');
-
-let styles = require('./Me.style');
-
+const Icon = require('react-native-vector-icons/MaterialIcons');
+const styles = require('./Me.style');
+const IconButton = require('../components/common/IconButton');
 const Avatar = require('../components/Avatar');
 const PageMixin = require('./PageMixin');
+
+
+let data = [
+	{ title: "全部订单", color: '#fd9055', target: 'OrderList', icon: 'assignment'},
+	{ title: "地址管理", color: '#349cf2', target: 'AddressList', icon: 'place'},
+	{ title: "我的喜欢", color: '#fc6875', target: 'OrderList', icon: 'favorite'},
+	{ title: "意见反馈", color: '#99d0ac', target: 'OrderList', icon: 'comment'},
+	{ title: "我的分销", color: '#7690f4', target: 'Distribution', icon: 'device-hub'}
+];
 
 const Bar = (props) => {
 	let {icon, title, color, onPress} = props;
 	return (
 		<TouchableHighlight onPress={onPress} underlayColor="white">
 			<View style={styles.bar}>
-				<Icon name={icon} color={color} style={styles.barIcon}/>
-				<Text style={styles.barText}>{title}</Text>
-				<Icon name="ios-arrow-forward" style={styles.barArrow}/>
+				<IconButton
+					icon={icon}
+					iconColor={color}
+					text={title}
+					mode="label"
+				/>
+				<Icon name="chevron-right" style={styles.barArrow}/>
 			</View>
 		</TouchableHighlight>
 	)
@@ -39,13 +51,6 @@ const Me = React.createClass({
 	},
 
 	render(){
-		let data = [
-			{ title: "全部订单", color: '#fd9055', target: 'OrderList', icon: 'android-list'},
-			{ title: "地址管理", color: '#349cf2', target: 'AddressList', icon: 'android-pin'},
-			{ title: "我的喜欢", color: '#fc6875', target: 'OrderList', icon: 'heart'},
-			{ title: "意见反馈", color: '#99d0ac', target: 'OrderList', icon: 'chatbubble-working'},
-			{ title: "我的分销", color: '#7690f4', target: 'Distribution', icon: 'ios-people'}
-		];
 		return (
 			<View style={styles.container}>
 				<View style={styles.header}>

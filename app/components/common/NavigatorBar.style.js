@@ -1,12 +1,11 @@
 'use strict';
 
-let React = require('react-native');
+const React = require('react-native');
 
 const {
 	COLOR_MAIN,
 	FONT_L_SIZE,
 	FONT_ICON,
-	PADDING_M_SIZE,
 	PADDING_S_SIZE,
 	HEIGHT_BAR
 } = require('../../constants/StyleConstants');
@@ -21,16 +20,11 @@ module.exports = React.StyleSheet.create({
 	back: {
 		height: HEIGHT_BAR,
 		width: 120,
-		flexDirection: 'row',
-		alignItems: 'center'
+		marginLeft: PADDING_S_SIZE
 	},
 	backIcon: {
-		height: FONT_ICON,
-		lineHeight: FONT_ICON,
 		width: FONT_ICON - PADDING_S_SIZE,
-		fontSize: FONT_ICON,
-		color: 'white',
-		marginLeft: PADDING_M_SIZE
+		color: 'white'
 	},
 	backText: {
 		fontSize: FONT_L_SIZE,

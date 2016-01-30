@@ -1,5 +1,5 @@
 module.exports = {
-	start: 'AddressList',
+	start: 'Index',
 
 	Index: {
 		component: require('../pages/Index'),
