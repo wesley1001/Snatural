@@ -4,13 +4,13 @@ const React = require('react-native');
 
 const {
 	View,
-	Text,
-	TouchableHighlight
+	Text
 } = React;
 
 const Icon = require('react-native-vector-icons/MaterialIcons');
 let styles = require('./Distribution.style');
 const PageMixin = require('./PageMixin');
+const IconButton = require('../components/common/IconButton');
 
 let statData = { lastMonthIncome: 1200, lastMonthSales: 110, notSettledSales: 220, thisMonthIncome: 330, thisMonthSales: 550 };
 let statLabel = { lastMonthIncome: '上月收入', lastMonthSales: '上月销售额', notSettledSales: '未结算销售额', thisMonthIncome: '本月收入', thisMonthSales: '本月销售额' }
@@ -32,12 +32,31 @@ const Distribution = React.createClass({
 	},
 
 	render(){
+		let actionBar = this._renderNavigatorBar();
+
 		return (
 			<View style={styles.container}>
-				{this._renderStatistics()}
-				{operations.map((item,i) => {
-					return <Icon key={i} name={item.icon} color={item.color} size={32}/>
-				})}
+				<View style={styles.stats}>
+					{this._renderStatistics()}
+				</View>
+				<View style={styles.operations}>
+					{operations.map((item,i) => {
+						return (
+							<IconButton
+								key={i}
+								icon={item.icon}
+								text={item.title}
+								wrapStyle={styles.iconButton}
+								iconStyle={[styles.iconStyle, {backgroundColor: item.color}]}
+								textStyle={styles.textStyle}
+								onPress={() => this.goto(item.target)}
+							/>
+						);
+					})}
+				</View>
+				<View style={styles.products}>
+				</View>
+				{actionBar}
 			</View>
 		)
 	},
