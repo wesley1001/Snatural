@@ -26,13 +26,16 @@ let data = [
 const Bar = (props) => {
 	let {icon, title, color, onPress} = props;
 	return (
-		<TouchableHighlight onPress={onPress} underlayColor="white">
+		<TouchableHighlight
+			onPress={onPress}
+			underlayColor="#B5B5B5">
 			<View style={styles.bar}>
 				<IconButton
 					icon={icon}
 					iconColor={color}
 					text={title}
 					mode="label"
+					wrapStyle={styles.barLabel}
 				/>
 				<Icon name="chevron-right" style={styles.barArrow}/>
 			</View>

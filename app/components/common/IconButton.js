@@ -5,7 +5,7 @@ const React = require('react-native');
 const {
   View,
   Text,
-  TouchableOpacity,
+  TouchableHighlight,
 	StyleSheet
 } = React;
 
@@ -33,13 +33,16 @@ const IconButton = (props) => {
     );
   }else{
     return (
-      <TouchableOpacity
+      <TouchableHighlight
         activeOpacity={0.3}
         style={[styles.container, wrapStyle]}
-        onPress={onPress}>
-        {renderIcon(props)}
-        {renderText(props)}
-      </TouchableOpacity>
+        onPress={onPress}
+        underlayColor="#B5B5B5">
+        <View style={[styles.container, wrapStyle]}>
+          {renderIcon(props)}
+          {renderText(props)}
+        </View>
+      </TouchableHighlight>
     );  
   } 
 }
@@ -54,7 +57,6 @@ const {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center'
   },
