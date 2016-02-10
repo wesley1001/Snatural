@@ -1,5 +1,5 @@
 module.exports = {
-	start: 'Index',
+	start: 'Distribution',
 
 	Index: {
 		component: require('../pages/Index'),
@@ -28,5 +28,9 @@ module.exports = {
 	Distribution: {
 		component: require('../pages/Distribution'),
 		title: '分销管理'
+	},
+	Shop: {
+		component: require('../pages/Shop'),
+		title: '店铺管理'
 	}
 }

@@ -46,12 +46,11 @@ module.exports = React.StyleSheet.create({
 	operations: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-		padding: PADDING_M_SIZE,
 		backgroundColor: 'white'
 	},
 	iconButton: {
-		width: COLS[4],
-		marginLeft: PADDING_M_SIZE,
+		width: COLS[6],
+		paddingLeft: 2 * PADDING_M_SIZE,
 		marginTop: PADDING_S_SIZE,
 		marginBottom: PADDING_S_SIZE,
 		backgroundColor: 'transparent'

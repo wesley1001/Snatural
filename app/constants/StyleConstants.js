@@ -32,7 +32,7 @@ exports.HEIGHT_BAR = 48;
 
 // Grid System
 let unitWidth = screenWidth / 12;
-let cols = [];
+let cols = [0];
 for (let i = 1; i < 13; i++){
 	cols.push( i * unitWidth);
 }

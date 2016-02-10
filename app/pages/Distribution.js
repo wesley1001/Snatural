@@ -15,7 +15,7 @@ const IconButton = require('../components/common/IconButton');
 let statData = { lastMonthIncome: 1200, lastMonthSales: 110, notSettledSales: 220, thisMonthIncome: 330, thisMonthSales: 550 };
 let statLabel = { lastMonthIncome: '上月收入', lastMonthSales: '上月销售额', notSettledSales: '未结算销售额', thisMonthIncome: '本月收入', thisMonthSales: '本月销售额' }
 let operations = [
-	{ title: "店铺管理", color: '#98d1ad', target: 'OrderList', icon: 'store'},
+	{ title: "店铺管理", color: '#98d1ad', target: 'Shop', icon: 'store'},
 	{ title: "销售详情", color: '#9ccce3', target: 'OrderList', icon: 'equalizer'},
 	{ title: "商品管理", color: '#e79cac', target: 'OrderList', icon: 'shopping-basket'},
 	{ title: "团队管理", color: '#f5cc87', target: 'OrderList', icon: 'people'}
