@@ -5,10 +5,14 @@ const React = require('react-native');
 const {
 	View,
 	Text,
-	Image
+	Image,
+	Alert
 } = React;
 
+const { fetchShopInfo } = require('../services/shopService');
+
 const styles = require('./Shop.style');
+
 const PageMixin = require('./PageMixin');
 const Avatar = require('../components/Avatar');
 const IconButton = require('../components/common/IconButton');
@@ -63,13 +67,32 @@ const Shop = React.createClass({
 						})}
 					</View>
 				</View>
-			
+
 				<View style={styles.contents}>
 				</View>
 
 				{this._renderNavigatorBar()}
 			</View>
 		)
+	},
+
+	componentDidMount(){
+		let params = {"sign":"136af6d342e9da6feca3c552072f059f","data":{"oneMemberId":"3","memberId":3,"token":"51b99f6a0fe680356af1494842f3f9b0"},"appKey":"412f919f9a49352e"};
+		fetchShopInfo(params, 
+			(err, data) => {
+				if(err){
+					Alert.alert(
+            'Service Error',
+            err.message,
+            [
+            	{text: 'OK', onPress: () => console.log('OK Pressed!')}
+            ]
+          );
+          return;
+				}
+
+				console.log(data);
+			})
 	}
 
 })
