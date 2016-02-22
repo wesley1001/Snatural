@@ -14,10 +14,18 @@ const Icon = require('react-native-vector-icons/MaterialIcons');
 // Icon.Button
 
 const defaultRenderIcon = (props) => {
-  let {icon, iconColor, iconStyle} = props;
+  let {icon, iconColor, iconStyle, iconViewStyle} = props;
   // support borderRadius badly
   // see issue in https://github.com/facebook/react-native/issues/5261
-  return <Icon style={[styles.icon, iconStyle]} name={icon} color={iconColor}/>;
+  if(iconViewStyle){
+    return (
+      <View style={iconViewStyle}>
+        <Icon style={[styles.icon, iconStyle]} name={icon} color={iconColor}/>
+      </View>
+    );
+  }else{
+    return <Icon style={[styles.icon, iconStyle]} name={icon} color={iconColor}/>;
+  }
 }
 const defaultRenderText = (props) => {
   let {text, textStyle} = props;

@@ -47,7 +47,8 @@ const Distribution = React.createClass({
 								icon={item.icon}
 								text={item.title}
 								wrapStyle={styles.iconButton}
-								iconStyle={[styles.iconStyle, {backgroundColor: item.color}]}
+								iconViewStyle={[styles.iconViewStyle, {backgroundColor: item.color}]}
+								iconStyle={styles.iconStyle}
 								textStyle={styles.textStyle}
 								onPress={() => this.goto(item.target)}
 							/>

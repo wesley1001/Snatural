@@ -55,12 +55,18 @@ module.exports = React.StyleSheet.create({
 		marginBottom: PADDING_S_SIZE,
 		backgroundColor: 'transparent'
 	},
-	iconStyle: {
-		fontSize: 32,
+	iconViewStyle: {
 		width: HEIGHT_BAR,
 		height: HEIGHT_BAR,
 		borderRadius: HEIGHT_BAR / 2,
+		overflow: 'hidden',
 		paddingTop: (HEIGHT_BAR - 32) / 2,
+		alignItems: 'center'
+	},
+	iconStyle: {
+		fontSize: 32,
+		width: 32,
+		height: 32,
 		color: 'white'
 	},
 
