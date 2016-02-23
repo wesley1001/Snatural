@@ -21,6 +21,7 @@ const NavigatorBar = (props) => {
 				onPress={onBack}				
 				icon="chevron-left"
 				text="返回"
+				mode="feedback"
 				wrapStyle={styles.back}
 				iconStyle={styles.backIcon}
 				textStyle={styles.backText}

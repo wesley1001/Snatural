@@ -5,15 +5,27 @@ const React = require('react-native');
 const {
   View,
   Text,
-  TouchableOpacity,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
 	StyleSheet
 } = React;
 
 const Icon = require('react-native-vector-icons/MaterialIcons');
+// Icon.Button
 
 const defaultRenderIcon = (props) => {
-  let {icon, iconColor, iconStyle} = props;
-  return <Icon style={[styles.icon, iconStyle]} name={icon} color={iconColor}/>;
+  let {icon, iconColor, iconStyle, iconViewStyle} = props;
+  // support borderRadius badly
+  // see issue in https://github.com/facebook/react-native/issues/5261
+  if(iconViewStyle){
+    return (
+      <View style={iconViewStyle}>
+        <Icon style={[styles.icon, iconStyle]} name={icon} color={iconColor}/>
+      </View>
+    );
+  }else{
+    return <Icon style={[styles.icon, iconStyle]} name={icon} color={iconColor}/>;
+  }
 }
 const defaultRenderText = (props) => {
   let {text, textStyle} = props;
@@ -31,16 +43,29 @@ const IconButton = (props) => {
         {renderText(props)}
       </View>
     );
-  }else{
+  }else if(mode === 'feedback'){
     return (
-      <TouchableOpacity
-        activeOpacity={0.3}
+      <TouchableHighlight
+        style={[styles.container, wrapStyle]}
+        onPress={onPress}
+        underlayColor="#B5B5B5">
+        <View style={[styles.container, wrapStyle]}>
+          {renderIcon(props)}
+          {renderText(props)}
+        </View>
+      </TouchableHighlight>
+    );
+  }else{  
+    return (
+      <TouchableWithoutFeedback
         style={[styles.container, wrapStyle]}
         onPress={onPress}>
-        {renderIcon(props)}
-        {renderText(props)}
-      </TouchableOpacity>
-    );  
+        <View style={[styles.container, wrapStyle]}>
+          {renderIcon(props)}
+          {renderText(props)}
+        </View>
+      </TouchableWithoutFeedback>
+    );
   } 
 }
 
@@ -54,7 +79,6 @@ const {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center'
   },

@@ -45,6 +45,9 @@ module.exports = React.StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center'
 	},
+	barLabel: {
+		flex: 1
+	},
 	barArrow: {
 		fontSize: FONT_ICON,
 		width: FONT_ICON,
